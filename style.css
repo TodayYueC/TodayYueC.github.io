@@ -27,6 +27,7 @@ html {
 }
 
 body {
+  position: relative;
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-body);
@@ -38,8 +39,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(110deg, rgba(247, 248, 252, 0.74), rgba(247, 248, 252, 0.92)),
+    url("up猫猫背景.png") center top / cover no-repeat;
+  opacity: 0.5;
+}
+
 body.nav-open {
   overflow: hidden;
+}
+
+.site-header,
+main,
+.site-footer {
+  position: relative;
+  z-index: 1;
 }
 
 img {
@@ -207,7 +227,7 @@ ul {
 }
 
 .section-band.muted {
-  background: var(--surface-muted);
+  background: rgba(238, 243, 248, 0.88);
 }
 
 .section-inner {
