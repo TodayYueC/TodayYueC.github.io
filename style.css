@@ -940,20 +940,28 @@ h3 {
 
 @media (max-width: 760px) {
   .navbar {
+    width: min(1180px, calc(100% - 24px));
     min-height: 64px;
+    gap: 12px;
   }
 
   .nav-toggle {
     display: block;
+    flex: 0 0 auto;
   }
 
   .brand-slogan {
     max-width: min(48vw, 220px);
   }
 
+  .section-inner,
+  .footer-bottom {
+    width: min(1180px, calc(100% - 24px));
+  }
+
   .nav-panel {
     position: fixed;
-    inset: 64px 16px auto 16px;
+    inset: 64px 12px auto 12px;
     display: none;
     padding: 16px;
     flex-direction: column;
@@ -975,27 +983,43 @@ h3 {
   }
 
   .section-band {
-    padding: 64px 0;
+    padding: 52px 0;
   }
 
   .hero {
-    padding-top: 72px;
-    padding-bottom: 32px;
+    padding-top: 48px;
+    padding-bottom: 28px;
+  }
+
+  .hero-layout {
+    gap: 28px;
   }
 
   h1 {
-    font-size: 2.1rem;
+    font-size: 1.78rem;
+    line-height: 1.18;
   }
 
   h2 {
-    font-size: 1.6rem;
+    font-size: 1.48rem;
+    line-height: 1.22;
+  }
+
+  h3 {
+    line-height: 1.25;
   }
 
   .hero-description {
+    margin-top: 18px;
     font-size: 1rem;
   }
 
-  .hero-actions,
+  .hero-actions {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .footer-links {
     flex-direction: column;
     align-items: stretch;
@@ -1005,19 +1029,48 @@ h3 {
     width: 100%;
   }
 
-  .facts-strip,
   .skill-grid,
   .notes-grid {
     grid-template-columns: 1fr;
   }
 
+  .facts-strip {
+    margin-top: 34px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .facts-strip div {
-    border-right: 0;
+    min-height: 92px;
+    padding: 18px;
     border-bottom: 1px solid var(--line);
+  }
+
+  .facts-strip div:nth-child(odd) {
+    border-right: 1px solid var(--line);
+  }
+
+  .facts-strip div:nth-child(2) {
+    border-right: 0;
+  }
+
+  .facts-strip div:nth-child(3) {
+    border-bottom: 0;
   }
 
   .facts-strip div:last-child {
     border-bottom: 0;
+  }
+
+  .hero-portrait {
+    width: min(100%, 220px);
+  }
+
+  .split-section {
+    gap: 24px;
+  }
+
+  .section-heading {
+    margin-bottom: 24px;
   }
 
   .project-body,
@@ -1026,7 +1079,51 @@ h3 {
     padding: 20px;
   }
 
+  .info-card,
+  .vibe-card {
+    min-height: auto;
+  }
+
+  .placeholder-media {
+    min-height: 150px;
+    padding: 18px;
+  }
+
+  .project-media img {
+    min-height: 150px;
+  }
+
+  .project-body {
+    gap: 14px;
+  }
+
+  .project-points {
+    gap: 8px;
+  }
+
+  .vibe-projects {
+    margin-top: 34px;
+    padding-top: 26px;
+  }
+
+  .vibe-card {
+    padding: 18px;
+  }
+
+  .note-summary {
+    min-height: auto;
+  }
+
+  .note-markdown {
+    overflow-wrap: anywhere;
+  }
+
+  .site-footer {
+    padding-top: 56px;
+  }
+
   .footer-bottom {
+    margin-top: 40px;
     flex-direction: column;
   }
 }
