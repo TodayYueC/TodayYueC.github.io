@@ -181,14 +181,14 @@ const vibeProjectItems = {
       {
         title: "ChronicleEngine",
         label: "UE5 叙事插件",
-        body: "一个面向 UE5 的 JRPG 对话与叙事插件项目，覆盖 Dialogue Runner、变量与回滚、Trigger、UMG 表现层以及原生图编辑器等模块。我把它当作一次系统化整理，去验证一套叙事工具链能否从编辑器工作流一路落到运行时接入。",
+        body: "一个面向 UE5 的 JRPG 对话与叙事插件项目，覆盖 Dialogue Runner、变量与回滚、Trigger、UMG 表现层以及原生图编辑器等模块，包含从编辑器工作流到运行时接入的一整套叙事系统基础能力。",
         meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
         links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/ChronicleEngine" }]
       },
       {
         title: "Novella",
         label: "Godot 叙事插件",
-        body: "一个基于 Godot 4 的 visual novel / GalGame 插件项目，包含脚本解析、运行时 VM、存档回滚、编辑器 dock 与打包脚本。我把它当作同类叙事系统在另一套引擎中的实现与对照，用来继续打磨工具链和运行时结构。",
+        body: "一个基于 Godot 4 的 visual novel / GalGame 插件项目，包含脚本解析、运行时 VM、存档回滚、编辑器 dock 与打包脚本，提供从剧本执行到编辑器辅助的一套完整叙事插件能力。",
         meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
         links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/Novella" }]
       }
@@ -208,14 +208,14 @@ const vibeProjectItems = {
       {
         title: "ChronicleEngine",
         label: "UE5 narrative plugin",
-        body: "A UE5 plugin project focused on JRPG-style dialogue and narrative flow, covering a dialogue runner, variables and rollback, triggers, a UMG-facing presentation layer, and a native graph editor. I use it to test whether a narrative toolchain can stay coherent from editor workflow through runtime integration.",
+        body: "A UE5 plugin project focused on JRPG-style dialogue and narrative flow, covering a dialogue runner, variables and rollback, triggers, a UMG-facing presentation layer, and a native graph editor as one complete narrative-system foundation.",
         meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
         links: [{ label: "Open repository", href: "https://github.com/TodayYueC/ChronicleEngine" }]
       },
       {
         title: "Novella",
         label: "Godot narrative plugin",
-        body: "A Godot 4 visual novel / GalGame plugin project with its own script parsing, runtime VM, save and rollback flow, editor dock, and packaging scripts. I treat it as a parallel implementation of the same narrative-system problem in another engine, with more attention on toolchain structure and runtime flow.",
+        body: "A Godot 4 visual novel / GalGame plugin project with its own script parsing, runtime VM, save and rollback flow, editor dock, and packaging scripts, covering the core pieces needed for both script execution and editor-side support.",
         meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
         links: [{ label: "Open repository", href: "https://github.com/TodayYueC/Novella" }]
       }
