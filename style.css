@@ -606,6 +606,24 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.vibe-category {
+  display: grid;
+  gap: 16px;
+}
+
+.vibe-category + .vibe-category {
+  margin-top: 30px;
+}
+
+.vibe-category-head {
+  max-width: 720px;
+}
+
+.vibe-category-label {
+  margin-bottom: 8px;
+  font-size: 0.84rem;
+}
+
 .compact-heading {
   max-width: 640px;
   margin-bottom: 20px;
@@ -619,6 +637,19 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
+}
+
+.vibe-grid-featured .vibe-card {
+  min-height: 220px;
+  padding: 24px;
+}
+
+.vibe-grid-featured .vibe-card h4 {
+  font-size: 1.18rem;
+}
+
+.vibe-grid-compact {
+  grid-template-columns: minmax(0, 420px);
 }
 
 .vibe-card {
@@ -1124,6 +1155,10 @@ h3 {
   .vibe-projects {
     margin-top: 34px;
     padding-top: 26px;
+  }
+
+  .vibe-category + .vibe-category {
+    margin-top: 24px;
   }
 
   .vibe-card {

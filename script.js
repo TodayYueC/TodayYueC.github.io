@@ -39,7 +39,11 @@ const i18n = {
     projectsVideoLink: "先看作品集视频",
     vibeEyebrow: "Vibecoding",
     vibeTitle: "把小念头做出来",
-    vibeIntro: "这里放一些开发来玩的项目。它们不是主线作品，更像是把心里冒出来的简单想法先做成能用的小东西。",
+    vibeIntro: "这里放一些开发来玩的项目，会分成更靠近 gameplay 系统的练习，和其他类型的小东西。",
+    vibeGameplayTitle: "Gameplay 相关",
+    vibeGameplayIntro: "这一组更偏插件、系统和引擎工具，所以版面也稍微放大一点。",
+    vibeOtherTitle: "其他",
+    vibeOtherIntro: "不直接落在游戏引擎里，但一样是拿来试想法的小项目。",
     notesEyebrow: "笔记",
     notesTitle: "UE 与 GAS 学习记录",
     notesIntro: "这是我学习 UE 和 GAS 过程中整理出来的笔记，有些内容会和 AI 一起梳理，再改成自己能复盘的版本。点击卡片可以展开正文。",
@@ -88,7 +92,11 @@ const i18n = {
     projectsVideoLink: "Watch portfolio video",
     vibeEyebrow: "Vibecoding",
     vibeTitle: "Small ideas made real",
-    vibeIntro: "This is where I keep playful side projects. They are not the main line of the portfolio; they are simple ideas that popped into my head and became usable little things.",
+    vibeIntro: "This is where I keep playful side projects, split between experiments closer to gameplay systems and everything else.",
+    vibeGameplayTitle: "Gameplay related",
+    vibeGameplayIntro: "This group leans more toward plugins, systems, and engine tools, so it gets a little more room.",
+    vibeOtherTitle: "Other",
+    vibeOtherIntro: "Smaller ideas that do not sit inside a game engine, but still came from the same urge to make something quickly.",
     notesEyebrow: "Notes",
     notesTitle: "UE and GAS learning notes",
     notesIntro: "These are notes from studying UE and GAS. Some entries were organized together with AI, then rewritten into a version I can actually review later. Click a card to expand.",
@@ -168,24 +176,60 @@ const projectItems = {
 };
 
 const vibeProjectItems = {
-  zh: [
-    {
-      title: "BodyTrack",
-      label: "玩具项目",
-      body: "一个开发来玩的 Kotlin + Jetpack Compose 小项目，用来记录体重、体脂、围度、BMI 和趋势。我把它放在这里，是因为它比较像“突然想到一个简单想法，就先做出来试试”的那类东西。",
-      meta: ["Kotlin", "Compose", "Local-first"],
-      links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/BodyTrack" }]
-    }
-  ],
-  en: [
-    {
-      title: "BodyTrack",
-      label: "toy project",
-      body: "A playful Kotlin + Jetpack Compose side project for tracking weight, body fat, measurements, BMI, and trends. It belongs here because it started as a simple idea I wanted to make real for fun.",
-      meta: ["Kotlin", "Compose", "Local-first"],
-      links: [{ label: "Open repository", href: "https://github.com/TodayYueC/BodyTrack" }]
-    }
-  ]
+  zh: {
+    gameplay: [
+      {
+        title: "ChronicleEngine",
+        label: "UE5 插件练习",
+        body: "一个往 UE5 里补 JRPG 对话与叙事流程的插件练习。我把 Dialogue Runner、变量与回滚、Trigger、UMG 表现层和原生图编辑器都往里塞，想看看一套叙事系统能不能从工具层一路长到项目里。",
+        meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
+        links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/ChronicleEngine" }]
+      },
+      {
+        title: "Novella",
+        label: "Godot 插件练习",
+        body: "一个用 Godot 4 写的 visual novel / GalGame 插件，里面有自己的脚本解析、运行时 VM、存档回滚、编辑器 dock 和打包脚本。算是我把“叙事系统”这件事换到另一套引擎里继续拆。",
+        meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
+        links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/Novella" }]
+      }
+    ],
+    other: [
+      {
+        title: "BodyTrack",
+        label: "应用小项目",
+        body: "一个 Kotlin + Jetpack Compose 的身体数据记录小工具，用来记体重、体脂、围度、BMI 和趋势。比起主线项目，它更像我拿来快速验证一个日常小需求的随手实现。",
+        meta: ["Kotlin", "Compose", "Local-first"],
+        links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/BodyTrack" }]
+      }
+    ]
+  },
+  en: {
+    gameplay: [
+      {
+        title: "ChronicleEngine",
+        label: "UE5 plugin experiment",
+        body: "A UE5 plugin experiment built around JRPG-style dialogue and narrative flow. I kept pushing it beyond a dialogue box into a fuller stack with a runner, variables and rollback, triggers, a UMG-facing presentation layer, and a native graph editor.",
+        meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
+        links: [{ label: "Open repository", href: "https://github.com/TodayYueC/ChronicleEngine" }]
+      },
+      {
+        title: "Novella",
+        label: "Godot plugin experiment",
+        body: "A Godot 4 visual novel / GalGame plugin with its own script parsing, runtime VM, save and rollback flow, editor dock, and packaging scripts. It is basically me taking the same narrative-system obsession into another engine.",
+        meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
+        links: [{ label: "Open repository", href: "https://github.com/TodayYueC/Novella" }]
+      }
+    ],
+    other: [
+      {
+        title: "BodyTrack",
+        label: "app side project",
+        body: "A Kotlin + Jetpack Compose utility for tracking weight, body fat, measurements, BMI, and trends. Compared with the game-facing work, this one is more of a quick everyday need turned into a usable little app.",
+        meta: ["Kotlin", "Compose", "Local-first"],
+        links: [{ label: "Open repository", href: "https://github.com/TodayYueC/BodyTrack" }]
+      }
+    ]
+  }
 };
 
 const noteItems = {
@@ -340,10 +384,11 @@ function renderProjects() {
 }
 
 function renderVibeProjects() {
-  const list = document.querySelector("#vibe-projects-list");
-  if (!list) return;
+  const gameplayList = document.querySelector("#vibe-gameplay-list");
+  const otherList = document.querySelector("#vibe-other-list");
+  if (!gameplayList || !otherList) return;
 
-  list.innerHTML = vibeProjectItems[state.lang].map((project) => `
+  const renderVibeCards = (projects) => projects.map((project) => `
     <article class="vibe-card">
       <div>
         <p class="vibe-label">${escapeHtml(project.label)}</p>
@@ -358,6 +403,9 @@ function renderVibeProjects() {
       </div>
     </article>
   `).join("");
+
+  gameplayList.innerHTML = renderVibeCards(vibeProjectItems[state.lang].gameplay);
+  otherList.innerHTML = renderVibeCards(vibeProjectItems[state.lang].other);
 }
 
 function filteredNotes() {

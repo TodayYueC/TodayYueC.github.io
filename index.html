@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260412-cats">
+  <link rel="stylesheet" href="style.css?v=20260428-vibe">
 </head>
 <body>
   <header class="site-header">
@@ -74,7 +74,7 @@
           <span class="fact-label" data-i18n="factCpp">主要开发语言</span>
         </div>
         <div>
-          <span class="fact-value">3</span>
+          <span class="fact-value">5</span>
           <span class="fact-label" data-i18n="factRepos">非 fork 公开仓库</span>
         </div>
         <div>
@@ -122,9 +122,22 @@
           <div class="section-heading compact-heading">
             <p class="eyebrow" data-i18n="vibeEyebrow">Vibecoding</p>
             <h3 id="vibe-projects-title" data-i18n="vibeTitle">把小念头做出来</h3>
-            <p data-i18n="vibeIntro">这里放一些开发来玩的项目。它们不是主线作品，更像是把心里冒出来的简单想法先做成能用的小东西。</p>
+          <p data-i18n="vibeIntro">这里放一些开发来玩的项目，会分成更靠近 gameplay 系统的练习，和其他类型的小东西。</p>
           </div>
-          <div class="vibe-grid" id="vibe-projects-list"></div>
+          <section class="vibe-category vibe-category-featured" aria-labelledby="vibe-gameplay-title">
+            <div class="vibe-category-head">
+              <p class="eyebrow vibe-category-label" id="vibe-gameplay-title" data-i18n="vibeGameplayTitle">Gameplay 相关</p>
+              <p data-i18n="vibeGameplayIntro">这一组更偏插件、系统和引擎工具，所以版面也稍微放大一点。</p>
+            </div>
+            <div class="vibe-grid vibe-grid-featured" id="vibe-gameplay-list"></div>
+          </section>
+          <section class="vibe-category" aria-labelledby="vibe-other-title">
+            <div class="vibe-category-head">
+              <p class="eyebrow vibe-category-label" id="vibe-other-title" data-i18n="vibeOtherTitle">其他</p>
+              <p data-i18n="vibeOtherIntro">不直接落在游戏引擎里，但一样是拿来试想法的小项目。</p>
+            </div>
+            <div class="vibe-grid vibe-grid-compact" id="vibe-other-list"></div>
+          </section>
         </div>
       </div>
     </section>
@@ -169,6 +182,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="notesData.js"></script>
-  <script src="script.js"></script>
+  <script src="script.js?v=20260428-vibe"></script>
 </body>
 </html>
