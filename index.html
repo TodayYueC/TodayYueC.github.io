@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YueC 的 UE5 玩法工程作品集，包含 C++、GAS、节奏射击、近战系统和 Unreal Engine 学习笔记。">
-  <meta name="keywords" content="YueC, Unreal Engine 5, UE5, Gameplay Engineer, GAS, C++, 玩法工程师">
-  <title>YueC | UE5 玩法工程师</title>
+  <meta name="description" content="YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含 GAS、节奏射击、软光栅渲染器、OpenGL 和 Unreal Engine 学习笔记。">
+  <meta name="keywords" content="YueC, Unreal Engine 5, UE5, Gameplay Engineer, GAS, C++, OpenGL, SoftRenderer, 玩法工程师, 软光栅渲染器">
+  <title>YueC | UE5 玩法工程师 / C++ 渲染</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260428-vibe">
+  <link rel="stylesheet" href="style.css?v=20260622-rendering">
 </head>
 <body>
   <header class="site-header">
@@ -46,7 +46,7 @@
     <section class="hero section-band" aria-labelledby="hero-title">
       <div class="section-inner hero-layout">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="heroEyebrow">UE5 玩法工程师 / C++ / Gameplay</p>
+          <p class="eyebrow" data-i18n="heroEyebrow">UE5 玩法工程师 / C++ / Rendering</p>
           <h1 id="hero-title" data-i18n="heroTitle">我在 Engine 里搭玩法骨架，也给奇怪想法找一条能跑起来的路。</h1>
           <p class="hero-description" data-i18n="heroDescription">我想做的，是把脑子里那些乱七八糟但很想实现的东西，一点点变成能玩的世界。</p>
           <div class="hero-actions">
@@ -74,12 +74,12 @@
           <span class="fact-label" data-i18n="factCpp">主要开发语言</span>
         </div>
         <div>
-          <span class="fact-value">5</span>
+          <span class="fact-value">9</span>
           <span class="fact-label" data-i18n="factRepos">非 fork 公开仓库</span>
         </div>
         <div>
           <span class="fact-value">Gameplay</span>
-          <span class="fact-label" data-i18n="factGameDev">玩法系统开发</span>
+          <span class="fact-label" data-i18n="factGameDev">玩法系统与渲染管线</span>
         </div>
       </div>
     </section>
@@ -91,7 +91,7 @@
           <h2 id="about-title" data-i18n="aboutTitle">我的终极目标，是创造一个能把内心想法全盘托出的世界。</h2>
         </div>
         <div class="copy-block">
-          <p data-i18n="aboutBody">目前主要围绕 UE5 玩法工程积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置和多人同步基础。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。</p>
+          <p data-i18n="aboutBody">目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置，以及从软光栅到 OpenGL 的渲染管线拆解。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。</p>
           <p data-i18n="aboutBody2">这里尽量只放我愿意被继续追问实现细节的内容：项目怎么拆、问题怎么修、下一步还可以怎么扩展。</p>
         </div>
       </div>
@@ -113,7 +113,7 @@
         <div class="section-heading">
           <p class="eyebrow" data-i18n="projectsEyebrow">项目</p>
           <h2 id="projects-title" data-i18n="projectsTitle">主要项目</h2>
-          <p data-i18n="projectsIntro">两个 UE5 项目分别记录了我处理玩法工程的两类问题：PurgeHour 侧重战斗框架、能力归属和装备数据，Cyber2026 侧重节奏判定、事件分发，以及 Game Jam 结束后的工程化整理。</p>
+          <p data-i18n="projectsIntro">主要项目现在分成两条线：UE5 玩法工程和 C++ 渲染基础。PurgeHour 与 Cyber2026 记录战斗、GAS、节奏判定和事件分发；SoftRenderer 记录软光栅管线；PBRDeferredRenderer 作为 OpenGL PBR 延迟渲染器正在开发中。</p>
           <a class="text-link portfolio-video-link" href="https://www.bilibili.com/video/BV1jmwkzMEcN/" target="_blank" rel="noopener noreferrer" data-i18n="projectsVideoLink">先看作品集视频</a>
         </div>
         <div class="project-list" id="projects-list"></div>
@@ -166,7 +166,7 @@
       <div>
         <p class="eyebrow" data-i18n="contactEyebrow">联系</p>
         <h2 data-i18n="contactTitle">可以从代码，也可以从视频认识我。</h2>
-        <p data-i18n="contactBody">我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长。PurgeHour 和 Cyber2026 都是这条路上的存档点。</p>
+        <p data-i18n="contactBody">我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长；也把渲染管线拆到自己能解释、能实现的程度。PurgeHour、Cyber2026 和 SoftRenderer 都是这条路上的存档点。</p>
         <a class="email-link" href="mailto:tdyuechu@163.com">tdyuechu@163.com</a>
       </div>
       <div class="footer-links">
@@ -176,12 +176,12 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 YueC</span>
-      <span data-i18n="footerNote">UE5 玩法工程作品集</span>
+      <span data-i18n="footerNote">UE5 玩法工程与 C++ 渲染作品集</span>
     </div>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
   <script src="notesData.js"></script>
-  <script src="script.js?v=20260428-vibe-copy3"></script>
+  <script src="script.js?v=20260622-rendering"></script>
 </body>
 </html>

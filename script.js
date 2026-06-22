@@ -6,8 +6,8 @@ const state = {
 
 const i18n = {
   zh: {
-    documentTitle: "YueC | UE5 玩法工程师",
-    metaDescription: "YueC 的 UE5 玩法工程作品集，包含 C++、GAS、节奏射击、近战系统和 Unreal Engine 学习笔记。",
+    documentTitle: "YueC | UE5 玩法工程师 / C++ 渲染",
+    metaDescription: "YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含 GAS、节奏射击、软光栅渲染器、OpenGL 和 Unreal Engine 学习笔记。",
     navAbout: "关于",
     navSkills: "技能",
     navProjects: "项目",
@@ -15,7 +15,7 @@ const i18n = {
     navContact: "联系",
     langButton: "EN",
     brandSlogan: "二次元死宅，也想用双手创造一点“世界”",
-    heroEyebrow: "UE5 玩法工程师 / C++ / Gameplay",
+    heroEyebrow: "UE5 玩法工程师 / C++ / Rendering",
     heroTitle: "我在 Engine 里搭玩法骨架，也给奇怪想法找一条能跑起来的路。",
     heroDescription: "我想做的，是把脑子里那些乱七八糟但很想实现的东西，一点点变成能玩的世界。",
     ctaGithub: "GitHub",
@@ -25,17 +25,17 @@ const i18n = {
     factEngine: "近期项目引擎版本",
     factCpp: "主要开发语言",
     factRepos: "非 fork 公开仓库",
-    factGameDev: "玩法系统开发",
+    factGameDev: "玩法系统与渲染管线",
     aboutEyebrow: "个人方向",
     aboutTitle: "我的终极目标，是创造一个能把内心想法全盘托出的世界。",
-    aboutBody: "目前主要围绕 UE5 玩法工程积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置和多人同步基础。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。",
+    aboutBody: "目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置，以及从软光栅到 OpenGL 的渲染管线拆解。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。",
     aboutBody2: "这里尽量只放我愿意被继续追问实现细节的内容：项目怎么拆、问题怎么修、下一步还可以怎么扩展。",
     skillsEyebrow: "技术栈",
     skillsTitle: "能直接落到项目里的能力",
     skillsIntro: "下面按“能解决什么问题”来组织，不按工具名堆列表。",
     projectsEyebrow: "项目",
     projectsTitle: "主要项目",
-    projectsIntro: "两个 UE5 项目分别记录了我处理玩法工程的两类问题：PurgeHour 侧重战斗框架、能力归属和装备数据，Cyber2026 侧重节奏判定、事件分发，以及 Game Jam 结束后的工程化整理。",
+    projectsIntro: "主要项目现在分成两条线：UE5 玩法工程和 C++ 渲染基础。PurgeHour 与 Cyber2026 记录战斗、GAS、节奏判定和事件分发；SoftRenderer 记录软光栅管线；PBRDeferredRenderer 作为 OpenGL PBR 延迟渲染器正在开发中。",
     projectsVideoLink: "先看作品集视频",
     vibeEyebrow: "Vibecoding",
     vibeTitle: "把小念头做出来",
@@ -55,12 +55,12 @@ const i18n = {
     noNoteContent: "这篇笔记还没有可展示的正文。",
     contactEyebrow: "联系",
     contactTitle: "可以从代码，也可以从视频认识我。",
-    contactBody: "我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长。PurgeHour 和 Cyber2026 都是这条路上的存档点。",
-    footerNote: "UE5 玩法工程作品集"
+    contactBody: "我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长；也把渲染管线拆到自己能解释、能实现的程度。PurgeHour、Cyber2026 和 SoftRenderer 都是这条路上的存档点。",
+    footerNote: "UE5 玩法工程与 C++ 渲染作品集"
   },
   en: {
-    documentTitle: "YueC | UE5 Gameplay Engineer",
-    metaDescription: "YueC's UE5 gameplay engineering portfolio, including C++, GAS, rhythm shooting, melee systems, and Unreal Engine notes.",
+    documentTitle: "YueC | UE5 Gameplay & C++ Rendering",
+    metaDescription: "YueC's UE5 gameplay engineering and C++ rendering portfolio, including GAS, rhythm shooting, software rasterization, OpenGL, and Unreal Engine notes.",
     navAbout: "About",
     navSkills: "Skills",
     navProjects: "Projects",
@@ -68,7 +68,7 @@ const i18n = {
     navContact: "Contact",
     langButton: "中",
     brandSlogan: "An anime shut-in trying to build small worlds by hand.",
-    heroEyebrow: "UE5 Gameplay Engineer / C++ / Gameplay",
+    heroEyebrow: "UE5 Gameplay Engineer / C++ / Rendering",
     heroTitle: "I build gameplay skeletons in-engine and give odd ideas a way to move.",
     heroDescription: "I want to turn the messy ideas I cannot stop thinking about into worlds people can actually play.",
     ctaGithub: "GitHub",
@@ -78,17 +78,17 @@ const i18n = {
     factEngine: "Recent engine version",
     factCpp: "Main language",
     factRepos: "Non-fork public repos",
-    factGameDev: "Gameplay systems",
+    factGameDev: "Gameplay and rendering",
     aboutEyebrow: "Direction",
     aboutTitle: "My end goal is to create a world where I can pour out everything I have been carrying inside.",
-    aboutBody: "My current UE5 work centers on character control, Enhanced Input, GAS, animation montages, behavior trees, UMG, DataAsset configuration, and multiplayer fundamentals. The goal is not to pack in one-off features, but to clarify how input, state, numbers, and presentation talk to each other.",
+    aboutBody: "My current work centers on UE5 gameplay engineering and C++ rendering fundamentals: character control, Enhanced Input, GAS, animation montages, behavior trees, UMG, DataAsset configuration, and rendering-pipeline study from software rasterization to OpenGL. The goal is not to pack in one-off features, but to clarify how input, state, numbers, and presentation talk to each other.",
     aboutBody2: "I try to keep the site focused on work I am willing to be asked about in detail: how it was split, what broke, and where it can go next.",
     skillsEyebrow: "Stack",
     skillsTitle: "Skills that map to real project problems",
     skillsIntro: "The list is organized by the problem each skill helps solve, not by tool names alone.",
     projectsEyebrow: "Projects",
     projectsTitle: "Main projects",
-    projectsIntro: "These two UE5 projects record two kinds of gameplay engineering problems I have worked through: PurgeHour focuses on combat structure, ability ownership, and equipment data; Cyber2026 focuses on rhythm judgment, event dispatching, and post-jam engineering cleanup.",
+    projectsIntro: "The main projects now split across two tracks: UE5 gameplay engineering and C++ rendering fundamentals. PurgeHour and Cyber2026 cover combat, GAS, rhythm judgment, and event dispatching; SoftRenderer records the software rasterization pipeline; PBRDeferredRenderer is an in-development OpenGL PBR deferred renderer.",
     projectsVideoLink: "Watch portfolio video",
     vibeEyebrow: "Vibecoding",
     vibeTitle: "Small ideas made real",
@@ -108,8 +108,8 @@ const i18n = {
     noNoteContent: "This note does not have displayable content yet.",
     contactEyebrow: "Contact",
     contactTitle: "Start with the code, or with the video.",
-    contactBody: "What I care about right now is simple: taking the loud, troublesome gameplay ideas in my head and breaking them into UE5 systems that can keep growing. PurgeHour and Cyber2026 are save points on that road.",
-    footerNote: "UE5 gameplay engineering portfolio"
+    contactBody: "What I care about right now is simple: taking the loud, troublesome gameplay ideas in my head and breaking them into UE5 systems that can keep growing, while also understanding rendering pipelines deeply enough to explain and implement them. PurgeHour, Cyber2026, and SoftRenderer are save points on that road.",
+    footerNote: "UE5 gameplay and C++ rendering portfolio"
   }
 };
 
@@ -120,7 +120,7 @@ const skillItems = {
     { title: "AI 与行为树", body: "行为树任务、感知、巡逻、追击和攻击流程，配合 GAS 或普通伤害系统使用。", tags: ["Behavior Tree", "Perception", "BTTask"] },
     { title: "UI 与事件同步", body: "用委托、子系统和 UMG 组织 UI 刷新，避免界面层直接绑定太多游戏对象。", tags: ["UMG", "Delegates", "Subsystem"] },
     { title: "数据驱动", body: "用 DataAsset 和蓝图资产承载可调配置，让武器、技能、动画和数值更容易扩展。", tags: ["DataAsset", "Blueprint", "TSubclassOf"] },
-    { title: "工程基础", body: "C++、对象生命周期、内存与网络基础。写玩法时会同时考虑调试和维护成本。", tags: ["C++", "Lifecycle", "Networking"] }
+    { title: "工程与渲染基础", body: "C++、对象生命周期、内存、网络和渲染管线基础。写玩法或渲染代码时都会同时考虑调试和维护成本。", tags: ["C++", "Rendering", "Debugging"] }
   ],
   en: [
     { title: "Gameplay systems", body: "Character control, input mapping, combat states, hit detection, and feedback chains with clear boundaries.", tags: ["UE5", "Enhanced Input", "Combat"] },
@@ -128,7 +128,7 @@ const skillItems = {
     { title: "AI and behavior trees", body: "Behavior tree tasks, perception, patrol, pursuit, and attack flows that can work with GAS or standard damage systems.", tags: ["Behavior Tree", "Perception", "BTTask"] },
     { title: "UI and event sync", body: "Delegates, subsystems, and UMG for UI updates without over-coupling widgets to gameplay actors.", tags: ["UMG", "Delegates", "Subsystem"] },
     { title: "Data-driven workflows", body: "DataAssets and Blueprint assets for weapons, abilities, animations, and tunable values.", tags: ["DataAsset", "Blueprint", "TSubclassOf"] },
-    { title: "Engineering fundamentals", body: "C++, object lifecycle, memory, and networking basics with debugging and maintenance in mind.", tags: ["C++", "Lifecycle", "Networking"] }
+    { title: "Engineering and rendering fundamentals", body: "C++, object lifecycle, memory, networking, and rendering-pipeline basics with debugging and maintenance in mind.", tags: ["C++", "Rendering", "Debugging"] }
   ]
 };
 
@@ -151,6 +151,25 @@ const projectItems = {
       meta: ["C++", "Unreal Engine 5.7", "Game Jam", "Event Bus"],
       points: ["节奏系统区分 Early Hit、Late Hit 和 Miss，避免所有输入都被粗暴地塞进一个命中窗口。", "面具切换和射击反馈通过事件分发给 UI，减少 Widget 直接读取角色变量的情况。", "战斗和死亡连锁加了重复触发保护，避免 Jam 原型里常见的边界抖动。", "活动结束后和 Claude 重新整理过目录与职责，让原型逻辑能继续维护，而不是只停留在 48 小时能跑的状态。"],
       links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/Cyber2026_UE5.7" }]
+    },
+    {
+      title: "SoftRenderer",
+      subtitle: "CPU 软光栅渲染器",
+      body: "SoftRenderer 是一个用 C++ 在 CPU 上模拟现代渲染管线的软光栅项目，来自 tinyrenderer 学习线索，但目标不是只复现教程，而是把模型加载、MVP 变换、三角形光栅化、深度测试、片元着色和后处理拆成自己能解释的工程结构。",
+      placeholder: "SoftRenderer",
+      meta: ["C++20", "CMake", "CPU Rasterizer", "Rendering Pipeline"],
+      points: ["实现 OBJ 模型加载、ModelView / Perspective / Viewport 变换，以及从齐次裁剪空间到屏幕空间的完整坐标链路。", "用重心坐标和 1/w 做透视校正插值，配合浮点 Z-buffer 完成逐像素深度测试。", "片元阶段包含 Phong / Blinn-Phong 光照、切线空间法线贴图、阴影贴图和深度偏移处理。", "加入 SSAO 后处理，用屏幕空间深度采样增强接触阴影，并输出渲染结果与 zbuffer 可视化。"],
+      links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/SoftRenderer" }]
+    },
+    {
+      title: "PBRDeferredRenderer",
+      subtitle: "OpenGL PBR 延迟渲染器",
+      status: "开发中",
+      body: "PBRDeferredRenderer 是正在推进的 OpenGL 渲染项目，当前仓库已经搭起 C++20、CMake、GLFW、GLAD 和 OpenGL 4.6 Debug Context 的基础窗口与渲染循环。它会作为下一阶段学习 PBR、G-buffer 和延迟光照管线的主线项目继续扩展。",
+      placeholder: "PBR Deferred",
+      meta: ["C++20", "OpenGL 4.6", "GLFW", "In Development"],
+      points: ["当前代码已完成 GLFW 窗口、GLAD 初始化、OpenGL 4.6 Core Profile 上下文和 Debug Callback，方便后续定位图形 API 错误。", "使用现代 OpenGL DSA 风格创建 VBO、EBO、VAO，并通过最小 Shader Program 绘制基础几何，先把渲染入口跑通。", "CMake 中直接集成 third_party/glad 和 GLFW 源码，项目结构已经为后续渲染模块拆分预留入口。", "后续重点会推进 PBR 材质、G-buffer、延迟光照、HDR / Tone Mapping 等渲染管线内容。"],
+      links: [{ label: "打开仓库", href: "https://github.com/TodayYueC/PBRDeferredRenderer" }]
     }
   ],
   en: [
@@ -171,6 +190,25 @@ const projectItems = {
       meta: ["C++", "Unreal Engine 5.7", "Game Jam", "Event Bus"],
       points: ["The rhythm system distinguishes Early Hit, Late Hit, and Miss instead of flattening all input into one timing window.", "Mask switching and shooting feedback are sent to UI through events, reducing direct reads from widgets into character state.", "Combat and chain-death logic include duplicate-trigger guards for the fragile edge cases common in jam prototypes.", "After the event, Claude and I reorganized folders and responsibilities so the prototype was not stuck as a 48-hour tangle."],
       links: [{ label: "Open repository", href: "https://github.com/TodayYueC/Cyber2026_UE5.7" }]
+    },
+    {
+      title: "SoftRenderer",
+      subtitle: "CPU software rasterizer",
+      body: "SoftRenderer is a C++ software rasterizer that simulates the rendering pipeline on the CPU. It started from the tinyrenderer learning path, but the focus is on turning model loading, MVP transforms, triangle rasterization, depth testing, fragment shading, and post-processing into a structure I can explain and extend.",
+      placeholder: "SoftRenderer",
+      meta: ["C++20", "CMake", "CPU Rasterizer", "Rendering Pipeline"],
+      points: ["Implements OBJ loading, ModelView / Perspective / Viewport transforms, and the full coordinate path from clip space to screen space.", "Uses barycentric coordinates plus 1/w for perspective-correct interpolation, with a floating-point Z-buffer for per-pixel depth testing.", "The fragment stage covers Phong / Blinn-Phong lighting, tangent-space normal mapping, shadow mapping, and depth bias handling.", "Adds an SSAO post-process pass that samples screen-space depth for contact occlusion, then outputs both the rendered image and zbuffer visualization."],
+      links: [{ label: "Open repository", href: "https://github.com/TodayYueC/SoftRenderer" }]
+    },
+    {
+      title: "PBRDeferredRenderer",
+      subtitle: "OpenGL PBR deferred renderer",
+      status: "In development",
+      body: "PBRDeferredRenderer is the OpenGL rendering project I am currently building. The repository already has a C++20, CMake, GLFW, GLAD, and OpenGL 4.6 Debug Context foundation with a working window and render loop. It will become the main track for studying PBR, G-buffer layout, and deferred lighting.",
+      placeholder: "PBR Deferred",
+      meta: ["C++20", "OpenGL 4.6", "GLFW", "In Development"],
+      points: ["The current code initializes a GLFW window, GLAD, an OpenGL 4.6 Core Profile context, and Debug Callback support for API diagnostics.", "It uses modern OpenGL DSA-style VBO, EBO, and VAO setup with a minimal shader program to get the first geometry path running.", "CMake integrates third_party/glad and GLFW from source, leaving room for future renderer module splits.", "Next steps are PBR materials, G-buffer construction, deferred lighting, HDR, and tone mapping."],
+      links: [{ label: "Open repository", href: "https://github.com/TodayYueC/PBRDeferredRenderer" }]
     }
   ]
 };
@@ -366,7 +404,10 @@ function renderProjects() {
       <div class="project-body">
         <div>
           <p class="eyebrow">${escapeHtml(project.subtitle)}</p>
-          <h3>${escapeHtml(project.title)}</h3>
+          <div class="project-title-row">
+            <h3>${escapeHtml(project.title)}</h3>
+            ${project.status ? `<span class="status-pill">${escapeHtml(project.status)}</span>` : ""}
+          </div>
         </div>
         <p>${escapeHtml(project.body)}</p>
         <div class="project-meta">

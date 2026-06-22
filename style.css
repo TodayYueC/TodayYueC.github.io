@@ -554,6 +554,26 @@ h3 {
   gap: 18px;
 }
 
+.project-title-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.status-pill {
+  min-height: 28px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(15, 157, 88, 0.28);
+  background: rgba(15, 157, 88, 0.1);
+  color: var(--green);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .project-meta {
   display: flex;
   flex-wrap: wrap;
