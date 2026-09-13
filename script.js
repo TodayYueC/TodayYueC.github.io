@@ -1205,6 +1205,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupEvents();
   renderPage();
   setupVisuals();
+  setupTicker();
 });
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -1307,4 +1308,43 @@ function setupVisuals() {
     });
   });
   wipe.addEventListener("animationend", () => wipe.classList.remove("playing"));
+}
+
+// Two identical groups move by exactly one group width at the loop boundary.
+// Each group exceeds the viewport so ultrawide screens never expose an empty tail.
+function setupTicker() {
+  const ticker = document.querySelector(".ticker");
+  const track = ticker?.querySelector(".ticker-track");
+  const groups = track?.querySelectorAll(".ticker-group");
+  const unit = groups?.[0]?.querySelector(".ticker-unit");
+  if (!unit || groups.length !== 2) return;
+  const template = unit.cloneNode(true);
+  template.textContent = template.textContent.replace(/\s+/g, " ").trim();
+  let scheduled = 0;
+  let previousSignature = "";
+  function measure() {
+    scheduled = 0;
+    const currentUnit = groups[0].querySelector(".ticker-unit");
+    const unitWidth = currentUnit.offsetWidth;
+    const viewportWidth = ticker.clientWidth;
+    if (!unitWidth || !viewportWidth) return;
+    const count = Math.max(2, Math.ceil(viewportWidth / unitWidth) + 1);
+    const signature = `${unitWidth}:${viewportWidth}:${count}`;
+    if (signature === previousSignature) return;
+    previousSignature = signature;
+    for (const group of groups) {
+      group.replaceChildren(
+        ...Array.from({ length: count }, () => template.cloneNode(true)),
+      );
+    }
+    const groupWidth = groups[0].offsetWidth;
+    track.style.setProperty("--ticker-duration", `${groupWidth / 70}s`);
+  }
+  function queueMeasure() {
+    if (!scheduled) scheduled = requestAnimationFrame(measure);
+  }
+  measure();
+  new ResizeObserver(queueMeasure).observe(ticker);
+  document.fonts?.ready.then(queueMeasure);
+  document.fonts?.addEventListener("loadingdone", queueMeasure);
 }

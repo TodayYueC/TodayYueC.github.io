@@ -868,9 +868,6 @@
           `${Math.min(current * 0.09, 65)}px`,
         );
       }
-      document
-        .querySelector(".ticker")
-        .style.setProperty("--scroll-drift", `${-(current % 1600) * 0.1}px`);
     }
     window.addEventListener(
       "scroll",

@@ -529,15 +529,24 @@ h4 {
 .ticker-track {
   display: flex;
   width: max-content;
-  animation: marquee 38s linear infinite;
+  animation: marquee var(--ticker-duration, 38s) linear infinite;
+  will-change: transform;
 }
-.ticker span {
+.ticker-group {
+  display: flex;
+  flex: 0 0 auto;
+  flex-wrap: nowrap;
+}
+.ticker .ticker-unit {
   flex-shrink: 0;
   font-family: var(--display);
   font-weight: 800;
   font-size: 26px;
   letter-spacing: 1px;
-  white-space: pre;
+  white-space: nowrap;
+  line-height: 1.2;
+  display: block;
+  padding-inline-end: 28px;
 }
 .section-band {
   padding: 100px 0;

@@ -726,9 +726,6 @@ html.motion-paused .fx-replay {
 .fx-scroll-ready .hero-art {
   translate: 0 var(--hero-scroll, 0px);
 }
-.ticker-track {
-  translate: var(--scroll-drift, 0px) 0;
-}
 .section-band {
   isolation: isolate;
   overflow: clip;
