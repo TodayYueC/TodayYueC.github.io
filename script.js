@@ -60,13 +60,10 @@ const i18n = {
     projectsVideoLink: "先看作品集视频",
     vibeEyebrow: "Vibecoding",
     vibeTitle: "把小念头做出来",
-    vibeIntro:
-      "这里放一些开发来玩的项目，会分成更靠近 gameplay 系统的练习，和其他类型的小东西。",
+    vibeIntro: "把叙事、对话和游戏系统里的小想法，做成可以继续扩展的插件。",
     vibeGameplayTitle: "Gameplay 相关",
     vibeGameplayIntro:
       "这一组更偏插件、系统和引擎工具，所以版面也稍微放大一点。",
-    vibeOtherTitle: "其他",
-    vibeOtherIntro: "不直接落在游戏引擎里，但一样是拿来试想法的小项目。",
     notesEyebrow: "笔记",
     notesTitle: "UE 与 GAS 学习记录",
     notesIntro:
@@ -126,13 +123,10 @@ const i18n = {
     vibeEyebrow: "Vibecoding",
     vibeTitle: "Small ideas made real",
     vibeIntro:
-      "This is where I keep playful side projects, split between experiments closer to gameplay systems and everything else.",
+      "Playful experiments in dialogue, narrative and gameplay, built as plugins that can keep growing.",
     vibeGameplayTitle: "Gameplay related",
     vibeGameplayIntro:
       "This group leans more toward plugins, systems, and engine tools, so it gets a little more room.",
-    vibeOtherTitle: "Other",
-    vibeOtherIntro:
-      "Smaller ideas that do not sit inside a game engine, but still came from the same urge to make something quickly.",
     notesEyebrow: "Notes",
     notesTitle: "UE and GAS learning notes",
     notesIntro:
@@ -152,6 +146,8 @@ const i18n = {
 };
 
 Object.assign(i18n.zh, {
+  featuredExperience: "实习项目 / FEATURED EXPERIENCE",
+  artCredit: "官方宣传图 ↗",
   documentTitle: "YueC | 把想象写成可玩的世界",
   navAbout: "关于我",
   navExperience: "实习经历",
@@ -198,6 +194,8 @@ Object.assign(i18n.zh, {
   skipLink: "跳到正文",
 });
 Object.assign(i18n.en, {
+  featuredExperience: "FEATURED INTERNSHIP PROJECT",
+  artCredit: "Official key art ↗",
   documentTitle: "YueC | Imagine. Build. Play.",
   navExperience: "Experience",
   heroTitle: "Turning imagination into playable worlds.",
@@ -495,17 +493,6 @@ const vibeProjectItems = {
         ],
       },
     ],
-    other: [
-      {
-        title: "BodyTrack",
-        label: "应用小项目",
-        body: "一个 Kotlin + Jetpack Compose 的身体数据记录小工具，用来记体重、体脂、围度、BMI 和趋势。比起主线项目，它更像我拿来快速验证一个日常小需求的随手实现。",
-        meta: ["Kotlin", "Compose", "Local-first"],
-        links: [
-          { label: "打开仓库", href: "https://github.com/TodayYueC/BodyTrack" },
-        ],
-      },
-    ],
   },
   en: {
     gameplay: [
@@ -530,20 +517,6 @@ const vibeProjectItems = {
           {
             label: "Open repository",
             href: "https://github.com/TodayYueC/Novella",
-          },
-        ],
-      },
-    ],
-    other: [
-      {
-        title: "BodyTrack",
-        label: "app side project",
-        body: "A Kotlin + Jetpack Compose utility for tracking weight, body fat, measurements, BMI, and trends. Compared with the game-facing work, this one is more of a quick everyday need turned into a usable little app.",
-        meta: ["Kotlin", "Compose", "Local-first"],
-        links: [
-          {
-            label: "Open repository",
-            href: "https://github.com/TodayYueC/BodyTrack",
           },
         ],
       },
@@ -1040,8 +1013,7 @@ function renderProjects() {
 
 function renderVibeProjects() {
   const gameplayList = document.querySelector("#vibe-gameplay-list");
-  const otherList = document.querySelector("#vibe-other-list");
-  if (!gameplayList || !otherList) return;
+  if (!gameplayList) return;
 
   const renderVibeCards = (projects) =>
     projects
@@ -1067,7 +1039,6 @@ function renderVibeProjects() {
   gameplayList.innerHTML = renderVibeCards(
     vibeProjectItems[state.lang].gameplay,
   );
-  otherList.innerHTML = renderVibeCards(vibeProjectItems[state.lang].other);
 }
 
 function filteredNotes() {
@@ -1191,12 +1162,10 @@ function setupEvents() {
     state.expandedNoteId = null;
     renderNotes();
     if (!state.showAllNotes)
-      document
-        .querySelector(".notes-controls")
-        .scrollIntoView({
-          behavior: motionEnabled() ? "smooth" : "instant",
-          block: "start",
-        });
+      document.querySelector(".notes-controls").scrollIntoView({
+        behavior: motionEnabled() ? "smooth" : "instant",
+        block: "start",
+      });
   });
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;

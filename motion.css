@@ -999,3 +999,423 @@ html.motion-paused .ticker-track {
     translate: none !important;
   }
 }
+/* The internship is the featured project; personal work stays visually quieter. */
+@property --feature-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.experience-section {
+  background:
+    radial-gradient(ellipse at 75% 35%, #ff7ba517, transparent 65%), #17171b;
+}
+.experience-featured {
+  border-color: #ff9abc;
+  box-shadow:
+    0 0 50px #ff7ba50d,
+    8px 8px 0 #ff7ba51a;
+}
+.experience-featured:after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  padding: 2px;
+  border-radius: 0;
+  background: conic-gradient(
+    from var(--feature-angle),
+    transparent 0deg,
+    #ff7ba530 65deg,
+    #ffbad3 85deg,
+    transparent 110deg,
+    transparent 180deg,
+    #ff7ba555 245deg,
+    #ffe1eb 270deg,
+    transparent 290deg
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+  pointer-events: none;
+  z-index: 4;
+  animation: feature-border 9s linear infinite;
+}
+@keyframes feature-border {
+  to {
+    --feature-angle: 360deg;
+  }
+}
+.experience-feature {
+  position: relative;
+  height: 315px;
+  margin: -28px -35px 28px;
+  overflow: hidden;
+  background: #111114;
+  isolation: isolate;
+}
+.experience-feature > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-position: 70% center;
+  filter: saturate(0.85);
+  animation: feature-breathe 14s ease-in-out infinite;
+}
+.experience-feature:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      #111114 0%,
+      #111114dc 26%,
+      #11111435 59%,
+      #11111408 100%
+    ),
+    linear-gradient(0deg, #111114 0%, transparent 32%);
+  z-index: 1;
+  pointer-events: none;
+}
+.experience-feature:after {
+  content: "";
+  position: absolute;
+  inset: -100%;
+  background: linear-gradient(
+    112deg,
+    transparent 46%,
+    #ffb5d12b 49%,
+    #ffe6ef66 50%,
+    transparent 54%
+  );
+  z-index: 2;
+  pointer-events: none;
+  animation: feature-scan 9s ease-in-out infinite;
+}
+.feature-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  opacity: 0.23;
+  background-image:
+    linear-gradient(#ff7ba520 1px, transparent 1px),
+    linear-gradient(90deg, #ff7ba520 1px, transparent 1px);
+  background-size: 35px 35px;
+  mask-image: linear-gradient(90deg, #000, transparent 70%);
+}
+.feature-title {
+  position: absolute;
+  z-index: 3;
+  left: 36px;
+  top: 34px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.feature-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  background: var(--pink);
+  color: var(--ink);
+  transform: skew(-7deg);
+  margin-bottom: 21px;
+}
+.feature-title strong {
+  font: 900 80px/0.82 var(--display);
+  letter-spacing: -1px;
+  color: var(--paper);
+  transform: rotate(-4deg);
+}
+.feature-title strong > span {
+  display: inline-block;
+  font:
+    44px/1 Arial,
+    sans-serif;
+  color: var(--pink);
+  margin-left: 10px;
+  vertical-align: top;
+  animation: feature-star 8s ease-in-out infinite;
+}
+.feature-game-name {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: var(--pink-light);
+  margin-top: 22px;
+}
+.feature-coordinate {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--ink);
+  background: #ffdae8c9;
+  padding: 3px 8px;
+}
+.experience-feature figcaption {
+  position: absolute;
+  bottom: 17px;
+  right: 20px;
+  z-index: 3;
+  font-size: 9px;
+  color: #ede4e9;
+}
+.experience-feature figcaption a {
+  padding: 4px 8px;
+  background: #111114ab;
+  border-bottom: 1px solid #ff7ba56b;
+}
+.feature-reticle {
+  position: absolute;
+  right: 5%;
+  top: 25%;
+  height: 150px;
+  width: 150px;
+  border: 1px solid #ffc3d459;
+  border-radius: 50%;
+  z-index: 2;
+  pointer-events: none;
+  animation: reticle-turn 18s linear infinite;
+}
+.feature-reticle:before {
+  content: "";
+  position: absolute;
+  inset: 14px;
+  border: 1px dashed #ffe1ee75;
+  border-radius: 50%;
+}
+.feature-reticle:after {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-block: 2px solid var(--pink);
+  border-radius: 50%;
+}
+.feature-reticle span {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #ffe1ee77;
+  font:
+    30px Arial,
+    sans-serif;
+}
+.experience-featured .experience-work {
+  gap: 12px;
+  border: 0;
+}
+.experience-featured .experience-work > section {
+  padding: 22px !important;
+  border: 1px solid #ff7ba52c;
+  background: linear-gradient(135deg, #ff7ba50b, #111114);
+  overflow: hidden;
+}
+.experience-featured .experience-work > section + section {
+  border-left: 1px solid #ff7ba52c;
+}
+.experience-featured .work-number {
+  display: block;
+  letter-spacing: 1.8px;
+}
+.experience-featured .experience-work h4 {
+  font-size: 20px;
+}
+.experience-featured .agent-grid > div {
+  padding: 16px 18px;
+  border: 1px solid #ff7ba531;
+  border-left: 3px solid var(--pink);
+  background: #ff7ba508;
+  box-shadow: inset 0 0 25px #ff7ba506;
+}
+.experience-featured .experience-header {
+  padding-top: 18px;
+}
+.experience-featured .experience-seal {
+  box-shadow: 4px 4px 0 #ff7ba529;
+}
+@keyframes feature-breathe {
+  50% {
+    scale: 1.055;
+    translate: -8px 0;
+  }
+}
+@keyframes feature-scan {
+  0%,
+  25% {
+    translate: -55% 0;
+  }
+  65%,
+  100% {
+    translate: 55% 0;
+  }
+}
+@keyframes feature-star {
+  50% {
+    rotate: 90deg;
+    scale: 1.1;
+  }
+}
+@keyframes reticle-turn {
+  to {
+    rotate: 360deg;
+  }
+}
+/* Sub-animations reinforce the content type instead of repeating one bounce. */
+.project-card[data-entry-style="project-shutter"].fx-scene-impact
+  .project-media
+  strong {
+  animation: project-type-focus 1s ease-out both;
+}
+.project-card[data-entry-style="project-perspective"].fx-scene-impact
+  .project-media:after {
+  animation: renderer-grid-rotate 1.4s ease-out both;
+}
+.project-card[data-entry-style="project-scan"].fx-scene-impact
+  .project-media
+  strong {
+  animation: project-type-focus 1.25s ease-out both;
+}
+.note-card.fx-scene-impact .note-number {
+  animation: archive-number 0.65s ease-out both;
+}
+.vibe-card.fx-scene-impact:before {
+  animation: sidequest-arrow 0.9s ease-out both;
+}
+@keyframes project-type-focus {
+  0%,
+  15% {
+    opacity: 0;
+    filter: blur(8px);
+    scale: 1.08;
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    scale: 1;
+  }
+}
+@keyframes renderer-grid-rotate {
+  0% {
+    transform: rotate(60deg) scale(0.5);
+  }
+  100% {
+    transform: rotate(-30deg) scale(1);
+  }
+}
+@keyframes archive-number {
+  0% {
+    opacity: 0;
+    translate: -16px 0;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@keyframes sidequest-arrow {
+  0%,
+  20% {
+    opacity: 0;
+    translate: -15px 15px;
+  }
+  70% {
+    opacity: 1;
+    translate: 3px -3px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (max-width: 1150px) {
+  .experience-feature {
+    margin: -25px -25px 25px;
+  }
+  .feature-title {
+    left: 27px;
+  }
+  .feature-title strong {
+    font-size: 73px;
+  }
+}
+@media (max-width: 900px) {
+  .experience-feature {
+    height: 295px;
+  }
+  .experience-featured .experience-work {
+    gap: 12px;
+  }
+  .feature-reticle {
+    right: 6%;
+    width: 120px;
+    height: 120px;
+  }
+}
+@media (max-width: 600px) {
+  .experience-feature {
+    margin: -21px -20px 22px;
+    height: 300px;
+  }
+  .experience-feature > img {
+    object-position: 68% center;
+  }
+  .experience-feature:before {
+    background:
+      linear-gradient(90deg, #111114dd, #11111460 65%, #11111422),
+      linear-gradient(0deg, #111114, transparent 48%);
+  }
+  .feature-title {
+    left: 20px;
+    top: 60px;
+  }
+  .feature-kicker {
+    font-size: 7px;
+    letter-spacing: 1px;
+    padding: 4px 7px;
+    margin-bottom: 22px;
+  }
+  .feature-title strong {
+    font-size: 60px;
+  }
+  .feature-title strong > span {
+    font-size: 32px;
+  }
+  .feature-game-name {
+    font-size: 7px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+  }
+  .feature-coordinate {
+    font-size: 6px;
+    right: 10px;
+    top: 14px;
+    letter-spacing: 1px;
+  }
+  .feature-reticle {
+    width: 80px;
+    height: 80px;
+    right: -10px;
+    top: 28%;
+  }
+  .experience-feature figcaption {
+    bottom: 12px;
+    right: 12px;
+    font-size: 8px;
+  }
+  .experience-featured .experience-work > section {
+    padding: 18px !important;
+  }
+  .experience-featured .agent-grid > div {
+    padding: 15px;
+  }
+  .experience-featured .experience-header h3 {
+    font-size: 20px;
+  }
+}

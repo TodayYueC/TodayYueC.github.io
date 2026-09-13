@@ -420,7 +420,7 @@
       previousScroll = scrollY,
       scrollFrame = 0;
     const sceneSelector =
-      ".section-heading,.profile-art,.about-copy,.experience-header,.experience-work>section,.agent-grid>div,.project-card,.vibe-card,.info-card,.note-card,.footer-main,.footer-links";
+      ".section-heading,.profile-art,.about-copy,.experience-feature,.experience-header,.experience-work>section,.agent-grid>div,.project-card,.vibe-card,.info-card,.note-card,.footer-main,.footer-links";
     const sceneSections = [...document.querySelectorAll(".section-band")];
     const ghostNames = [
       "THE PLAYER",
@@ -437,6 +437,276 @@
       section.append(ghost);
     });
     root.classList.add("fx-scroll-ready");
+    // Distinct visual vocabulary for each type of content; reverse only its travel direction.
+    function sceneChoreography(el, index, direction, narrow) {
+      const sign = index % 2 ? 1 : -1;
+      const full = "inset(0% 0% 0% 0%)";
+      const still = {
+        opacity: 1,
+        translate: "0 0",
+        rotate: "0deg",
+        scale: 1,
+        filter: "blur(0px)",
+        clipPath: full,
+      };
+      const make = (name, frames, duration = 850, delay = 0) => ({
+        name,
+        frames,
+        duration,
+        delay,
+      });
+      if (el.matches(".experience-feature"))
+        return make(
+          "cinematic-aperture",
+          [
+            {
+              opacity: 0.2,
+              clipPath: "inset(48% 0% 48% 0%)",
+              scale: 1.08,
+              filter: "brightness(1.5)",
+            },
+            { opacity: 1, clipPath: full, scale: 1, filter: "brightness(1)" },
+          ],
+          1350,
+        );
+      if (el.matches(".profile-art"))
+        return make(
+          "polaroid-turn",
+          [
+            {
+              opacity: 0,
+              translate: `${sign * (narrow ? 24 : 65)}px ${direction * 25}px`,
+              rotate: `${direction * -14}deg`,
+              scale: 0.93,
+            },
+            {
+              opacity: 1,
+              translate: "0 0",
+              rotate: "2deg",
+              scale: 1.025,
+              offset: 0.76,
+            },
+            { opacity: 1, translate: "0 0", rotate: "0deg", scale: 1 },
+          ],
+          1050,
+        );
+      if (el.matches(".about-copy"))
+        return make(
+          "editorial-unfold",
+          [
+            {
+              opacity: 0,
+              clipPath:
+                direction > 0 ? "inset(0% 0% 100% 0%)" : "inset(100% 0% 0% 0%)",
+            },
+            { opacity: 1, clipPath: full },
+          ],
+          1100,
+          100,
+        );
+      if (el.matches(".experience-header"))
+        return make(
+          "title-lock-on",
+          [
+            { opacity: 0, translate: "-45px 0", filter: "blur(7px)" },
+            { opacity: 1, translate: "0 0", filter: "blur(0px)" },
+          ],
+          900,
+          180,
+        );
+      if (el.matches(".experience-work>section"))
+        return make(
+          "mission-panel",
+          [
+            {
+              opacity: 0,
+              clipPath: "inset(0% 100% 0% 0%)",
+              translate: `${sign * 20}px 0`,
+            },
+            { opacity: 1, clipPath: full, translate: "0 0" },
+          ],
+          900,
+          index * 160,
+        );
+      if (el.matches(".agent-grid>div"))
+        return make(
+          "agent-boot",
+          [
+            { opacity: 0, scale: 0.93, filter: "blur(9px)" },
+            { opacity: 1, scale: 1.01, filter: "blur(0px)", offset: 0.8 },
+            { opacity: 1, scale: 1, filter: "blur(0px)" },
+          ],
+          1050,
+          index * 180,
+        );
+      if (el.matches(".project-card")) {
+        switch (index % 4) {
+          case 0:
+            return make(
+              "project-diagonal",
+              [
+                {
+                  opacity: 0.2,
+                  clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+                },
+                {
+                  opacity: 1,
+                  clipPath: "polygon(0% 0%, 78% 0%, 36% 100%, 0% 100%)",
+                  offset: 0.58,
+                },
+                {
+                  opacity: 1,
+                  clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                },
+              ],
+              1050,
+            );
+          case 1:
+            return make(
+              "project-shutter",
+              [
+                { opacity: 0.3, clipPath: "inset(50% 0% 50% 0%)", scale: 0.98 },
+                { opacity: 1, clipPath: full, scale: 1 },
+              ],
+              1000,
+              100,
+            );
+          case 2:
+            return make(
+              "project-perspective",
+              [
+                {
+                  opacity: 0,
+                  transform: `perspective(1200px) rotateY(${direction * -17}deg)`,
+                  translate: `${direction * -35}px 0`,
+                  transformOrigin: "left center",
+                },
+                {
+                  opacity: 1,
+                  transform: "perspective(1200px) rotateY(0deg)",
+                  translate: "0 0",
+                  transformOrigin: "left center",
+                },
+              ],
+              1150,
+            );
+          default:
+            return make(
+              "project-scan",
+              [
+                {
+                  opacity: 0.4,
+                  clipPath:
+                    direction > 0
+                      ? "inset(100% 0% 0% 0%)"
+                      : "inset(0% 0% 100% 0%)",
+                  translate: `0 ${direction * 25}px`,
+                },
+                { opacity: 1, clipPath: full, translate: "0 0" },
+              ],
+              1100,
+              120,
+            );
+        }
+      }
+      if (el.matches(".vibe-card"))
+        return make(
+          "sidequest-fan",
+          [
+            {
+              opacity: 0,
+              rotate: `${sign * direction * 8}deg`,
+              translate: `${sign * 30}px ${direction * 25}px`,
+              transformOrigin: sign > 0 ? "right bottom" : "left bottom",
+            },
+            { opacity: 1, rotate: "0deg", translate: "0 0" },
+          ],
+          900,
+          index * 120,
+        );
+      if (el.matches(".info-card"))
+        return make(
+          "skill-unlock",
+          [
+            { opacity: 0, scale: 0.76, filter: "blur(4px)" },
+            { opacity: 1, scale: 1.035, filter: "blur(0px)", offset: 0.7 },
+            { opacity: 1, scale: 1, filter: "blur(0px)" },
+          ],
+          760,
+          (index % 3) * 140,
+        );
+      if (el.matches(".note-card"))
+        return make(
+          "archive-drawer",
+          [
+            {
+              opacity: 0,
+              translate: `${direction * (narrow ? 22 : 45)}px 0`,
+              clipPath: "inset(0% 0% 0% 12%)",
+            },
+            { opacity: 1, translate: "0 0", clipPath: full },
+          ],
+          650,
+          (index % 3) * 80,
+        );
+      if (el.matches(".footer-main"))
+        return make(
+          "final-title",
+          [
+            {
+              opacity: 0,
+              translate: `0 ${direction * 60}px`,
+              filter: "blur(4px)",
+            },
+            { opacity: 1, translate: "0 0", filter: "blur(0px)" },
+          ],
+          1200,
+        );
+      if (el.matches(".footer-links"))
+        return make("footer-fade", [{ opacity: 0 }, { opacity: 1 }], 850, 250);
+      if (el.matches(".section-heading")) {
+        if (el.closest("#experience"))
+          return make(
+            "featured-heading",
+            [
+              {
+                opacity: 0,
+                clipPath: "inset(0% 100% 0% 0%)",
+                filter: "blur(3px)",
+              },
+              { opacity: 1, clipPath: full, filter: "blur(0px)" },
+            ],
+            1200,
+          );
+        if (el.closest("#skills"))
+          return make(
+            "loadout-heading",
+            [
+              { opacity: 0, scale: 0.92 },
+              { opacity: 1, scale: 1 },
+            ],
+            800,
+          );
+        if (el.closest("#notes"))
+          return make(
+            "archive-heading",
+            [
+              { opacity: 0, translate: "-25px 0" },
+              { opacity: 1, translate: "0 0" },
+            ],
+            750,
+          );
+        return make(
+          "chapter-mask",
+          [
+            { opacity: 0, clipPath: "inset(0% 0% 100% 0%)" },
+            { opacity: 1, clipPath: full },
+          ],
+          900,
+        );
+      }
+      return make("quiet-fade", [{ opacity: 0 }, still], 650);
+    }
     function revealScene(el, item) {
       item.animation?.cancel();
       item.animation = null;
@@ -448,10 +718,7 @@
       )
         return;
       const index = [...el.parentElement.children].indexOf(el);
-      const side = index % 2 ? 1 : -1;
       const narrow = innerWidth < 700;
-      const travel = narrow ? 58 : 105;
-      const sideways = narrow ? 20 : 65;
       const heading = el.matches(".section-heading");
       el.classList.remove("fx-scene-impact");
       void el.offsetWidth;
@@ -461,36 +728,12 @@
         void el.offsetWidth;
         el.classList.add("fx-heading-hit");
       }
-      const frames = [
-        {
-          opacity: 0,
-          translate: `${side * sideways}px ${scrollDirection * travel}px`,
-          rotate: `${side * scrollDirection * (heading ? 3 : 6)}deg`,
-          scale: heading ? 0.94 : 0.87,
-          filter: "blur(6px)",
-          offset: 0,
-        },
-        {
-          opacity: 1,
-          translate: `${-side * 6}px ${-scrollDirection * 9}px`,
-          rotate: `${-side * 0.8}deg`,
-          scale: 1.015,
-          filter: "blur(0px)",
-          offset: 0.72,
-        },
-        {
-          opacity: 1,
-          translate: "0 0",
-          rotate: "0deg",
-          scale: 1,
-          filter: "blur(0px)",
-          offset: 1,
-        },
-      ];
-      const animation = el.animate(frames, {
-        duration: 900,
-        delay: (index % 3) * 75,
-        easing: "cubic-bezier(.16,.75,.24,1)",
+      const preset = sceneChoreography(el, index, scrollDirection, narrow);
+      el.dataset.entryStyle = preset.name;
+      const animation = el.animate(preset.frames, {
+        duration: preset.duration,
+        delay: preset.delay || 0,
+        easing: preset.easing || "cubic-bezier(.16,1,.3,1)",
         fill: "backwards",
       });
       item.animation = animation;
@@ -591,6 +834,7 @@
       for (const [el, item] of sceneItems) {
         if (
           !item.inside ||
+          !el.matches(".project-card") ||
           item.animation ||
           el.matches(".note-card.expanded") ||
           el.contains(document.activeElement)
