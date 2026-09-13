@@ -1,187 +1,516 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含 GAS、节奏射击、软光栅渲染器、OpenGL 和 Unreal Engine 学习笔记。">
-  <meta name="keywords" content="YueC, Unreal Engine 5, UE5, Gameplay Engineer, GAS, C++, OpenGL, SoftRenderer, 玩法工程师, 软光栅渲染器">
-  <title>YueC | UE5 玩法工程师 / C++ 渲染</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20260622-rendering">
-</head>
-<body>
-  <header class="site-header">
-    <nav class="navbar" aria-label="Main navigation">
-      <a class="brand" href="#top" aria-label="YueC home">
-        <span class="brand-mark" aria-hidden="true">
-          <img src="up猫猫(小).png" alt="">
-        </span>
-        <span class="brand-copy">
-          <span class="brand-name">YueC</span>
-          <span class="brand-slogan" data-i18n="brandSlogan">二次元死宅，也想用双手创造一点“世界”</span>
-        </span>
-      </a>
-
-      <button class="nav-toggle" type="button" aria-label="打开导航" aria-expanded="false">
-        <span></span>
-        <span></span>
-      </button>
-
-      <div class="nav-panel" id="nav-panel">
-        <a class="nav-link" href="#about" data-i18n="navAbout">关于</a>
-        <a class="nav-link" href="#skills" data-i18n="navSkills">技能</a>
-        <a class="nav-link" href="#projects" data-i18n="navProjects">项目</a>
-        <a class="nav-link" href="#notes" data-i18n="navNotes">笔记</a>
-        <a class="nav-link" href="#contact" data-i18n="navContact">联系</a>
-        <button class="lang-toggle" type="button" aria-label="Switch language">
-          <span data-i18n="langButton">EN</span>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ff7ba5" />
+    <meta
+      name="description"
+      content="YueC 的 UE5 玩法工程与 C++ 渲染作品集。游戏开发、实习经历与学习记录。"
+    />
+    <title>YueC | 把想象写成可玩的世界</title>
+    <link rel="icon" href="新视觉图/头像.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="新视觉图/eabf34e11d6ac27281e5ee2dfc01c291.jpeg"
+    />
+    <link rel="stylesheet" href="style.css?v=20260913-scroll3" />
+    <link rel="stylesheet" href="motion.css?v=20260913-scroll3" />
+  </head>
+  <body>
+    <a class="skip-link" href="#about" data-i18n="skipLink">跳到正文</a>
+    <div class="page-wipe" aria-hidden="true"></div>
+    <div class="reading-progress" aria-hidden="true"></div>
+    <header class="site-header">
+      <nav class="navbar" aria-label="主导航">
+        <a class="brand" href="#top" aria-label="YueC 首页"
+          ><img src="新视觉图/头像.png" alt="" width="42" height="42" /><span
+            >YueC<span class="brand-star">✦</span
+            ><small>PLAYER / CREATOR</small></span
+          ></a
+        >
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="打开导航"
+          aria-expanded="false"
+          aria-controls="nav-panel"
+        >
+          <span></span><span></span>
         </button>
-      </div>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero section-band" aria-labelledby="hero-title">
-      <div class="section-inner hero-layout">
+        <div class="nav-panel" id="nav-panel">
+          <a class="nav-link" href="#about"
+            ><small>01</small><span data-i18n="navAbout">关于我</span></a
+          >
+          <a class="nav-link" href="#experience"
+            ><small>02</small><span data-i18n="navExperience">实习经历</span></a
+          >
+          <a class="nav-link" href="#projects"
+            ><small>03</small><span data-i18n="navProjects">项目</span></a
+          >
+          <a class="nav-link" href="#skills"
+            ><small>04</small><span data-i18n="navSkills">技能</span></a
+          >
+          <a class="nav-link" href="#notes"
+            ><small>05</small><span data-i18n="navNotes">笔记</span></a
+          >
+          <a class="nav-link nav-contact" href="#contact"
+            ><span data-i18n="navContact">联系我</span> ↗</a
+          >
+          <button class="lang-toggle" type="button" aria-label="切换语言">
+            <span data-i18n="langButton">EN</span>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-grid" aria-hidden="true"></div>
+        <div class="hero-coordinate" aria-hidden="true">
+          PORTFOLIO — VOL. 2026 / THE WORLD IS STILL LOADING
+        </div>
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="heroEyebrow">UE5 玩法工程师 / C++ / Rendering</p>
-          <h1 id="hero-title" data-i18n="heroTitle">我在 Engine 里搭玩法骨架，也给奇怪想法找一条能跑起来的路。</h1>
-          <p class="hero-description" data-i18n="heroDescription">我想做的，是把脑子里那些乱七八糟但很想实现的东西，一点点变成能玩的世界。</p>
+          <p class="hero-kicker">
+            <span class="signal-dot"></span> HELLO WORLD, I'M YUEC.
+          </p>
+          <h1 id="hero-title" aria-label="IMAGINE. BUILD. PLAY.">
+            <span>IMAGINE.</span><span class="outline-word">BUILD.</span
+            ><span class="pink-word"
+              >PLAY<span class="title-star" aria-hidden="true">✦</span></span
+            >
+          </h1>
+          <div class="hero-statement">
+            <span data-i18n="heroTitle">把想象，写成可玩的世界。</span>
+          </div>
+          <p class="hero-description" data-i18n="heroDescription">
+            UE5 玩法工程 / C++ 渲染 / 一个想创造世界的二次元玩家。
+          </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="https://space.bilibili.com/287477294" target="_blank" rel="noopener noreferrer" data-i18n="ctaVideo">Bilibili</a>
-            <a class="button button-secondary" href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer" data-i18n="ctaGithub">GitHub</a>
+            <a class="button button-primary" href="#projects"
+              ><span data-i18n="exploreProjects">探索我的项目</span
+              ><span>↗</span></a
+            ><a
+              class="hero-social"
+              href="https://github.com/TodayYueC"
+              target="_blank"
+              rel="noopener noreferrer"
+              >GitHub ↗</a
+            ><a
+              class="hero-social"
+              href="https://space.bilibili.com/287477294"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Bilibili ↗</a
+            >
           </div>
         </div>
-
-        <figure class="hero-portrait">
-          <img src="up猫猫.png" alt="YueC 的头像">
-          <figcaption>
-            <span data-i18n="heroLocation">China</span>
-            <span data-i18n="heroFocus">Gameplay systems</span>
-          </figcaption>
-        </figure>
-      </div>
-
-      <div class="section-inner facts-strip">
-        <div>
-          <span class="fact-value">UE 5.7</span>
-          <span class="fact-label" data-i18n="factEngine">近期项目引擎版本</span>
-        </div>
-        <div>
-          <span class="fact-value">C++</span>
-          <span class="fact-label" data-i18n="factCpp">主要开发语言</span>
-        </div>
-        <div>
-          <span class="fact-value">9</span>
-          <span class="fact-label" data-i18n="factRepos">非 fork 公开仓库</span>
-        </div>
-        <div>
-          <span class="fact-value">Gameplay</span>
-          <span class="fact-label" data-i18n="factGameDev">玩法系统与渲染管线</span>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-band" id="about" aria-labelledby="about-title">
-      <div class="section-inner split-section">
-        <div>
-          <p class="eyebrow" data-i18n="aboutEyebrow">个人方向</p>
-          <h2 id="about-title" data-i18n="aboutTitle">我的终极目标，是创造一个能把内心想法全盘托出的世界。</h2>
-        </div>
-        <div class="copy-block">
-          <p data-i18n="aboutBody">目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置，以及从软光栅到 OpenGL 的渲染管线拆解。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。</p>
-          <p data-i18n="aboutBody2">这里尽量只放我愿意被继续追问实现细节的内容：项目怎么拆、问题怎么修、下一步还可以怎么扩展。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-band muted" id="skills" aria-labelledby="skills-title">
-      <div class="section-inner">
-        <div class="section-heading">
-          <p class="eyebrow" data-i18n="skillsEyebrow">技术栈</p>
-          <h2 id="skills-title" data-i18n="skillsTitle">能直接落到项目里的能力</h2>
-          <p data-i18n="skillsIntro">下面按“能解决什么问题”来组织，不按工具名堆列表。</p>
-        </div>
-        <div class="card-grid skill-grid" id="skills-grid"></div>
-      </div>
-    </section>
-
-    <section class="section-band" id="projects" aria-labelledby="projects-title">
-      <div class="section-inner">
-        <div class="section-heading">
-          <p class="eyebrow" data-i18n="projectsEyebrow">项目</p>
-          <h2 id="projects-title" data-i18n="projectsTitle">主要项目</h2>
-          <p data-i18n="projectsIntro">主要项目现在分成两条线：UE5 玩法工程和 C++ 渲染基础。PurgeHour 与 Cyber2026 记录战斗、GAS、节奏判定和事件分发；SoftRenderer 记录软光栅管线；PBRDeferredRenderer 作为 OpenGL PBR 延迟渲染器正在开发中。</p>
-          <a class="text-link portfolio-video-link" href="https://www.bilibili.com/video/BV1jmwkzMEcN/" target="_blank" rel="noopener noreferrer" data-i18n="projectsVideoLink">先看作品集视频</a>
-        </div>
-        <div class="project-list" id="projects-list"></div>
-
-        <div class="vibe-projects">
-          <div class="section-heading compact-heading">
-            <p class="eyebrow" data-i18n="vibeEyebrow">Vibecoding</p>
-            <h3 id="vibe-projects-title" data-i18n="vibeTitle">把小念头做出来</h3>
-          <p data-i18n="vibeIntro">这里放一些开发来玩的项目，会分成更靠近 gameplay 系统的练习，和其他类型的小东西。</p>
+        <div class="hero-art">
+          <div class="art-outline" aria-hidden="true"></div>
+          <figure class="hero-frame">
+            <img
+              class="hero-image"
+              src="新视觉图/eabf34e11d6ac27281e5ee2dfc01c291.jpeg"
+              alt="科幻城市中与悬浮界面交互的二次元角色"
+              fetchpriority="high"
+              width="1904"
+              height="2544"
+            />
+            <div class="art-halftone" aria-hidden="true"></div>
+          </figure>
+          <span class="art-star" aria-hidden="true">✦</span>
+          <span class="art-cross" aria-hidden="true">+</span>
+          <div class="art-label">
+            <span>CODE IS MY</span><strong>SUPERPOWER.</strong>
           </div>
-          <section class="vibe-category vibe-category-featured" aria-labelledby="vibe-gameplay-title">
-            <div class="vibe-category-head">
-              <p class="eyebrow vibe-category-label" id="vibe-gameplay-title" data-i18n="vibeGameplayTitle">Gameplay 相关</p>
-              <p data-i18n="vibeGameplayIntro">这一组更偏插件、系统和引擎工具，所以版面也稍微放大一点。</p>
-            </div>
-            <div class="vibe-grid vibe-grid-featured" id="vibe-gameplay-list"></div>
-          </section>
-          <section class="vibe-category" aria-labelledby="vibe-other-title">
-            <div class="vibe-category-head">
-              <p class="eyebrow vibe-category-label" id="vibe-other-title" data-i18n="vibeOtherTitle">其他</p>
-              <p data-i18n="vibeOtherIntro">不直接落在游戏引擎里，但一样是拿来试想法的小项目。</p>
-            </div>
-            <div class="vibe-grid vibe-grid-compact" id="vibe-other-list"></div>
-          </section>
+          <span class="art-index" aria-hidden="true"
+            >YC—01 / GAMEPLAY ENGINEER</span
+          >
+        </div>
+        <div class="hero-bottom">
+          <span
+            ><i></i> UNREAL ENGINE &nbsp; / &nbsp; C++ &nbsp; / &nbsp;
+            RENDERING</span
+          ><a href="#about">SCROLL TO EXPLORE <span>↓</span></a>
+        </div>
+      </section>
+      <div class="ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span
+            >MAKE IT PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦ MAKE IT
+            PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦ </span
+          ><span
+            >MAKE IT PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦ MAKE IT
+            PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦
+          </span>
         </div>
       </div>
-    </section>
-
-    <section class="section-band muted" id="notes" aria-labelledby="notes-title">
+      <section
+        class="section-band about-section"
+        id="about"
+        aria-labelledby="about-title"
+      >
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <p class="eyebrow">01 / THE PLAYER</p>
+            <h2 id="about-title">
+              <span class="display-heading">BEHIND THE CODE<span>.</span></span
+              ><span class="heading-caption" data-i18n="aboutEyebrow"
+                >关于我 / 代码背后</span
+              >
+            </h2>
+          </div>
+          <div class="about-layout">
+            <figure class="profile-art reveal">
+              <img
+                src="新视觉图/f8d470c03527e418c3c2e89fded670b6.jpeg"
+                alt="城市光影中回望的二次元角色"
+                loading="lazy"
+                width="1904"
+                height="2544"
+              />
+              <figcaption>
+                <strong>YueC</strong><span>PLAYER ID: TODAYYUEC</span>
+              </figcaption>
+              <span class="profile-sticker" aria-hidden="true"
+                >STAY<br />CURIOUS!</span
+              >
+            </figure>
+            <div class="about-copy reveal">
+              <p class="eyebrow pink-text">GAMEPLAY ENGINEER & WORLD BUILDER</p>
+              <h3 data-i18n="aboutTitle">
+                我的终极目标，是创造一个能把内心想法全盘托出的世界。
+              </h3>
+              <p data-i18n="aboutBody">
+                目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累。
+              </p>
+              <p data-i18n="aboutBody2">
+                这里尽量只放我愿意被继续追问实现细节的内容。
+              </p>
+              <div class="identity-strip">
+                <img
+                  src="新视觉图/头像.png"
+                  alt="YueC 的桃色头像"
+                  width="52"
+                  height="52"
+                  loading="lazy"
+                />
+                <div>
+                  <strong>YueC / TodayYueC</strong
+                  ><span data-i18n="brandSlogan"
+                    >二次元死宅，也想用双手创造一点“世界”</span
+                  >
+                </div>
+                <span aria-hidden="true">↗</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section-band experience-section"
+        id="experience"
+        aria-labelledby="experience-title"
+      >
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <p class="eyebrow">02 / FIELD EXPERIENCE</p>
+            <h2 id="experience-title">
+              <span class="display-heading">IN THE REAL GAME<span>.</span></span
+              ><span class="heading-caption" data-i18n="experienceHeading"
+                >实习经历 / 从想法到上线</span
+              >
+            </h2>
+          </div>
+          <article class="experience-card reveal">
+            <div class="experience-topline">
+              <span class="file-label">EXPERIENCE FILE — 001</span
+              ><span class="experience-date" data-i18n="experienceDate"
+                >实习时间待补充</span
+              >
+            </div>
+            <div class="experience-header">
+              <div>
+                <p class="studio-label">SAROS × LIGHTSPEED STUDIOS</p>
+                <h3 data-i18n="experienceCompany">萨罗斯 · 腾讯光子工作室群</h3>
+                <p class="experience-role" data-i18n="experienceRole">
+                  客户端研发工程师 / 命运扳机项目组
+                </p>
+              </div>
+              <span class="experience-seal" aria-hidden="true"
+                >UE<br /><b>5</b></span
+              >
+            </div>
+            <p class="experience-intro" data-i18n="experienceIntro">
+              光子旗下基于 UE5
+              引擎打造的大型二次元风格第三人称战术竞技射击游戏。
+            </p>
+            <div class="experience-work">
+              <section>
+                <span class="work-number">01 / GAMEPLAY</span>
+                <h4 data-i18n="workGameplayTitle">业务开发</h4>
+                <p data-i18n="workGameplayBody">
+                  参与英雄技能、装备等 Gameplay
+                  相关需求开发，负责客户端功能实现，参与项目 Debug
+                  阶段及游戏内测版本迭代。
+                </p>
+                <div class="tag-list">
+                  <span class="tag">Hero Abilities</span
+                  ><span class="tag">Equipment</span>
+                </div>
+              </section>
+              <section>
+                <span class="work-number">02 / DEBUGGING</span>
+                <h4 data-i18n="workDebugTitle">Bug 定位与修复</h4>
+                <p data-i18n="workDebugBody">
+                  参与英雄、3C、技能、UI 等多个客户端模块的 Bug
+                  定位与修复，保障游戏稳定运行。
+                </p>
+                <div class="tag-list">
+                  <span class="tag">3C</span
+                  ><span class="tag">Skills / UI</span>
+                </div>
+              </section>
+              <section>
+                <span class="work-number">03 / AI WORKFLOW</span>
+                <h4 data-i18n="workAITitle">研发提效</h4>
+                <p data-i18n="workAIBody">
+                  负责并参与客户端 AI 工作流建设，负责客户端内存性能监控 Agent
+                  与 Crash 分析 Agent。
+                </p>
+                <div class="tag-list">
+                  <span class="tag">AI Agent</span
+                  ><span class="tag">Automation</span>
+                </div>
+              </section>
+            </div>
+            <div class="agent-grid">
+              <div>
+                <span>MEMORY AGENT ↗</span>
+                <p data-i18n="memoryAgentBody">
+                  围绕 utrace、DumpObj、MemReport
+                  自动化分析关键场景内存变化，识别异常增长。
+                </p>
+              </div>
+              <div>
+                <span>CRASH AGENT ↗</span>
+                <p data-i18n="crashAgentBody">
+                  结合数据对 Crash 分类归因，识别 OOM、PageFault
+                  等高置信度问题，并自动解决 Bug。
+                </p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+      <section
+        class="section-band projects-section"
+        id="projects"
+        aria-labelledby="projects-title"
+      >
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <p class="eyebrow">03 / SELECTED WORKS</p>
+            <div class="heading-row">
+              <h2 id="projects-title">
+                <span class="display-heading">SAVE POINTS<span>.</span></span
+                ><span class="heading-caption" data-i18n="projectsTitle"
+                  >项目 / 我的存档点</span
+                >
+              </h2>
+              <a
+                class="button button-secondary"
+                href="https://www.bilibili.com/video/BV1jmwkzMEcN/"
+                target="_blank"
+                rel="noopener noreferrer"
+                ><span data-i18n="projectsVideoLink">观看作品集视频</span> ↗</a
+              >
+            </div>
+            <p class="section-intro" data-i18n="projectsIntro"></p>
+          </div>
+          <div class="project-list" id="projects-list"></div>
+          <div class="vibe-projects">
+            <div class="section-heading compact-heading">
+              <p class="eyebrow">SIDE QUESTS / VIBECODING</p>
+              <h3 data-i18n="vibeTitle">把小念头做出来</h3>
+              <p data-i18n="vibeIntro"></p>
+            </div>
+            <section
+              class="vibe-category"
+              aria-labelledby="vibe-gameplay-title"
+            >
+              <h4
+                class="vibe-category-label"
+                id="vibe-gameplay-title"
+                data-i18n="vibeGameplayTitle"
+              >
+                Gameplay 相关
+              </h4>
+              <div class="vibe-grid" id="vibe-gameplay-list"></div>
+            </section>
+            <section class="vibe-category" aria-labelledby="vibe-other-title">
+              <h4
+                class="vibe-category-label"
+                id="vibe-other-title"
+                data-i18n="vibeOtherTitle"
+              >
+                其他
+              </h4>
+              <div class="vibe-grid" id="vibe-other-list"></div>
+            </section>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section-band skills-section"
+        id="skills"
+        aria-labelledby="skills-title"
+      >
+        <div class="section-inner">
+          <div class="section-heading reveal">
+            <p class="eyebrow">04 / ABILITY LOADOUT</p>
+            <h2 id="skills-title">
+              <span class="display-heading">MY SKILL TREE<span>.</span></span
+              ><span class="heading-caption" data-i18n="skillsTitle"
+                >技能 / 让想法运行的能力</span
+              >
+            </h2>
+            <p class="section-intro" data-i18n="skillsIntro"></p>
+          </div>
+          <div class="skill-grid" id="skills-grid"></div>
+        </div>
+      </section>
+      <section
+        class="section-band notes-section"
+        id="notes"
+        aria-labelledby="notes-title"
+      >
+        <div class="section-inner">
+          <div class="notes-heading">
+            <div class="section-heading reveal">
+              <p class="eyebrow">05 / KNOWLEDGE ARCHIVE</p>
+              <h2 id="notes-title">
+                <span class="display-heading">BRAIN DUMP<span>.</span></span
+                ><span class="heading-caption" data-i18n="notesTitle"
+                  >笔记 / UE 与 GAS 学习记录</span
+                >
+              </h2>
+              <p class="section-intro" data-i18n="notesIntro"></p>
+            </div>
+            <figure class="notes-art">
+              <img
+                src="新视觉图/ede5263c25a445f72c97d3663e255060.jpeg"
+                alt="专注构建微缩世界的二次元角色"
+                width="1904"
+                height="2544"
+                loading="lazy"
+              />
+              <figcaption>ALWAYS LEARNING ↗</figcaption>
+            </figure>
+          </div>
+          <div class="notes-controls">
+            <div class="notes-toolbar" role="group" aria-label="笔记分类">
+              <button
+                class="filter-btn active"
+                type="button"
+                data-filter="all"
+                data-i18n="filterAll"
+                aria-pressed="true"
+              >
+                全部</button
+              ><button
+                class="filter-btn"
+                type="button"
+                data-filter="ue"
+                data-i18n="filterUE"
+                aria-pressed="false"
+              >
+                UE 基础</button
+              ><button
+                class="filter-btn"
+                type="button"
+                data-filter="gas"
+                data-i18n="filterGAS"
+                aria-pressed="false"
+              >
+                GAS 系统
+              </button>
+            </div>
+            <label class="note-search"
+              ><span aria-hidden="true">⌕</span
+              ><span class="sr-only" data-i18n="searchNotes">搜索笔记</span
+              ><input
+                id="notes-search"
+                type="search"
+                placeholder="搜索笔记 / SEARCH"
+                autocomplete="off"
+            /></label>
+          </div>
+          <div class="notes-grid" id="notes-grid"></div>
+          <p id="notes-status" class="notes-status" role="status"></p>
+          <button
+            class="button button-secondary notes-more"
+            type="button"
+            data-i18n="moreNotes"
+          >
+            展开全部笔记 +
+          </button>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer" id="contact">
       <div class="section-inner">
-        <div class="section-heading">
-          <p class="eyebrow" data-i18n="notesEyebrow">笔记</p>
-          <h2 id="notes-title" data-i18n="notesTitle">UE 与 GAS 学习记录</h2>
-          <p data-i18n="notesIntro">这是我学习 UE 和 GAS 过程中整理出来的笔记，有些内容会和 AI 一起梳理，再改成自己能复盘的版本。点击卡片可以展开正文。</p>
+        <p class="eyebrow">NEXT CHAPTER / LET'S CONNECT</p>
+        <div class="footer-main">
+          <div>
+            <h2>LET'S MAKE<br /><span>SOMETHING REAL.</span></h2>
+            <p data-i18n="contactTitle">可以从代码，也可以从视频认识我。</p>
+            <a class="email-link" href="mailto:tdyuechu@163.com"
+              >tdyuechu@163.com ↗</a
+            >
+          </div>
+          <a
+            class="footer-arrow"
+            href="mailto:tdyuechu@163.com"
+            aria-label="发送邮件"
+            >↗</a
+          >
         </div>
-
-        <div class="notes-toolbar">
-          <button class="filter-btn active" type="button" data-filter="all" data-i18n="filterAll">全部</button>
-          <button class="filter-btn" type="button" data-filter="ue" data-i18n="filterUE">UE 基础</button>
-          <button class="filter-btn" type="button" data-filter="gas" data-i18n="filterGAS">GAS 系统</button>
+        <div class="footer-links">
+          <a
+            href="https://github.com/TodayYueC"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GITHUB ↗</a
+          ><a
+            href="https://space.bilibili.com/287477294"
+            target="_blank"
+            rel="noopener noreferrer"
+            >BILIBILI ↗</a
+          ><a href="#top" data-i18n="backToTop">回到顶部 ↑</a>
         </div>
-
-        <div class="notes-grid" id="notes-grid"></div>
+        <div class="footer-bottom">
+          <span>© 2026 YueC / BUILT WITH CURIOSITY.</span
+          ><button
+            class="motion-toggle"
+            type="button"
+            aria-pressed="false"
+            data-i18n="pauseMotion"
+          >
+            暂停动效</button
+          ><span>END OF FILE. KEEP PLAYING ✦</span>
+        </div>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer" id="contact">
-    <div class="section-inner footer-layout">
-      <div>
-        <p class="eyebrow" data-i18n="contactEyebrow">联系</p>
-        <h2 data-i18n="contactTitle">可以从代码，也可以从视频认识我。</h2>
-        <p data-i18n="contactBody">我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长；也把渲染管线拆到自己能解释、能实现的程度。PurgeHour、Cyber2026 和 SoftRenderer 都是这条路上的存档点。</p>
-        <a class="email-link" href="mailto:tdyuechu@163.com">tdyuechu@163.com</a>
-      </div>
-      <div class="footer-links">
-        <a class="button button-primary" href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a class="button button-secondary" href="https://space.bilibili.com/287477294" target="_blank" rel="noopener noreferrer">Bilibili</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>© 2026 YueC</span>
-      <span data-i18n="footerNote">UE5 玩法工程与 C++ 渲染作品集</span>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script src="notesData.js"></script>
-  <script src="script.js?v=20260622-rendering"></script>
-</body>
+    </footer>
+    <script src="vendor/marked.min.js" defer></script>
+    <script src="notesData.js" defer></script>
+    <script src="script.js?v=20260913" defer></script>
+    <script src="motion.js?v=20260913-scroll3" defer></script>
+  </body>
 </html>
