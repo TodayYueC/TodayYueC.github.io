@@ -522,7 +522,6 @@
   }
 }
 .project-card,
-.vibe-card,
 .info-card {
   transform: perspective(1000px) rotateX(var(--tilt-x, 0deg))
     rotateY(var(--tilt-y, 0deg));
@@ -631,7 +630,6 @@ html.motion-paused.fx-pointer summary {
 }
 html.motion-paused .hero-art,
 html.motion-paused .project-card,
-html.motion-paused .vibe-card,
 html.motion-paused .info-card {
   transform: none !important;
 }
@@ -653,7 +651,6 @@ html.motion-paused .fx-replay {
   }
   .hero-art,
   .project-card,
-  .vibe-card,
   .info-card {
     transform: none !important;
   }
@@ -1282,8 +1279,15 @@ html.motion-paused .ticker-track {
 .note-card.fx-scene-impact .note-number {
   animation: archive-number 0.65s ease-out both;
 }
-.vibe-card.fx-scene-impact:before {
-  animation: sidequest-arrow 0.9s ease-out both;
+.open-source-feature.fx-scene-impact .open-source-feature-art img {
+  animation: luckytri-art-arrive 1.35s cubic-bezier(.16, 1, .3, 1) both;
+}
+@keyframes luckytri-art-arrive {
+  0% { transform: scale(1.12) translateX(3%); filter: saturate(1.5) blur(8px); }
+  100% { transform: scale(1) translateX(0); filter: saturate(1) blur(0); }
+}
+html.motion-paused .open-source-feature-art img {
+  animation: none !important;
 }
 @keyframes project-type-focus {
   0%,

@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#ff7ba5" />
     <meta
       name="description"
-      content="YueC 的 UE5 玩法工程与 C++ 渲染作品集。游戏开发、实习经历与学习记录。"
+      content="YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含实习经历、LuckyTri 开源项目与学习记录。"
     />
     <title>YueC | 把想象写成可玩的世界</title>
     <link rel="icon" href="新视觉图/头像.png" />
@@ -21,8 +21,8 @@
       as="image"
       href="新视觉图/eabf34e11d6ac27281e5ee2dfc01c291.jpeg"
     />
-    <link rel="stylesheet" href="style.css?v=20260913-ticker5" />
-    <link rel="stylesheet" href="motion.css?v=20260913-ticker5" />
+    <link rel="stylesheet" href="style.css?v=20260926-open-source" />
+    <link rel="stylesheet" href="motion.css?v=20260926-open-source" />
   </head>
   <body>
     <a class="skip-link" href="#about" data-i18n="skipLink">跳到正文</a>
@@ -371,25 +371,81 @@
             <p class="section-intro" data-i18n="projectsIntro"></p>
           </div>
           <div class="project-list" id="projects-list"></div>
-          <div class="vibe-projects">
+          <div class="open-source-projects" aria-labelledby="open-source-title">
             <div class="section-heading compact-heading">
-              <p class="eyebrow">SIDE QUESTS / VIBECODING</p>
-              <h3 data-i18n="vibeTitle">把小念头做出来</h3>
-              <p data-i18n="vibeIntro"></p>
+              <p class="eyebrow">SIDE QUESTS / OPEN SOURCE</p>
+              <h3 id="open-source-title" data-i18n="openSourceTitle">开源项目</h3>
+              <p data-i18n="openSourceIntro">
+                在代码之外，关于记忆、相遇与成为自己的故事。
+              </p>
             </div>
-            <section
-              class="vibe-category"
-              aria-labelledby="vibe-gameplay-title"
-            >
-              <h4
-                class="vibe-category-label"
-                id="vibe-gameplay-title"
-                data-i18n="vibeGameplayTitle"
+            <article class="open-source-feature" aria-labelledby="luckytri-title">
+              <a
+                class="open-source-feature-art"
+                href="https://github.com/TodayYueC/LuckyTri"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LuckyTri GitHub 仓库"
+                data-i18n-aria-label="luckyTriArtLabel"
               >
-                Gameplay 相关
-              </h4>
-              <div class="vibe-grid" id="vibe-gameplay-list"></div>
-            </section>
+                <picture>
+                  <source
+                    media="(max-width: 600px)"
+                    srcset="assets/luckytri-mobile.png"
+                  />
+                  <img
+                    src="assets/luckytri-banner.png"
+                    alt="LuckyTri 项目插画：桃色与青蓝色背景中的蓝发角色"
+                    width="2172"
+                    height="724"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+                <span class="open-source-feature-stamp" aria-hidden="true"
+                  >LUCKYTRI / OPEN SOURCE</span
+                >
+              </a>
+              <div class="open-source-feature-body">
+                <div class="open-source-feature-identity">
+                  <div class="open-source-feature-head">
+                    <p class="eyebrow" data-i18n="luckyTriEyebrow">
+                      连续记忆 / 自我 / 生长
+                    </p>
+                    <span class="open-source-feature-mark" aria-hidden="true">✦</span>
+                  </div>
+                  <h4 id="luckytri-title">LuckyTri<span>.</span></h4>
+                </div>
+                <div class="open-source-feature-story">
+                  <p class="open-source-feature-lead" data-i18n="luckyTriLead">
+                    让 AI 拥有连续记忆与真实心灵。
+                  </p>
+                  <p
+                    class="open-source-feature-description"
+                    data-i18n="luckyTriDescription"
+                  >
+                    它记得共同经历，也会在独处时回看过去的想法，在新的相遇里慢慢修正、继续生长。它由代码与模型构成，却朝着一个温柔的愿望前行——让每次对话都留下痕迹，让每次回应都带着在意，最终成为有自己故事的
+                    LuckyTri。
+                  </p>
+                  <p class="open-source-feature-quote" data-i18n="luckyTriQuote">
+                    他不是 AI，他属于他自己。
+                  </p>
+                </div>
+                <div class="open-source-feature-foot">
+                  <div class="project-meta" aria-label="Project themes">
+                    <span>CONTINUITY</span><span>REFLECTION</span><span>GROWTH</span>
+                  </div>
+                  <a
+                    class="open-source-feature-link"
+                    href="https://github.com/TodayYueC/LuckyTri"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    ><span data-i18n="luckyTriLink">查看 GitHub 仓库</span
+                    ><span aria-hidden="true">↗</span></a
+                  >
+                </div>
+              </div>
+            </article>
           </div>
         </div>
       </section>
@@ -536,7 +592,7 @@
     </footer>
     <script src="vendor/marked.min.js" defer></script>
     <script src="notesData.js" defer></script>
-    <script src="script.js?v=20260913-ticker5" defer></script>
-    <script src="motion.js?v=20260913-ticker5" defer></script>
+    <script src="script.js?v=20260926-open-source" defer></script>
+    <script src="motion.js?v=20260926-open-source" defer></script>
   </body>
 </html>

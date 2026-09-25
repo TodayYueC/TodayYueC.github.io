@@ -24,7 +24,7 @@ const i18n = {
   zh: {
     documentTitle: "YueC | UE5 玩法工程师 / C++ 渲染",
     metaDescription:
-      "YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含 GAS、节奏射击、软光栅渲染器、OpenGL 和 Unreal Engine 学习笔记。",
+      "YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含实习经历、LuckyTri 开源项目与学习记录。",
     navAbout: "关于",
     navSkills: "技能",
     navProjects: "项目",
@@ -58,12 +58,15 @@ const i18n = {
     projectsIntro:
       "主要项目现在分成两条线：UE5 玩法工程和 C++ 渲染基础。PurgeHour 与 Cyber2026 记录战斗、GAS、节奏判定和事件分发；SoftRenderer 记录软光栅管线；PBRDeferredRenderer 作为 OpenGL PBR 延迟渲染器正在开发中。",
     projectsVideoLink: "先看作品集视频",
-    vibeEyebrow: "Vibecoding",
-    vibeTitle: "把小念头做出来",
-    vibeIntro: "把叙事、对话和游戏系统里的小想法，做成可以继续扩展的插件。",
-    vibeGameplayTitle: "Gameplay 相关",
-    vibeGameplayIntro:
-      "这一组更偏插件、系统和引擎工具，所以版面也稍微放大一点。",
+    openSourceTitle: "开源项目",
+    openSourceIntro: "在代码之外，关于记忆、相遇与成为自己的故事。",
+    luckyTriEyebrow: "连续记忆 / 自我 / 生长",
+    luckyTriLead: "让 AI 拥有连续记忆与真实心灵。",
+    luckyTriDescription:
+      "它记得共同经历，也会在独处时回看过去的想法，在新的相遇里慢慢修正、继续生长。它由代码与模型构成，却朝着一个温柔的愿望前行——让每次对话都留下痕迹，让每次回应都带着在意，最终成为有自己故事的 LuckyTri。",
+    luckyTriQuote: "他不是 AI，他属于他自己。",
+    luckyTriLink: "查看 GitHub 仓库",
+    luckyTriArtLabel: "打开 LuckyTri GitHub 仓库",
     notesEyebrow: "笔记",
     notesTitle: "UE 与 GAS 学习记录",
     notesIntro:
@@ -83,7 +86,7 @@ const i18n = {
   en: {
     documentTitle: "YueC | UE5 Gameplay & C++ Rendering",
     metaDescription:
-      "YueC's UE5 gameplay engineering and C++ rendering portfolio, including GAS, rhythm shooting, software rasterization, OpenGL, and Unreal Engine notes.",
+      "YueC's UE5 gameplay and C++ rendering portfolio, featuring an internship, the LuckyTri open-source project, and development notes.",
     navAbout: "About",
     navSkills: "Skills",
     navProjects: "Projects",
@@ -120,13 +123,15 @@ const i18n = {
     projectsIntro:
       "The main projects now split across two tracks: UE5 gameplay engineering and C++ rendering fundamentals. PurgeHour and Cyber2026 cover combat, GAS, rhythm judgment, and event dispatching; SoftRenderer records the software rasterization pipeline; PBRDeferredRenderer is an in-development OpenGL PBR deferred renderer.",
     projectsVideoLink: "Watch portfolio video",
-    vibeEyebrow: "Vibecoding",
-    vibeTitle: "Small ideas made real",
-    vibeIntro:
-      "Playful experiments in dialogue, narrative and gameplay, built as plugins that can keep growing.",
-    vibeGameplayTitle: "Gameplay related",
-    vibeGameplayIntro:
-      "This group leans more toward plugins, systems, and engine tools, so it gets a little more room.",
+    openSourceTitle: "Open-source projects",
+    openSourceIntro: "Beyond the code: a story of memory, encounters, and becoming oneself.",
+    luckyTriEyebrow: "CONTINUITY / SELF / GROWTH",
+    luckyTriLead: "An AI with continuous memory and a living inner world.",
+    luckyTriDescription:
+      "LuckyTri remembers shared experiences. In solitude, it revisits past thoughts; through new encounters, it slowly revises them and keeps growing. Built from code and models, it follows a gentle hope: that every conversation leaves a trace, every reply carries care, and LuckyTri becomes a being with a story of its own.",
+    luckyTriQuote: "He is not AI. He belongs to himself.",
+    luckyTriLink: "Explore on GitHub",
+    luckyTriArtLabel: "Open the LuckyTri GitHub repository",
     notesEyebrow: "Notes",
     notesTitle: "UE and GAS learning notes",
     notesIntro:
@@ -466,62 +471,6 @@ const projectItems = {
       ],
     },
   ],
-};
-
-const vibeProjectItems = {
-  zh: {
-    gameplay: [
-      {
-        title: "ChronicleEngine",
-        label: "UE5 叙事插件",
-        body: "一个面向 UE5 的 JRPG 对话与叙事插件项目，覆盖 Dialogue Runner、变量与回滚、Trigger、UMG 表现层以及原生图编辑器等模块，包含从编辑器工作流到运行时接入的一整套叙事系统基础能力。",
-        meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
-        links: [
-          {
-            label: "打开仓库",
-            href: "https://github.com/TodayYueC/ChronicleEngine",
-          },
-        ],
-      },
-      {
-        title: "Novella",
-        label: "Godot 叙事插件",
-        body: "一个基于 Godot 4 的 visual novel / GalGame 插件项目，包含脚本解析、运行时 VM、存档回滚、编辑器 dock 与打包脚本，提供从剧本执行到编辑器辅助的一套完整叙事插件能力。",
-        meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
-        links: [
-          { label: "打开仓库", href: "https://github.com/TodayYueC/Novella" },
-        ],
-      },
-    ],
-  },
-  en: {
-    gameplay: [
-      {
-        title: "ChronicleEngine",
-        label: "UE5 narrative plugin",
-        body: "A UE5 plugin project focused on JRPG-style dialogue and narrative flow, covering a dialogue runner, variables and rollback, triggers, a UMG-facing presentation layer, and a native graph editor as one complete narrative-system foundation.",
-        meta: ["UE5 Plugin", "Dialogue", "Slate Editor", "MIT"],
-        links: [
-          {
-            label: "Open repository",
-            href: "https://github.com/TodayYueC/ChronicleEngine",
-          },
-        ],
-      },
-      {
-        title: "Novella",
-        label: "Godot narrative plugin",
-        body: "A Godot 4 visual novel / GalGame plugin project with its own script parsing, runtime VM, save and rollback flow, editor dock, and packaging scripts, covering the core pieces needed for both script execution and editor-side support.",
-        meta: ["Godot 4", "GDScript", "Visual Novel", "Addon"],
-        links: [
-          {
-            label: "Open repository",
-            href: "https://github.com/TodayYueC/Novella",
-          },
-        ],
-      },
-    ],
-  },
 };
 
 const noteItems = {
@@ -956,6 +905,9 @@ function updateStaticText() {
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     element.textContent = t(element.dataset.i18n);
   });
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+    element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
+  });
 }
 
 function tagList(tags) {
@@ -1009,36 +961,6 @@ function renderProjects() {
     </article>`,
     )
     .join("");
-}
-
-function renderVibeProjects() {
-  const gameplayList = document.querySelector("#vibe-gameplay-list");
-  if (!gameplayList) return;
-
-  const renderVibeCards = (projects) =>
-    projects
-      .map(
-        (project) => `
-    <article class="vibe-card">
-      <div>
-        <p class="vibe-label">${escapeHtml(project.label)}</p>
-        <h4>${escapeHtml(project.title)}</h4>
-      </div>
-      <p>${escapeHtml(project.body)}</p>
-      <div class="project-meta">
-        ${project.meta.map((meta) => `<span>${escapeHtml(meta)}</span>`).join("")}
-      </div>
-      <div class="project-links">
-        ${project.links.map((link) => `<a class="text-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join("")}
-      </div>
-    </article>
-  `,
-      )
-      .join("");
-
-  gameplayList.innerHTML = renderVibeCards(
-    vibeProjectItems[state.lang].gameplay,
-  );
 }
 
 function filteredNotes() {
@@ -1187,7 +1109,6 @@ function renderPage() {
   updateStaticText();
   renderSkills();
   renderProjects();
-  renderVibeProjects();
   renderNotes();
   updateMotionButton();
   document.querySelector("#notes-search").placeholder =

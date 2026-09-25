@@ -273,7 +273,7 @@
           }
         }
         const card = event.target.closest(
-          ".project-card,.vibe-card,.info-card",
+          ".project-card,.info-card",
         );
         if (card !== tiltCard) resetTilt();
         if (card) {
@@ -420,7 +420,7 @@
       previousScroll = scrollY,
       scrollFrame = 0;
     const sceneSelector =
-      ".section-heading,.profile-art,.about-copy,.experience-feature,.experience-header,.experience-work>section,.agent-grid>div,.project-card,.vibe-card,.info-card,.note-card,.footer-main,.footer-links";
+      ".section-heading,.profile-art,.about-copy,.experience-feature,.experience-header,.experience-work>section,.agent-grid>div,.project-card,.open-source-feature,.info-card,.note-card,.footer-main,.footer-links";
     const sceneSections = [...document.querySelectorAll(".section-band")];
     const ghostNames = [
       "THE PLAYER",
@@ -609,20 +609,24 @@
             );
         }
       }
-      if (el.matches(".vibe-card"))
+      if (el.matches(".open-source-feature"))
         return make(
-          "sidequest-fan",
+          "luckytri-unfold",
           [
             {
               opacity: 0,
-              rotate: `${sign * direction * 8}deg`,
-              translate: `${sign * 30}px ${direction * 25}px`,
-              transformOrigin: sign > 0 ? "right bottom" : "left bottom",
+              clipPath: direction > 0
+                ? "polygon(0 0, 100% 0, 100% 0, 0 0)"
+                : "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+              translate: `0 ${direction * 25}px`,
             },
-            { opacity: 1, rotate: "0deg", translate: "0 0" },
+            {
+              opacity: 1,
+              clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)",
+              translate: "0 0",
+            },
           ],
-          900,
-          index * 120,
+          1250,
         );
       if (el.matches(".info-card"))
         return make(
