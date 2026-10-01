@@ -1,3 +1,7 @@
+/* Content, i18n and rendering for YueC.exe. The visual engine lives in
+   motion.js (window.YC); this file renders chapters and then calls YC.start(). */
+const YC = window.YC || (window.YC = {});
+
 function readPreference(key) {
   try {
     return localStorage.getItem(key);
@@ -17,7 +21,7 @@ const state = {
   search: "",
   showAllNotes: false,
   filter: "all",
-  expandedNoteId: null,
+  readerId: null,
 };
 
 const i18n = {
@@ -855,8 +859,164 @@ const noteItems = {
   ],
 };
 
-const navToggle = document.querySelector(".nav-toggle");
-const navPanel = document.querySelector(".nav-panel");
+
+Object.assign(i18n.zh, {
+  bootSkip: "点击或按任意键跳过",
+  navLabel: "主导航",
+  brandLabel: "YueC 首页",
+  menuOpen: "打开导航",
+  langLabel: "切换语言",
+  heroLoading: "世界加载中",
+  heroLoadingNote: "大概永远不会到 100%",
+  replayIntro: "重播开场 ↻",
+  cardFlip: "翻转卡片",
+  memRemember: "记得",
+  memReflect: "回看",
+  memEncounter: "相遇",
+  memRevise: "修正",
+  memGrow: "生长",
+  notesFilterLabel: "笔记分类",
+  sendEmail: "发送邮件",
+  insertCoin: "投币 · 发封邮件",
+  openConsole: "控制台",
+  readerPrev: "上一篇",
+  readerNext: "下一篇",
+  readerCopy: "复制链接",
+  readerClose: "关闭",
+  openNote: "打开笔记",
+  linkCopied: "链接已复制 ✦",
+  copyFailed: "复制失败，请直接复制地址栏",
+  readerLoading: "正在从 /Game/Archive 加载…",
+  readerLoadFailed: "笔记加载失败，请稍后重试。",
+  searchPlaceholder: "搜索笔记 / SEARCH",
+  motionLocked: "已遵循系统的减少动态效果设置",
+});
+Object.assign(i18n.en, {
+  bootSkip: "Click or press any key to skip",
+  navLabel: "Main navigation",
+  brandLabel: "YueC home",
+  menuOpen: "Open navigation",
+  langLabel: "Switch language",
+  heroLoading: "WORLD LOADING",
+  heroLoadingNote: "Probably never reaches 100%",
+  replayIntro: "Replay intro ↻",
+  cardFlip: "Flip card",
+  memRemember: "Shared moments",
+  memReflect: "Looking back",
+  memEncounter: "New encounters",
+  memRevise: "Gently revised",
+  memGrow: "Still growing",
+  notesFilterLabel: "Note categories",
+  sendEmail: "Send an email",
+  insertCoin: "INSERT COIN · SEND MAIL",
+  openConsole: "Console",
+  readerPrev: "Previous",
+  readerNext: "Next",
+  readerCopy: "Copy link",
+  readerClose: "Close",
+  openNote: "Open note",
+  linkCopied: "Link copied ✦",
+  copyFailed: "Copy failed — use the address bar",
+  readerLoading: "Loading from /Game/Archive…",
+  readerLoadFailed: "Couldn't load this note. Please try again.",
+  searchPlaceholder: "Search notes...",
+  motionLocked: "Following your system reduced-motion preference",
+});
+
+/* Save slots: each project owns a live demo scene (see scenes/*.js). */
+const slotItems = [
+  {
+    scene: "purgehour",
+    code: "GAS / COMBAT SYSTEM",
+    color: "#ff6f8f",
+    color2: "#ffc7d3",
+    state: "ARCH",
+    label: "ASC · PlayerState",
+    cursor: "INSPECT",
+    hint: {
+      zh: "点标签切换架构视图 · 空格下一页",
+      en: "Click tabs to inspect architecture · Space for next",
+    },
+    aria: {
+      zh: "PurgeHour 架构剖视：Owner/Avatar、Ability Handle、属性广播与 DataAsset",
+      en: "PurgeHour architecture view: Owner/Avatar, ability handles, attribute broadcast and DataAssets",
+    },
+  },
+  {
+    scene: "rhythm",
+    code: "RHYTHM / GAME JAM",
+    color: "#62e6f0",
+    color2: "#c8f7fb",
+    state: "ARCH",
+    label: "Event Bus · Rhythm",
+    cursor: "INSPECT",
+    hint: {
+      zh: "点标签切换架构视图 · 空格下一页",
+      en: "Click tabs to inspect architecture · Space for next",
+    },
+    aria: {
+      zh: "Cyber2026 架构剖视：事件总线、节奏判定、面具层与死亡连锁",
+      en: "Cyber2026 architecture view: event bus, rhythm judgment, mask layers and death cascade",
+    },
+  },
+  {
+    scene: "rasterizer",
+    code: "CPU / RASTERIZATION",
+    color: "#ffd479",
+    color2: "#fff0c9",
+    state: "LIVE",
+    label: "CPU RASTERIZER",
+    cursor: "SWITCH",
+    info: true,
+    hint: { zh: "点击切换渲染通道 · 拖动旋转", en: "Click to switch pass · Drag to rotate" },
+    aria: { zh: "SoftRenderer 可交互演示：CPU 软光栅", en: "SoftRenderer interactive demo: CPU rasterizer" },
+  },
+  {
+    scene: "pbr",
+    code: "OPENGL / PBR",
+    color: "#a58bff",
+    color2: "#ddd3ff",
+    state: "WIP",
+    label: "OpenGL 4.6 → WebGL",
+    cursor: "SWITCH",
+    hint: { zh: "移动指针控制光源 · 点击切换 G-Buffer", en: "Move to steer the light · Click to cycle the G-buffer" },
+    aria: { zh: "PBRDeferredRenderer 可交互演示：G-Buffer 预览", en: "PBRDeferredRenderer interactive demo: G-buffer preview" },
+  },
+];
+
+const abilityMeta = [
+  { type: "CLASS SKILL · GAMEPLAY", rarity: 5, icon: '<path d="M6 9h12a4 4 0 0 1 4 4v1a3 3 0 0 1-5.2 2L15 14H9l-1.8 2A3 3 0 0 1 2 14v-1a4 4 0 0 1 4-4z"/><path d="M7 11.5v3M5.5 13h3"/><circle cx="16" cy="12.5" r=".7"/><circle cx="18" cy="14.2" r=".7"/>' },
+  { type: "ULTIMATE · GAS", rarity: 5, icon: '<path d="M12 2.5 20 7v10l-8 4.5L4 17V7z"/><circle cx="12" cy="12" r="3"/><path d="M12 2.5V9M20 17l-5.4-3.2M4 17l5.4-3.2"/>' },
+  { type: "SUMMON · AI", rarity: 4, icon: '<path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3.2"/><path d="M12 5.5V3"/>' },
+  { type: "SUPPORT · UI", rarity: 4, icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h6M7 16h10"/>' },
+  { type: "PASSIVE · DATA", rarity: 4, icon: '<ellipse cx="12" cy="6" rx="7.5" ry="3"/><path d="M4.5 6v12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3V6M4.5 12c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3"/>' },
+  { type: "CORE · ENGINE", rarity: 5, icon: '<rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5"/>' },
+];
+
+const PIN_COLORS = ["#00a9f4", "#9dff00", "#fa4fd4", "#ffca23", "#1fe0a6", "#cf8bff"];
+
+const credits = {
+  zh: [
+    ["策划 / DIRECTOR", "YueC"],
+    ["玩法程序 / GAMEPLAY", "YueC"],
+    ["渲染 / RENDERING", "YueC"],
+    ["动效与界面 / MOTION & UI", "YueC"],
+    ["音效 / SOUND", "机械键盘的咔哒声"],
+    ["测试 / QA", "凌晨三点的 Crash Report"],
+    ["特别鸣谢 / SPECIAL THANKS", "看到这里的你 ✦"],
+    ["引擎 / POWERED BY", "Unreal Engine 5 · C++ · 好奇心"],
+  ],
+  en: [
+    ["DIRECTOR", "YueC"],
+    ["GAMEPLAY PROGRAMMING", "YueC"],
+    ["RENDERING", "YueC"],
+    ["MOTION & UI", "YueC"],
+    ["SOUND", "Mechanical keyboard clicks"],
+    ["QA", "Crash reports at 3 a.m."],
+    ["SPECIAL THANKS", "You, for scrolling this far ✦"],
+    ["POWERED BY", "Unreal Engine 5 · C++ · Curiosity"],
+  ],
+};
 
 function t(key) {
   return i18n[state.lang][key] || i18n.zh[key] || key;
@@ -895,377 +1055,456 @@ function renderMarkdown(markdown) {
   return `<p>${fallbackMarkdown(cleaned)}</p>`;
 }
 
+function rendered(part) {
+  document.dispatchEvent(new CustomEvent("yc:rendered", { detail: { part } }));
+}
+
+/* Keep reveal state when a list is re-rendered in place (e.g. language switch). */
+function keepRevealState(container, selector, render) {
+  const shown = new Set([...container.querySelectorAll(selector)].map((el, i) => (el.classList.contains("is-in") ? i : -1)));
+  render();
+  container.querySelectorAll(selector).forEach((el, i) => {
+    if (shown.has(i)) el.classList.add("is-in");
+  });
+  YC.refresh?.(container);
+}
+
 function updateStaticText() {
   document.documentElement.lang = state.lang === "zh" ? "zh-CN" : "en";
   document.title = t("documentTitle");
-
   const description = document.querySelector('meta[name="description"]');
   if (description) description.setAttribute("content", t("metaDescription"));
-
   document.querySelectorAll("[data-i18n]").forEach((element) => {
     element.textContent = t(element.dataset.i18n);
   });
   document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
     element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
   });
+  const search = document.querySelector("#notes-search");
+  if (search) search.placeholder = t("searchPlaceholder");
 }
 
 function tagList(tags) {
-  return tags
-    .map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`)
-    .join("");
+  return tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("");
 }
 
-function renderSkills() {
-  const grid = document.querySelector("#skills-grid");
-  if (!grid) return;
-
-  grid.innerHTML = skillItems[state.lang]
-    .map(
-      (item) => `
-    <article class="info-card">
-      <h3>${escapeHtml(item.title)}</h3>
-      <p>${escapeHtml(item.body)}</p>
-      <div class="tag-list">${tagList(item.tags)}</div>
-    </article>
-  `,
-    )
-    .join("");
+/* ── 03 · Save slots ─────────────────────────────────────────────────── */
+function slotBody(project) {
+  return `
+    <p class="eyebrow">${escapeHtml(project.subtitle)}</p>
+    <div class="slot-title"><h3>${escapeHtml(project.title)}</h3>${project.status ? `<span class="status-pill">${escapeHtml(project.status)}</span>` : ""}</div>
+    <p class="slot-desc">${escapeHtml(project.body)}</p>
+    <div class="slot-meta">${project.meta.map((meta) => `<span>${escapeHtml(meta)}</span>`).join("")}</div>
+    <details class="project-details">
+      <summary><span>${escapeHtml(t("implementationDetails"))}</span><i aria-hidden="true"></i></summary>
+      <ul class="project-points">${project.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul>
+    </details>
+    <div class="project-links">${project.links
+      .map((link) => `<a class="text-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}<span aria-hidden="true">↗</span></a>`)
+      .join("")}</div>`;
 }
 
 function renderProjects() {
   const list = document.querySelector("#projects-list");
   if (!list) return;
-  const codes = [
-    "GAS / COMBAT SYSTEM",
-    "RHYTHM / GAME JAM",
-    "CPU / RASTERIZATION",
-    "OPENGL / PBR",
-  ];
-  list.innerHTML = projectItems[state.lang]
-    .map(
-      (project, index) => `
-    <article class="project-card">
-      <div class="project-media" aria-hidden="true">
-        <span class="project-code">${codes[index]}</span><span class="project-no">0${index + 1}</span>
-        <strong>${escapeHtml(project.placeholder)}</strong>
+  const projects = projectItems[state.lang];
+  if (!list.childElementCount) {
+    list.innerHTML = projects
+      .map((project, index) => {
+        const slot = slotItems[index];
+        return `
+    <article class="slot" style="--slot:${slot.color};--slot-2:${slot.color2}">
+      <div class="slot-bar" aria-hidden="true">
+        <span class="slot-no">SLOT 0${index + 1}</span>
+        <span class="slot-code">${escapeHtml(slot.code)}</span>
+        <span class="slot-state"><i></i>${slot.state}</span>
       </div>
-      <div class="project-body">
-        <p class="eyebrow">${escapeHtml(project.subtitle)}</p>
-        <div class="project-title-row"><h3>${escapeHtml(project.title)}</h3>${project.status ? `<span class="status-pill">${escapeHtml(project.status)}</span>` : ""}</div>
-        <p>${escapeHtml(project.body)}</p>
-        <div class="project-meta">${project.meta.map((meta) => `<span>${escapeHtml(meta)}</span>`).join("")}</div>
-        <details class="project-details"><summary>${escapeHtml(t("implementationDetails"))}</summary><ul class="project-points">${project.points.map((point) => `<li>${escapeHtml(point)}</li>`).join("")}</ul></details>
-        <div class="project-links">${project.links.map((link) => `<a class="text-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}</a>`).join("")}</div>
+      <div class="slot-screen">
+        <canvas class="slot-canvas" data-scene="${slot.scene}" tabindex="0" role="img" data-cursor="${slot.cursor || "PLAY"}"></canvas>
+        <div class="slot-hud" aria-hidden="true"><span${slot.info ? " data-hud-info" : ""}>${escapeHtml(slot.label)}</span><b data-hud-mode></b></div>
+        <span class="slot-hint" aria-hidden="true"></span>
       </div>
-    </article>`,
-    )
-    .join("");
+      <div class="slot-body"></div>
+    </article>`;
+      })
+      .join("");
+  }
+  list.querySelectorAll(".slot").forEach((el, index) => {
+    const slot = slotItems[index];
+    const body = el.querySelector(".slot-body");
+    const open = body.querySelector(".project-details")?.open;
+    body.innerHTML = slotBody(projects[index]);
+    if (open) body.querySelector(".project-details").open = true;
+    el.querySelector(".slot-hint").textContent = slot.hint[state.lang];
+    el.querySelector(".slot-canvas").setAttribute("aria-label", slot.aria[state.lang]);
+  });
 }
 
-function filteredNotes() {
+/* ── 04 · Ability cards ──────────────────────────────────────────────── */
+function renderSkills() {
+  const grid = document.querySelector("#skills-grid");
+  if (!grid) return;
+  keepRevealState(grid, ".ability", () => {
+    grid.innerHTML = skillItems[state.lang]
+      .map((item, index) => {
+        const meta = abilityMeta[index] || abilityMeta[0];
+        return `
+    <article class="ability">
+      <div class="ability-inner">
+        <span class="ability-holo" aria-hidden="true"></span>
+        <span class="ability-glare" aria-hidden="true"></span>
+        <div class="ability-top">
+          <span class="ability-icon" aria-hidden="true"><svg viewBox="0 0 24 24">${meta.icon}</svg></span>
+          <span class="ability-rarity" aria-hidden="true">${"✦".repeat(meta.rarity)}</span>
+        </div>
+        <p class="ability-type">${meta.type}</p>
+        <h3>${escapeHtml(item.title)}</h3>
+        <p class="ability-body">${escapeHtml(item.body)}</p>
+        <div class="tag-list">${tagList(item.tags)}</div>
+      </div>
+    </article>`;
+      })
+      .join("");
+  });
+  rendered("skills");
+}
+
+/* ── 05 · Blueprint notes ────────────────────────────────────────────── */
+function searchMatches() {
   const query = state.search.trim().toLowerCase();
   return noteItems[state.lang].filter(
-    (note) =>
-      (state.filter === "all" || note.category === state.filter) &&
-      (!query ||
-        [note.title, note.summary, note.number, ...note.tags]
-          .join(" ")
-          .toLowerCase()
-          .includes(query)),
+    (note) => !query || [note.title, note.summary, note.number, ...note.tags].join(" ").toLowerCase().includes(query),
   );
 }
 
-function renderNotes() {
+function filteredNotes() {
+  return searchMatches().filter((note) => state.filter === "all" || note.category === state.filter);
+}
+
+function renderNotes({ keep = false } = {}) {
   const grid = document.querySelector("#notes-grid");
   if (!grid) return;
   const matches = filteredNotes();
   const visible = state.showAllNotes ? matches : matches.slice(0, 6);
-  grid.innerHTML = visible
-    .map((note) => {
-      const isExpanded = state.expandedNoteId === note.id;
-      const markdown = isExpanded
-        ? renderMarkdown(window.notesData?.[note.id])
-        : "";
-      return `<article class="note-card ${isExpanded ? "expanded" : ""}" data-note-id="${escapeHtml(note.id)}">
-      <button class="note-trigger" type="button" aria-expanded="${isExpanded}" aria-controls="content-${note.id}">
-        <span class="note-topline"><span class="note-number">${escapeHtml(note.number)}</span><span class="note-category">${escapeHtml(t(note.category === "ue" ? "filterUE" : "filterGAS"))}</span></span>
-        <span class="note-title">${escapeHtml(note.title)}</span><span class="note-summary">${escapeHtml(note.summary)}</span>
-        <span class="note-tags">${tagList(note.tags)}</span><span class="note-expand-text">${escapeHtml(t(isExpanded ? "collapseNote" : "expandNote"))}</span>
-      </button><div class="note-markdown" id="content-${note.id}" ${isExpanded ? "" : "hidden"}>${markdown}</div></article>`;
-    })
-    .join("");
+  const draw = () => {
+    grid.innerHTML = visible
+      .map((note) => {
+        const category = t(note.category === "ue" ? "filterUE" : "filterGAS");
+        return `
+    <article class="bp-node" data-cat="${note.category}">
+      <button class="bp-node-hit" type="button" data-open-note="${escapeHtml(note.id)}" aria-haspopup="dialog">
+        <span class="bp-head">
+          <span class="bp-icon" aria-hidden="true">${note.category === "ue" ? "f" : "◆"}</span>
+          <span class="bp-titles"><span class="bp-title">${escapeHtml(note.title)}</span><span class="bp-sub">${escapeHtml(note.number)} · ${escapeHtml(category)}</span></span>
+        </span>
+        <span class="bp-body">
+          <span class="bp-exec" aria-hidden="true"><i class="pin-exec in"></i><i class="pin-exec out"></i></span>
+          <span class="bp-pins">${note.tags
+            .map((tag, i) => `<span class="bp-pin" style="--pin:${PIN_COLORS[(i + note.number.length) % PIN_COLORS.length]}"><i aria-hidden="true"></i>${escapeHtml(tag)}</span>`)
+            .join("")}</span>
+          <span class="bp-summary">${escapeHtml(note.summary)}</span>
+          <span class="bp-read">${escapeHtml(t("openNote"))}<i class="pin-exec" aria-hidden="true"></i></span>
+        </span>
+      </button>
+    </article>`;
+      })
+      .join("");
+  };
+  if (keep) keepRevealState(grid, ".bp-node", draw);
+  else {
+    draw();
+    YC.refresh?.(grid);
+  }
+
+  const all = searchMatches();
+  const counts = { all: all.length, ue: all.filter((n) => n.category === "ue").length, gas: all.filter((n) => n.category === "gas").length };
+  document.querySelectorAll(".filter-btn").forEach((button) => {
+    const active = button.dataset.filter === state.filter;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+    const count = button.querySelector(".filter-count");
+    if (count) count.textContent = counts[button.dataset.filter] ?? "";
+  });
   document.querySelector("#notes-status").textContent = matches.length
     ? state.lang === "zh"
       ? `显示 ${visible.length} / ${matches.length} 篇笔记`
       : `Showing ${visible.length} / ${matches.length} notes`
     : t("noResults");
   const more = document.querySelector(".notes-more");
-  more.hidden = matches.length <= 6;
-  more.textContent = t(state.showAllNotes ? "lessNotes" : "moreNotes");
+  if (more) {
+    more.hidden = matches.length <= 6;
+    const label = more.querySelector("span");
+    if (label) label.textContent = t(state.showAllNotes ? "lessNotes" : "moreNotes");
+  }
+  rendered("notes");
 }
 
-function toggleLanguage() {
-  state.lang = state.lang === "zh" ? "en" : "zh";
-  savePreference("portfolioLang", state.lang);
+function renderCredits() {
+  const roll = document.querySelector("#credits-roll");
+  if (!roll) return;
+  roll.innerHTML = credits[state.lang].map(([role, name]) => `<p><b>${escapeHtml(role)}</b><span>${escapeHtml(name)}</span></p>`).join("");
+}
+
+/* ── Note reader (details panel) ─────────────────────────────────────── */
+const reader = document.querySelector("#note-reader");
+const readerPanel = reader?.querySelector(".reader-panel");
+const readerBody = reader?.querySelector(".reader-body");
+const readerArticle = reader?.querySelector(".note-markdown");
+const readerProgress = reader?.querySelector(".reader-progress");
+let readerReturnFocus = null;
+let readerCloseTimer = 0;
+const scriptLoads = {};
+
+function loadScript(src) {
+  if (!scriptLoads[src]) {
+    scriptLoads[src] = new Promise((resolve, reject) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.async = true;
+      script.onload = resolve;
+      script.onerror = () => {
+        delete scriptLoads[src];
+        reject(new Error(`Failed to load ${src}`));
+      };
+      document.head.append(script);
+    });
+  }
+  return scriptLoads[src];
+}
+
+function ensureNotesData() {
+  return Promise.all([
+    window.marked?.parse ? null : loadScript("vendor/marked.min.js"),
+    window.notesData ? null : loadScript("notesData.js"),
+  ]);
+}
+
+function noteById(id) {
+  return noteItems[state.lang].find((note) => note.id === id);
+}
+
+function readerSequence() {
+  const list = filteredNotes();
+  return list.some((note) => note.id === state.readerId) ? list : noteItems[state.lang];
+}
+
+function updateReaderNav() {
+  if (!reader) return;
+  const list = readerSequence();
+  const index = list.findIndex((note) => note.id === state.readerId);
+  reader.querySelector("[data-reader-prev]").disabled = index <= 0;
+  reader.querySelector("[data-reader-next]").disabled = index < 0 || index >= list.length - 1;
+}
+
+async function fillReader(note) {
+  readerPanel.dataset.cat = note.category;
+  reader.querySelector(".reader-num").textContent = note.number;
+  reader.querySelector("#reader-title").textContent = note.title;
+  reader.querySelector(".reader-path").textContent = `/Game/Archive/${note.category.toUpperCase()}/${note.id}.md`;
+  readerBody.scrollTop = 0;
+  readerProgress?.style.setProperty("--rp", "0");
+  updateReaderNav();
+  if (!window.notesData || !window.marked?.parse) {
+    readerArticle.innerHTML = `<p class="reader-loading">${escapeHtml(t("readerLoading"))}</p>`;
+  }
+  try {
+    await ensureNotesData();
+  } catch {
+    if (state.readerId === note.id) readerArticle.innerHTML = `<p class="reader-loading">${escapeHtml(t("readerLoadFailed"))}</p>`;
+    return;
+  }
+  if (state.readerId !== note.id) return;
+  readerArticle.innerHTML = renderMarkdown(window.notesData?.[note.id]);
+  readerArticle.querySelectorAll("a[href^='http']").forEach((link) => {
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+  });
+}
+
+function openNote(id, { push = true } = {}) {
+  const note = noteById(id);
+  if (!note || !reader) return;
+  clearTimeout(readerCloseTimer);
+  const wasOpen = !reader.hidden;
+  state.readerId = id;
+  if (!wasOpen) readerReturnFocus = document.activeElement;
+  const hash = `#note/${id}`;
+  if (location.hash !== hash) {
+    if (push && !wasOpen) history.pushState({ note: id }, "", hash);
+    else history.replaceState({ note: id }, "", hash);
+  }
+  fillReader(note);
+  if (!wasOpen) {
+    reader.hidden = false;
+    YC.lockScroll?.(true);
+    requestAnimationFrame(() => {
+      reader.classList.add("is-open");
+      readerPanel.focus({ preventScroll: true });
+    });
+  }
+}
+
+function closeNote({ fromHistory = false } = {}) {
+  if (!reader || reader.hidden) return;
+  const id = state.readerId;
+  state.readerId = null;
+  reader.classList.remove("is-open");
+  YC.lockScroll?.(false);
+  if (!fromHistory && location.hash.startsWith("#note/")) history.replaceState(null, "", "#notes");
+  readerCloseTimer = setTimeout(() => {
+    reader.hidden = true;
+  }, 650);
+  const usable = readerReturnFocus?.isConnected && readerReturnFocus !== document.body;
+  const back = usable ? readerReturnFocus : document.querySelector(`[data-open-note="${CSS.escape(id || "")}"]`);
+  back?.focus({ preventScroll: true });
+  readerReturnFocus = null;
+}
+
+function stepNote(direction) {
+  const list = readerSequence();
+  const index = list.findIndex((note) => note.id === state.readerId);
+  const next = list[index + direction];
+  if (next) openNote(next.id, { push: false });
+}
+
+async function copyNoteLink() {
+  const url = `${location.origin}${location.pathname}#note/${state.readerId}`;
+  try {
+    await navigator.clipboard.writeText(url);
+    YC.toast?.(t("linkCopied"));
+  } catch {
+    YC.toast?.(t("copyFailed"));
+  }
+}
+
+function syncReaderWithHash() {
+  const match = location.hash.match(/^#note\/([\w-]+)$/);
+  if (match && noteById(match[1])) openNote(match[1], { push: false });
+  else if (reader && !reader.hidden) closeNote({ fromHistory: true });
+}
+
+/* ── Motion + language ───────────────────────────────────────────────── */
+function updateMotionButton() {
+  const button = document.querySelector(".motion-toggle");
+  if (!button) return;
+  const paused = !(YC.motionOK ? YC.motionOK() : true);
+  const locked = YC.motionLockedBySystem ? YC.motionLockedBySystem() : false;
+  button.textContent = t(paused ? "resumeMotion" : "pauseMotion");
+  button.setAttribute("aria-pressed", String(paused));
+  button.disabled = locked;
+  button.title = locked ? t("motionLocked") : "";
+}
+YC.updateMotionButton = updateMotionButton;
+
+function renderPage() {
+  updateStaticText();
+  renderProjects();
+  renderSkills();
+  renderNotes({ keep: true });
+  renderCredits();
+  updateMotionButton();
+  if (state.readerId) {
+    const note = noteById(state.readerId);
+    if (note) fillReader(note);
+  }
+  requestAnimationFrame(() => YC.placePill?.());
+}
+
+function setLang(lang) {
+  if (lang !== "zh" && lang !== "en") return;
+  state.lang = lang;
+  savePreference("portfolioLang", lang);
   renderPage();
 }
+YC.setLang = setLang;
+YC.lang = () => state.lang;
 
 function setFilter(filter) {
   state.filter = filter;
   state.showAllNotes = false;
-  state.expandedNoteId = null;
   renderNotes();
-  updateMotionButton();
-  document.querySelector("#notes-search").placeholder =
-    state.lang === "zh" ? "搜索笔记 / SEARCH" : "Search notes...";
-  document.querySelectorAll(".filter-btn").forEach((button) => {
-    button.classList.toggle("active", button.dataset.filter === filter);
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.filter === filter),
-    );
-  });
-}
-
-function handleNoteClick(card) {
-  const noteId = card.dataset.noteId;
-  state.expandedNoteId = state.expandedNoteId === noteId ? null : noteId;
-  renderNotes();
-  const current = document.querySelector(
-    `[data-note-id="${CSS.escape(noteId)}"]`,
-  );
-  current?.querySelector(".note-trigger")?.focus({ preventScroll: true });
-  if (state.expandedNoteId)
-    current?.scrollIntoView({
-      behavior: motionEnabled() ? "smooth" : "instant",
-      block: "start",
-    });
 }
 
 function setupEvents() {
-  document
-    .querySelector(".lang-toggle")
-    ?.addEventListener("click", toggleLanguage);
-
-  navToggle?.addEventListener("click", () => {
-    const expanded = navToggle.getAttribute("aria-expanded") === "true";
-    navToggle.setAttribute("aria-expanded", String(!expanded));
-    navPanel?.classList.toggle("active", !expanded);
-    document.body.classList.toggle("nav-open", !expanded);
-  });
-
-  document.querySelectorAll(".nav-link").forEach((link) => {
-    link.addEventListener("click", () => {
-      navToggle?.setAttribute("aria-expanded", "false");
-      navPanel?.classList.remove("active");
-      document.body.classList.remove("nav-open");
-    });
-  });
-
+  document.querySelector(".lang-toggle")?.addEventListener("click", () => setLang(state.lang === "zh" ? "en" : "zh"));
   document.querySelectorAll(".filter-btn").forEach((button) => {
     button.addEventListener("click", () => setFilter(button.dataset.filter));
   });
-
-  document.querySelector("#notes-grid")?.addEventListener("click", (event) => {
-    const trigger = event.target.closest(".note-trigger");
-    if (trigger) handleNoteClick(trigger.closest(".note-card"));
+  document.querySelector("#notes-search")?.addEventListener("input", (event) => {
+    state.search = event.target.value;
+    state.showAllNotes = false;
+    renderNotes();
   });
-  document
-    .querySelector("#notes-search")
-    ?.addEventListener("input", (event) => {
-      state.search = event.target.value;
-      state.expandedNoteId = null;
-      state.showAllNotes = false;
-      renderNotes();
-    });
   document.querySelector(".notes-more")?.addEventListener("click", () => {
     state.showAllNotes = !state.showAllNotes;
-    state.expandedNoteId = null;
-    renderNotes();
-    if (!state.showAllNotes)
-      document.querySelector(".notes-controls").scrollIntoView({
-        behavior: motionEnabled() ? "smooth" : "instant",
-        block: "start",
-      });
-  });
-  document.addEventListener("keydown", (event) => {
-    if (event.key !== "Escape") return;
-    navToggle?.setAttribute("aria-expanded", "false");
-    navPanel?.classList.remove("active");
-    document.body.classList.remove("nav-open");
-    if (state.expandedNoteId) {
-      const noteId = state.expandedNoteId;
-      state.expandedNoteId = null;
-      renderNotes();
-      document
-        .querySelector(`[data-note-id="${CSS.escape(noteId)}"] .note-trigger`)
-        ?.focus({ preventScroll: true });
+    renderNotes({ keep: true });
+    if (!state.showAllNotes) {
+      const toolbar = document.querySelector(".bp-toolbar");
+      if (toolbar) YC.scrollTo?.(toolbar.getBoundingClientRect().top + scrollY - 120, 0.9);
     }
   });
-}
-
-function renderPage() {
-  updateStaticText();
-  renderSkills();
-  renderProjects();
-  renderNotes();
-  updateMotionButton();
-  document.querySelector("#notes-search").placeholder =
-    state.lang === "zh" ? "搜索笔记 / SEARCH" : "Search notes...";
-  document.querySelectorAll(".filter-btn").forEach((button) => {
-    button.classList.toggle("active", button.dataset.filter === state.filter);
-    button.setAttribute(
-      "aria-pressed",
-      String(button.dataset.filter === state.filter),
-    );
+  document.querySelector("#notes-grid")?.addEventListener("click", (event) => {
+    const trigger = event.target.closest("[data-open-note]");
+    if (trigger) openNote(trigger.dataset.openNote);
   });
-}
-
-document.addEventListener("DOMContentLoaded", () => {
-  setupEvents();
-  renderPage();
-  setupVisuals();
-  setupTicker();
-});
-
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-let userPausedMotion = readPreference("portfolioMotion") === "paused";
-function motionEnabled() {
-  return !reducedMotion.matches && !userPausedMotion;
-}
-function updateMotionButton() {
-  const paused = !motionEnabled();
-  document.documentElement.classList.toggle("motion-paused", paused);
-  const button = document.querySelector(".motion-toggle");
-  button.textContent = t(paused ? "resumeMotion" : "pauseMotion");
-  button.setAttribute("aria-pressed", String(paused));
-  button.disabled = reducedMotion.matches;
-  button.title = reducedMotion.matches
-    ? state.lang === "zh"
-      ? "已遵循系统的减少动态效果设置"
-      : "Following your system reduced-motion preference"
-    : "";
-}
-function setupVisuals() {
-  document.querySelector(".motion-toggle").addEventListener("click", () => {
-    userPausedMotion = !userPausedMotion;
-    savePreference("portfolioMotion", userPausedMotion ? "paused" : "enabled");
+  document.querySelector(".motion-toggle")?.addEventListener("click", () => {
+    YC.setMotion?.(!YC.motionOK());
     updateMotionButton();
   });
-  reducedMotion.addEventListener("change", updateMotionButton);
-  const revealObserver = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.08 },
-  );
-  document.querySelectorAll(".reveal").forEach((element) => {
-    element.classList.add("is-observed");
-    revealObserver.observe(element);
+  YC.onMotionChange?.(updateMotionButton);
+
+  reader?.addEventListener("click", (event) => {
+    if (event.target.closest("[data-reader-close]")) closeNote();
+    else if (event.target.closest("[data-reader-prev]")) stepNote(-1);
+    else if (event.target.closest("[data-reader-next]")) stepNote(1);
+    else if (event.target.closest("[data-reader-copy]")) copyNoteLink();
   });
-  const sections = [
-    ...document.querySelectorAll("main section[id], footer[id]"),
-  ];
-  let pending = false;
-  function syncScroll() {
-    const max = document.documentElement.scrollHeight - innerHeight;
-    document.querySelector(".reading-progress").style.transform =
-      `scaleX(${max > 0 ? scrollY / max : 0})`;
-    const current = sections
-      .filter((section) => section.getBoundingClientRect().top <= 180)
-      .at(-1);
-    document.querySelectorAll(".nav-link").forEach((link) => {
-      const active = link.hash === `#${current?.id}`;
-      link.classList.toggle("active", active);
-      if (active) link.setAttribute("aria-current", "location");
-      else link.removeAttribute("aria-current");
-    });
-    pending = false;
-  }
-  window.addEventListener(
+  readerBody?.addEventListener(
     "scroll",
     () => {
-      if (!pending) {
-        pending = true;
-        requestAnimationFrame(syncScroll);
-      }
+      const max = readerBody.scrollHeight - readerBody.clientHeight;
+      readerProgress?.style.setProperty("--rp", max > 0 ? (readerBody.scrollTop / max).toFixed(4) : "1");
     },
     { passive: true },
   );
-  window.addEventListener("resize", syncScroll);
-  syncScroll();
-  const hero = document.querySelector(".hero");
-  const art = document.querySelector(".hero-art");
-  hero.addEventListener("pointermove", (event) => {
-    if (!motionEnabled() || event.pointerType !== "mouse" || innerWidth < 900)
+  reader?.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowLeft" && !event.target.closest("input")) stepNote(-1);
+    if (event.key === "ArrowRight" && !event.target.closest("input")) stepNote(1);
+    if (event.key !== "Tab") return;
+    const focusable = [...readerPanel.querySelectorAll("button:not([disabled]), a[href], [tabindex]:not([tabindex='-1'])")].filter((el) => el.offsetParent !== null);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && (document.activeElement === first || document.activeElement === readerPanel)) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      if (reader && !reader.hidden) closeNote();
+      YC.closeMenu?.();
       return;
-    const rect = hero.getBoundingClientRect();
-    art.style.setProperty(
-      "--mx",
-      `${((event.clientX - rect.left) / rect.width - 0.5) * 12}px`,
-    );
-    art.style.setProperty(
-      "--my",
-      `${((event.clientY - rect.top) / rect.height - 0.5) * 8}px`,
-    );
+    }
+    const typing = event.target.closest?.("input, textarea, [contenteditable]");
+    if (event.key === "/" && !typing && !event.ctrlKey && !event.metaKey && (!reader || reader.hidden)) {
+      const search = document.querySelector("#notes-search");
+      if (!search) return;
+      event.preventDefault();
+      const top = search.getBoundingClientRect().top;
+      if (top < 80 || top > innerHeight - 80) YC.jumpTo?.(top + scrollY - innerHeight * 0.35);
+      search.focus({ preventScroll: true });
+    }
   });
-  hero.addEventListener("pointerleave", () => {
-    art.style.setProperty("--mx", "0px");
-    art.style.setProperty("--my", "0px");
-  });
-  const wipe = document.querySelector(".page-wipe");
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", () => {
-      if (!motionEnabled()) return;
-      wipe.classList.remove("playing");
-      void wipe.offsetWidth;
-      wipe.classList.add("playing");
-    });
-  });
-  wipe.addEventListener("animationend", () => wipe.classList.remove("playing"));
+  addEventListener("popstate", syncReaderWithHash);
+  addEventListener("hashchange", syncReaderWithHash);
 }
 
-// Two identical groups move by exactly one group width at the loop boundary.
-// Each group exceeds the viewport so ultrawide screens never expose an empty tail.
-function setupTicker() {
-  const ticker = document.querySelector(".ticker");
-  const track = ticker?.querySelector(".ticker-track");
-  const groups = track?.querySelectorAll(".ticker-group");
-  const unit = groups?.[0]?.querySelector(".ticker-unit");
-  if (!unit || groups.length !== 2) return;
-  const template = unit.cloneNode(true);
-  template.textContent = template.textContent.replace(/\s+/g, " ").trim();
-  let scheduled = 0;
-  let previousSignature = "";
-  function measure() {
-    scheduled = 0;
-    const currentUnit = groups[0].querySelector(".ticker-unit");
-    const unitWidth = currentUnit.offsetWidth;
-    const viewportWidth = ticker.clientWidth;
-    if (!unitWidth || !viewportWidth) return;
-    const count = Math.max(2, Math.ceil(viewportWidth / unitWidth) + 1);
-    const signature = `${unitWidth}:${viewportWidth}:${count}`;
-    if (signature === previousSignature) return;
-    previousSignature = signature;
-    for (const group of groups) {
-      group.replaceChildren(
-        ...Array.from({ length: count }, () => template.cloneNode(true)),
-      );
-    }
-    const groupWidth = groups[0].offsetWidth;
-    track.style.setProperty("--ticker-duration", `${groupWidth / 70}s`);
-  }
-  function queueMeasure() {
-    if (!scheduled) scheduled = requestAnimationFrame(measure);
-  }
-  measure();
-  new ResizeObserver(queueMeasure).observe(ticker);
-  document.fonts?.ready.then(queueMeasure);
-  document.fonts?.addEventListener("loadingdone", queueMeasure);
-}
+setupEvents();
+renderPage();
+YC.start?.();
+if (location.hash.startsWith("#note/")) syncReaderWithHash();

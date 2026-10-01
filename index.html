@@ -1,260 +1,332 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-world="hero">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ff7ba5" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0b0b12" />
     <meta
       name="description"
       content="YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含实习经历、LuckyTri 开源项目与学习记录。"
     />
-    <title>YueC | 把想象写成可玩的世界</title>
-    <link rel="icon" href="新视觉图/头像.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://todayyuec.github.io/" />
+    <meta property="og:title" content="YueC | 把想象写成可玩的世界" />
+    <meta
+      property="og:description"
+      content="UE5 玩法工程 / C++ 渲染 / 一个想创造世界的二次元玩家。"
     />
+    <meta property="og:image" content="https://todayyuec.github.io/assets/img/og-card.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>YueC | 把想象写成可玩的世界</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32.png" />
+    <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png" />
     <link
       rel="preload"
       as="image"
-      href="新视觉图/eabf34e11d6ac27281e5ee2dfc01c291.jpeg"
+      href="assets/img/hero-poster-1400.webp"
+      imagesrcset="assets/img/hero-poster-820.webp 820w, assets/img/hero-poster-1400.webp 1400w"
+      imagesizes="(max-width: 600px) 92vw, 50vw"
+      fetchpriority="high"
     />
-    <link rel="stylesheet" href="style.css?v=20260926-open-source" />
-    <link rel="stylesheet" href="motion.css?v=20260926-open-source" />
+    <link rel="preload" href="fonts/barlow-condensed-900.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="fonts/barlow-condensed-800.woff2" as="font" type="font/woff2" crossorigin />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        try {
+          var reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (reduce || localStorage.getItem("portfolioMotion") === "paused") {
+            d.classList.add("motion-paused");
+          } else if (!sessionStorage.getItem("yc-booted")) {
+            d.classList.add("is-booting");
+          }
+        } catch (e) {}
+        setTimeout(function () {
+          d.classList.remove("is-booting");
+          var hero = document.querySelector(".hero");
+          if (hero) hero.classList.add("hero-ready", "hero-in");
+        }, 5000);
+      })();
+    </script>
+    <link rel="stylesheet" href="style.css?v=20261001-perf3" />
+    <link rel="stylesheet" href="motion.css?v=20261001-perf3" />
   </head>
   <body>
     <a class="skip-link" href="#about" data-i18n="skipLink">跳到正文</a>
-    <div class="page-wipe" aria-hidden="true"></div>
-    <div class="reading-progress" aria-hidden="true"></div>
-    <header class="site-header">
-      <nav class="navbar" aria-label="主导航">
-        <a class="brand" href="#top" aria-label="YueC 首页"
-          ><img src="新视觉图/头像.png" alt="" width="42" height="42" /><span
-            >YueC<span class="brand-star">✦</span
-            ><small>PLAYER / CREATOR</small></span
-          ></a
-        >
+
+    <div class="world-bg" aria-hidden="true"><i class="world-glow"></i><i class="world-grain"></i></div>
+
+    <div class="boot" aria-hidden="true">
+      <div class="boot-frame">
+        <p class="boot-brand">YueC<span>✦</span><small>ENGINE BOOT / BUILD 2026.10</small></p>
+        <div class="boot-log"></div>
+        <div class="boot-bar"><i></i></div>
+        <p class="boot-meta"><span class="boot-pct">0%</span><span data-i18n="bootSkip">点击或按任意键跳过</span></p>
+      </div>
+      <div class="boot-wipe"><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="scene-wipe" aria-hidden="true"><i></i><span class="scene-wipe-label"></span></div>
+    <div class="reading-progress" aria-hidden="true"><i></i></div>
+
+    <header class="hud-top">
+      <nav class="navbar" aria-label="主导航" data-i18n-aria-label="navLabel">
+        <a class="brand" href="#top" aria-label="YueC 首页" data-i18n-aria-label="brandLabel">
+          <img src="assets/img/avatar-96.webp" alt="" width="40" height="40" />
+          <span class="brand-text">YueC<span class="brand-star" aria-hidden="true">✦</span><small>PLAYER / CREATOR</small></span>
+        </a>
         <button
           class="nav-toggle"
           type="button"
           aria-label="打开导航"
+          data-i18n-aria-label="menuOpen"
           aria-expanded="false"
           aria-controls="nav-panel"
         >
           <span></span><span></span>
         </button>
         <div class="nav-panel" id="nav-panel">
-          <a class="nav-link" href="#about"
-            ><small>01</small><span data-i18n="navAbout">关于我</span></a
-          >
-          <a class="nav-link" href="#experience"
-            ><small>02</small><span data-i18n="navExperience">实习经历</span></a
-          >
-          <a class="nav-link" href="#projects"
-            ><small>03</small><span data-i18n="navProjects">项目</span></a
-          >
-          <a class="nav-link" href="#skills"
-            ><small>04</small><span data-i18n="navSkills">技能</span></a
-          >
-          <a class="nav-link" href="#notes"
-            ><small>05</small><span data-i18n="navNotes">笔记</span></a
-          >
-          <a class="nav-link nav-contact" href="#contact"
-            ><span data-i18n="navContact">联系我</span> ↗</a
-          >
-          <button class="lang-toggle" type="button" aria-label="切换语言">
+          <p class="menu-title" aria-hidden="true">PAUSED<small>GAME MENU</small></p>
+          <div class="nav-links">
+            <span class="nav-pill" aria-hidden="true"></span>
+            <a class="nav-link" href="#about"><small>01</small><span data-i18n="navAbout">关于我</span></a>
+            <a class="nav-link" href="#experience"><small>02</small><span data-i18n="navExperience">实习经历</span></a>
+            <a class="nav-link" href="#projects"><small>03</small><span data-i18n="navProjects">项目</span></a>
+            <a class="nav-link" href="#skills"><small>04</small><span data-i18n="navSkills">技能</span></a>
+            <a class="nav-link" href="#notes"><small>05</small><span data-i18n="navNotes">笔记</span></a>
+          </div>
+          <a class="nav-contact" href="#contact"><span data-i18n="navContact">联系我</span><span aria-hidden="true">↗</span></a>
+          <button class="lang-toggle" type="button" aria-label="切换语言" data-i18n-aria-label="langLabel">
             <span data-i18n="langButton">EN</span>
           </button>
+          <button class="menu-resume" type="button" aria-hidden="true" tabindex="-1">RESUME ▶</button>
         </div>
       </nav>
     </header>
+
+    <aside class="hud-rail" aria-hidden="true">
+      <span class="rail-no">00</span>
+      <span class="rail-track"><i></i></span>
+      <span class="rail-name">TITLE SCREEN</span>
+    </aside>
+
+    <div class="stat-unit" aria-hidden="true" hidden>
+      <span><b data-stat="fps">0.00</b> FPS</span>
+      <span><b data-stat="ms">0.00</b> ms</span>
+      <span class="stat-dim">Scenes: <b data-stat="scenes">0</b></span>
+    </div>
+
     <main id="top">
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-grid" aria-hidden="true"></div>
-        <div class="hero-coordinate" aria-hidden="true">
-          PORTFOLIO — VOL. 2026 / THE WORLD IS STILL LOADING
+      <!-- ═══════════ TITLE SCREEN ═══════════ -->
+      <section class="stage hero" id="hero" data-world="hero" aria-labelledby="hero-title">
+        <div class="hero-bg" aria-hidden="true">
+          <div class="hero-grid"></div>
+          <div class="hero-orbit"><i></i></div>
+          <canvas class="hero-stars" data-scene="stars"></canvas>
         </div>
+        <p class="hero-coordinate" aria-hidden="true">
+          <span>PORTFOLIO — VOL. 2026</span><span>THE WORLD IS STILL LOADING</span>
+        </p>
+
         <div class="hero-copy">
-          <p class="hero-kicker">
-            <span class="signal-dot"></span> HELLO WORLD, I'M YUEC.
-          </p>
-          <h1 id="hero-title" aria-label="IMAGINE. BUILD. PLAY.">
-            <span>IMAGINE.</span><span class="outline-word">BUILD.</span
-            ><span class="pink-word"
-              >PLAY<span class="title-star" aria-hidden="true">✦</span></span
-            >
+          <p class="hero-kicker"><span class="signal-dot" aria-hidden="true"></span><span>HELLO WORLD, I'M YUEC.</span></p>
+          <h1 id="hero-title" class="hero-title">
+            <span class="sr-only">IMAGINE. BUILD. PLAY.</span>
+            <span class="ht" aria-hidden="true">
+              <span class="ht-line" data-split>IMAGINE.</span>
+              <span class="ht-line ht-outline" data-split>BUILD.</span>
+              <span class="ht-line ht-pink"><span data-split>PLAY</span><i class="ht-star">✦</i></span>
+            </span>
           </h1>
-          <div class="hero-statement">
-            <span data-i18n="heroTitle">把想象，写成可玩的世界。</span>
-          </div>
+          <p class="hero-statement"><span data-i18n="heroTitle">把想象，写成可玩的世界。</span></p>
           <p class="hero-description" data-i18n="heroDescription">
             UE5 玩法工程 / C++ 渲染 / 一个想创造世界的二次元玩家。
           </p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#experience"
-              ><span data-i18n="exploreProjects">探索我的项目</span
-              ><span>↗</span></a
-            ><a
-              class="hero-social"
-              href="https://github.com/TodayYueC"
-              target="_blank"
-              rel="noopener noreferrer"
-              >GitHub ↗</a
-            ><a
-              class="hero-social"
-              href="https://space.bilibili.com/287477294"
-              target="_blank"
-              rel="noopener noreferrer"
-              >Bilibili ↗</a
+            <a class="btn btn-primary" href="#experience" data-magnetic
+              ><span data-i18n="exploreProjects">探索我的项目</span><span class="btn-arrow" aria-hidden="true">↗</span></a
             >
+            <a class="hero-social" href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a class="hero-social" href="https://space.bilibili.com/287477294" target="_blank" rel="noopener noreferrer">Bilibili ↗</a>
           </div>
         </div>
+
         <div class="hero-art">
-          <div class="art-outline" aria-hidden="true"></div>
-          <figure class="hero-frame">
+          <div class="poster-shadow" aria-hidden="true"></div>
+          <figure class="poster">
             <img
-              class="hero-image"
-              src="新视觉图/eabf34e11d6ac27281e5ee2dfc01c291.jpeg"
+              class="poster-img"
+              src="assets/img/hero-poster-1400.webp"
+              srcset="assets/img/hero-poster-820.webp 820w, assets/img/hero-poster-1400.webp 1400w"
+              sizes="(max-width: 600px) 92vw, 50vw"
               alt="科幻城市中与悬浮界面交互的二次元角色"
+              width="1400"
+              height="1871"
               fetchpriority="high"
-              width="1904"
-              height="2544"
+              decoding="async"
             />
-            <div class="art-halftone" aria-hidden="true"></div>
+            <canvas class="poster-gl" data-scene="poster" aria-hidden="true"></canvas>
+            <div class="poster-hud" aria-hidden="true">
+              <i class="ph-corner tl"></i><i class="ph-corner tr"></i><i class="ph-corner bl"></i><i class="ph-corner br"></i>
+              <span class="ph-tag">OBJ // CREATE A WORLD</span>
+              <span class="ph-sync">SYNC <b>98</b>%</span>
+              <span class="ph-scan"></span>
+            </div>
           </figure>
           <span class="art-star" aria-hidden="true">✦</span>
           <span class="art-cross" aria-hidden="true">+</span>
-          <div class="art-label">
-            <span>CODE IS MY</span><strong>SUPERPOWER.</strong>
-          </div>
-          <span class="art-index" aria-hidden="true"
-            >YC—01 / GAMEPLAY ENGINEER</span
-          >
+          <div class="art-label" aria-hidden="true"><span>CODE IS MY</span><strong>SUPERPOWER.</strong></div>
+          <span class="art-index" aria-hidden="true">YC—01 / GAMEPLAY ENGINEER</span>
         </div>
+
         <div class="hero-bottom">
-          <span
-            ><i></i> UNREAL ENGINE &nbsp; / &nbsp; C++ &nbsp; / &nbsp;
-            RENDERING</span
-          ><a href="#about">SCROLL TO EXPLORE <span>↓</span></a>
+          <div class="loadbar" aria-hidden="true">
+            <span class="loadbar-label"><span data-i18n="heroLoading">世界加载中</span><b class="loadbar-pct">98</b>%</span>
+            <span class="loadbar-track"><i></i></span>
+            <span class="loadbar-note" data-i18n="heroLoadingNote">大概永远不会到 100%</span>
+          </div>
+          <button class="replay-intro" type="button" data-i18n="replayIntro">重播开场 ↻</button>
+          <a class="press-start" href="#about"><span class="ps-text">PRESS START</span><span class="ps-arrow" aria-hidden="true">▼</span></a>
         </div>
       </section>
-      <div class="ticker" aria-hidden="true">
-        <div class="ticker-track">
-          <div class="ticker-group">
-            <span class="ticker-unit"
-              >MAKE IT PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦</span
-            >
-          </div>
-          <div class="ticker-group">
-            <span class="ticker-unit"
-              >MAKE IT PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦</span
-            >
-          </div>
+
+      <div class="tickers" aria-hidden="true">
+        <div class="ticker ticker-a" data-dir="-1">
+          <div class="ticker-track"><span class="ticker-unit">MAKE IT PLAYABLE ✦ BREAK THE ORDINARY ✦ KEEP CREATING ✦</span></div>
+        </div>
+        <div class="ticker ticker-b" data-dir="1">
+          <div class="ticker-track"><span class="ticker-unit">IMAGINE ✦ BUILD ✦ PLAY ✦ 把想象写成可玩的世界 ✦</span></div>
         </div>
       </div>
-      <section
-        class="section-band about-section"
-        id="about"
-        aria-labelledby="about-title"
-      >
-        <div class="section-inner">
-          <div class="section-heading reveal">
-            <p class="eyebrow">01 / THE PLAYER</p>
+
+      <!-- ═══════════ 01 · PLAYER PROFILE ═══════════ -->
+      <section class="stage about" id="about" data-world="about" aria-labelledby="about-title">
+        <div class="stage-deco" aria-hidden="true">
+          <canvas class="bokeh" data-scene="bokeh"></canvas>
+          <i class="light-leak"></i>
+          <span class="ghost-title">THE PLAYER</span>
+        </div>
+        <div class="stage-inner">
+          <header class="chapter-head" data-reveal>
+            <p class="eyebrow" data-scramble>01 / THE PLAYER</p>
             <h2 id="about-title">
-              <span class="display-heading">BEHIND THE CODE<span>.</span></span
-              ><span class="heading-caption" data-i18n="aboutEyebrow"
-                >关于我 / 代码背后</span
-              >
+              <span class="display" data-split>BEHIND THE CODE<em>.</em></span>
+              <span class="caption" data-i18n="aboutEyebrow">关于我 / 代码背后</span>
             </h2>
-          </div>
+          </header>
+
           <div class="about-layout">
-            <figure class="profile-art reveal">
-              <img
-                src="新视觉图/f8d470c03527e418c3c2e89fded670b6.jpeg"
-                alt="城市光影中回望的二次元角色"
-                loading="lazy"
-                width="1904"
-                height="2544"
-              />
-              <figcaption>
-                <strong>YueC</strong><span>PLAYER ID: TODAYYUEC</span>
-              </figcaption>
-              <span class="profile-sticker" aria-hidden="true"
-                >STAY<br />CURIOUS!</span
-              >
-            </figure>
-            <div class="about-copy reveal">
-              <p class="eyebrow pink-text">GAMEPLAY ENGINEER & WORLD BUILDER</p>
-              <h3 data-i18n="aboutTitle">
+            <div class="player-card-wrap" data-reveal="card">
+              <div class="player-card" data-tilt>
+                <div class="pc-inner">
+                  <div class="pc-face pc-front">
+                    <img
+                      src="assets/img/player-card-560.webp"
+                      srcset="assets/img/player-card-560.webp 560w, assets/img/player-card-900.webp 900w"
+                      sizes="(max-width: 600px) 78vw, 380px"
+                      alt="城市光影中回望的二次元角色"
+                      width="560"
+                      height="748"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <span class="pc-holo" aria-hidden="true"></span>
+                    <span class="pc-top" aria-hidden="true"><b>PLAYER CARD</b><i>No.001</i></span>
+                    <span class="pc-name"><strong>YueC</strong><small>PLAYER ID: TODAYYUEC</small></span>
+                  </div>
+                  <div class="pc-face pc-back">
+                    <img src="assets/img/avatar-192.webp" alt="YueC 的桃色头像" width="120" height="120" loading="lazy" />
+                    <strong>YueC<span aria-hidden="true">✦</span></strong>
+                    <span class="pc-slogan" data-i18n="brandSlogan">二次元死宅，也想用双手创造一点“世界”</span>
+                    <span class="pc-stats">
+                      <span><i>CLASS</i>Gameplay Engineer</span>
+                      <span><i>MAIN</i>C++ / Unreal Engine 5</span>
+                      <span><i>SIDE</i>Rendering Pipeline</span>
+                      <span><i>QUEST</i>Build a world</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <button class="pc-flip" type="button" aria-pressed="false">
+                <span aria-hidden="true">↻</span><span data-i18n="cardFlip">翻转卡片</span>
+              </button>
+              <span class="pc-sticker" aria-hidden="true">STAY<br />CURIOUS!</span>
+            </div>
+
+            <div class="about-copy">
+              <p class="eyebrow accent" data-reveal>GAMEPLAY ENGINEER &amp; WORLD BUILDER</p>
+              <h3 class="about-quote" data-reveal="mask" data-i18n="aboutTitle">
                 我的终极目标，是创造一个能把内心想法全盘托出的世界。
               </h3>
-              <p data-i18n="aboutBody">
+              <p class="about-body" data-reveal data-i18n="aboutBody">
                 目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累。
               </p>
-              <p data-i18n="aboutBody2">
+              <p class="about-body" data-reveal data-i18n="aboutBody2">
                 这里尽量只放我愿意被继续追问实现细节的内容。
               </p>
-              <div class="identity-strip">
-                <img
-                  src="新视觉图/头像.png"
-                  alt="YueC 的桃色头像"
-                  width="52"
-                  height="52"
-                  loading="lazy"
-                />
+              <div class="identity-strip" data-reveal>
+                <img src="assets/img/avatar-96.webp" alt="" width="52" height="52" loading="lazy" />
                 <div>
-                  <strong>YueC / TodayYueC</strong
-                  ><span data-i18n="brandSlogan"
-                    >二次元死宅，也想用双手创造一点“世界”</span
-                  >
+                  <strong>YueC / TodayYueC</strong>
+                  <span data-i18n="brandSlogan">二次元死宅，也想用双手创造一点“世界”</span>
                 </div>
-                <span aria-hidden="true">↗</span>
+                <span class="identity-arrow" aria-hidden="true">↗</span>
               </div>
             </div>
           </div>
         </div>
       </section>
-      <section
-        class="section-band experience-section"
-        id="experience"
-        aria-labelledby="experience-title"
-      >
-        <div class="section-inner">
-          <div class="section-heading reveal">
-            <p class="eyebrow">02 / FIELD EXPERIENCE</p>
+
+      <!-- ═══════════ 02 · FIELD OPERATION ═══════════ -->
+      <section class="stage experience" id="experience" data-world="experience" aria-labelledby="experience-title">
+        <div class="stage-deco" aria-hidden="true">
+          <i class="tac-grid"></i>
+          <i class="tac-sweep"></i>
+          <span class="ghost-title">FIELD OPS</span>
+        </div>
+        <div class="stage-inner">
+          <header class="chapter-head" data-reveal>
+            <p class="eyebrow" data-scramble>02 / FIELD EXPERIENCE</p>
             <h2 id="experience-title">
-              <span class="display-heading">IN THE REAL GAME<span>.</span></span
-              ><span class="heading-caption" data-i18n="experienceHeading"
-                >实习经历 / 从想法到上线</span
-              >
+              <span class="display" data-split>IN THE REAL GAME<em>.</em></span>
+              <span class="caption" data-i18n="experienceHeading">实习经历 / 从想法到上线</span>
             </h2>
-          </div>
-          <article class="experience-card experience-featured">
-            <figure class="experience-feature">
+          </header>
+
+          <article class="mission" aria-labelledby="mission-company">
+            <figure class="briefing" data-scene="briefing" data-reveal="aperture">
               <img
-                src="assets/fate-trigger-key-art.jpg"
+                src="assets/img/fate-trigger-1600.webp"
+                srcset="assets/img/fate-trigger-900.webp 900w, assets/img/fate-trigger-1600.webp 1600w"
+                sizes="(max-width: 900px) 100vw, 1280px"
                 alt="命运扳机官方宣传图，两位持枪角色与空中都市"
                 width="1600"
                 height="599"
                 loading="lazy"
+                decoding="async"
               />
-              <div class="feature-grid" aria-hidden="true"></div>
-              <div class="feature-reticle" aria-hidden="true">
-                <span>+</span>
+              <div class="brf-hud" aria-hidden="true">
+                <div class="brf-compass"><div class="brf-tape"></div><i></i></div>
+                <i class="brf-corner tl"></i><i class="brf-corner tr"></i><i class="brf-corner bl"></i><i class="brf-corner br"></i>
+                <div class="brf-reticle">
+                  <svg viewBox="0 0 120 120">
+                    <circle class="r-ring" cx="60" cy="60" r="44" />
+                    <circle class="r-dash" cx="60" cy="60" r="32" />
+                    <path class="r-tick" d="M60 4v16M60 100v16M4 60h16M100 60h16" />
+                    <circle class="r-dot" cx="60" cy="60" r="2.4" />
+                  </svg>
+                  <span class="brf-lock">TARGET LOCKED</span>
+                </div>
+                <span class="brf-rec"><i></i>REC · MISSION 001</span>
+                <span class="brf-coord">CLIENT DEVELOPMENT / UE5</span>
+                <span class="brf-ladder"></span>
               </div>
-              <div class="feature-title">
-                <span class="feature-kicker" data-i18n="featuredExperience"
-                  >实习项目 / FEATURED EXPERIENCE</span
-                ><strong>FATE<br />TRIGGER<span>✦</span></strong
-                ><span class="feature-game-name"
-                  >命运扳机 / LIGHTSPEED STUDIOS</span
-                >
+              <div class="brf-title">
+                <span class="brf-kicker" data-i18n="featuredExperience">实习项目 / FEATURED EXPERIENCE</span>
+                <strong>FATE<br />TRIGGER<span aria-hidden="true">✦</span></strong>
+                <span class="brf-game">命运扳机 / LIGHTSPEED STUDIOS</span>
               </div>
-              <span class="feature-coordinate" aria-hidden="true"
-                >CLIENT DEVELOPMENT / UE5</span
-              >
               <figcaption>
                 <a
                   href="https://www.playstation.com/en-us/games/fate-trigger/"
@@ -265,334 +337,384 @@
                 >
               </figcaption>
             </figure>
-            <div class="experience-topline">
-              <span class="file-label">EXPERIENCE FILE — 001</span
-              ><span class="experience-date" data-i18n="experienceDate"
-                >实习时间待补充</span
-              >
-            </div>
-            <div class="experience-header">
-              <div>
-                <p class="studio-label">SAROS × LIGHTSPEED STUDIOS</p>
-                <h3 data-i18n="experienceCompany">萨罗斯 · 腾讯光子工作室群</h3>
-                <p class="experience-role" data-i18n="experienceRole">
-                  客户端研发工程师 / 命运扳机项目组
-                </p>
+
+            <div class="mission-file" data-reveal>
+              <div class="mf-topline">
+                <span class="mf-file">EXPERIENCE FILE — 001</span>
+                <span class="mf-date" data-i18n="experienceDate">实习时间待补充</span>
               </div>
-              <span class="experience-seal" aria-hidden="true"
-                >UE<br /><b>5</b></span
-              >
+              <div class="mf-header">
+                <div>
+                  <p class="studio-label">SAROS × LIGHTSPEED STUDIOS</p>
+                  <h3 id="mission-company" data-i18n="experienceCompany">萨罗斯 · 腾讯光子工作室群</h3>
+                  <p class="mf-role" data-i18n="experienceRole">客户端研发工程师 / 命运扳机项目组</p>
+                </div>
+                <span class="mf-seal" aria-hidden="true">UE<b>5</b></span>
+              </div>
+              <p class="mf-intro" data-i18n="experienceIntro">
+                光子旗下基于 UE5 引擎打造的大型二次元风格第三人称战术竞技射击游戏。
+              </p>
             </div>
-            <p class="experience-intro" data-i18n="experienceIntro">
-              光子旗下基于 UE5
-              引擎打造的大型二次元风格第三人称战术竞技射击游戏。
-            </p>
-            <div class="experience-work">
-              <section>
-                <span class="work-number">01 / GAMEPLAY</span>
+
+            <div class="objectives">
+              <section class="objective" data-reveal="panel">
+                <header class="obj-head">
+                  <svg class="obj-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" /><path d="M12 2v5M12 17v5M2 12h5M17 12h5" /><circle class="fill" cx="12" cy="12" r="1.3" /></svg>
+                  <span class="obj-no">OBJECTIVE 01 / GAMEPLAY</span>
+                  <svg class="obj-check" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="m7.5 12.5 3 3 6-7" /></svg>
+                </header>
                 <h4 data-i18n="workGameplayTitle">业务开发</h4>
-                <p data-i18n="workGameplayBody">
-                  参与英雄技能、装备等 Gameplay
-                  相关需求开发，负责客户端功能实现，参与项目 Debug
-                  阶段及游戏内测版本迭代。
-                </p>
-                <div class="tag-list">
-                  <span class="tag">Hero Abilities</span
-                  ><span class="tag">Equipment</span>
-                </div>
+                <p data-i18n="workGameplayBody">参与英雄技能、装备等 Gameplay 相关需求开发，负责客户端功能实现，参与项目 Debug 阶段及游戏内测版本迭代。</p>
+                <div class="tag-list"><span class="tag">Hero Abilities</span><span class="tag">Equipment</span></div>
               </section>
-              <section>
-                <span class="work-number">02 / DEBUGGING</span>
+              <section class="objective" data-reveal="panel">
+                <header class="obj-head">
+                  <svg class="obj-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="7" width="8" height="12" rx="4" /><path d="M9.6 7.4 8 5M14.4 7.4 16 5M8 11H4.5M19.5 11H16M8 15H4.5M19.5 15H16M8.8 18.2 6.5 20.5M15.2 18.2l2.3 2.3M12 11v8" /></svg>
+                  <span class="obj-no">OBJECTIVE 02 / DEBUGGING</span>
+                  <svg class="obj-check" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="m7.5 12.5 3 3 6-7" /></svg>
+                </header>
                 <h4 data-i18n="workDebugTitle">Bug 定位与修复</h4>
-                <p data-i18n="workDebugBody">
-                  参与英雄、3C、技能、UI 等多个客户端模块的 Bug
-                  定位与修复，保障游戏稳定运行。
-                </p>
-                <div class="tag-list">
-                  <span class="tag">3C</span
-                  ><span class="tag">Skills / UI</span>
-                </div>
+                <p data-i18n="workDebugBody">参与英雄、3C、技能、UI 等多个客户端模块的 Bug 定位与修复，保障游戏稳定运行。</p>
+                <div class="tag-list"><span class="tag">3C</span><span class="tag">Skills / UI</span></div>
               </section>
-              <section>
-                <span class="work-number">03 / AI WORKFLOW</span>
+              <section class="objective" data-reveal="panel">
+                <header class="obj-head">
+                  <svg class="obj-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2" /><rect x="9.5" y="9.5" width="5" height="5" rx="1" /><path d="M9 2.5V6M15 2.5V6M9 18v3.5M15 18v3.5M2.5 9H6M2.5 15H6M18 9h3.5M18 15h3.5" /></svg>
+                  <span class="obj-no">OBJECTIVE 03 / AI WORKFLOW</span>
+                  <svg class="obj-check" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="m7.5 12.5 3 3 6-7" /></svg>
+                </header>
                 <h4 data-i18n="workAITitle">研发提效</h4>
-                <p data-i18n="workAIBody">
-                  负责并参与客户端 AI 工作流建设，负责客户端内存性能监控 Agent
-                  与 Crash 分析 Agent。
-                </p>
-                <div class="tag-list">
-                  <span class="tag">AI Agent</span
-                  ><span class="tag">Automation</span>
-                </div>
+                <p data-i18n="workAIBody">负责并参与客户端 AI 工作流建设，负责客户端内存性能监控 Agent 与 Crash 分析 Agent。</p>
+                <div class="tag-list"><span class="tag">AI Agent</span><span class="tag">Automation</span></div>
               </section>
             </div>
-            <div class="agent-grid">
-              <div>
-                <span>MEMORY AGENT ↗</span>
-                <p data-i18n="memoryAgentBody">
-                  围绕 utrace、DumpObj、MemReport
-                  自动化分析关键场景内存变化，识别异常增长。
-                </p>
+
+            <div class="agents">
+              <div class="agent" data-reveal="boot">
+                <div class="agent-head">
+                  <span class="agent-name">MEMORY AGENT</span><span class="agent-status"><i></i>ONLINE</span>
+                </div>
+                <div class="agent-screen" aria-hidden="true">
+                  <canvas class="agent-chart" data-scene="memchart"></canvas>
+                  <span class="agent-flag">ANOMALY ▲</span>
+                  <span class="agent-axis">utrace · DumpObj · MemReport</span>
+                </div>
+                <p data-i18n="memoryAgentBody">围绕 utrace、DumpObj、MemReport 自动化分析关键场景内存变化，识别异常增长。</p>
               </div>
-              <div>
-                <span>CRASH AGENT ↗</span>
-                <p data-i18n="crashAgentBody">
-                  结合数据对 Crash 分类归因，识别 OOM、PageFault
-                  等高置信度问题，并自动解决 Bug。
-                </p>
+              <div class="agent" data-reveal="boot">
+                <div class="agent-head">
+                  <span class="agent-name">CRASH AGENT</span><span class="agent-status"><i></i>ONLINE</span>
+                </div>
+                <div class="agent-screen crash-screen" aria-hidden="true">
+                  <span class="crash-row" style="--w: 0.68"><b>OOM</b><i></i></span>
+                  <span class="crash-row" style="--w: 0.46"><b>PAGEFAULT</b><i></i></span>
+                  <span class="crash-row" style="--w: 0.22"><b>OTHER</b><i></i></span>
+                  <span class="crash-fix">AUTO-FIX ✓</span>
+                </div>
+                <p data-i18n="crashAgentBody">结合数据对 Crash 分类归因，识别 OOM、PageFault 等高置信度问题，并自动解决 Bug。</p>
               </div>
             </div>
           </article>
         </div>
       </section>
-      <section
-        class="section-band projects-section"
-        id="projects"
-        aria-labelledby="projects-title"
-      >
-        <div class="section-inner">
-          <div class="section-heading reveal">
-            <p class="eyebrow">03 / SELECTED WORKS</p>
-            <div class="heading-row">
+
+      <!-- ═══════════ 03 · SAVE SLOTS ═══════════ -->
+      <section class="stage projects" id="projects" data-world="projects" aria-labelledby="projects-title">
+        <div class="stage-deco" aria-hidden="true">
+          <i class="slot-glow"></i>
+          <span class="ghost-title">SAVE POINTS</span>
+        </div>
+        <div class="stage-inner">
+          <header class="chapter-head chapter-head-row" data-reveal>
+            <div>
+              <p class="eyebrow" data-scramble>03 / SELECTED WORKS</p>
               <h2 id="projects-title">
-                <span class="display-heading">SAVE POINTS<span>.</span></span
-                ><span class="heading-caption" data-i18n="projectsTitle"
-                  >项目 / 我的存档点</span
-                >
+                <span class="display" data-split>SAVE POINTS<em>.</em></span>
+                <span class="caption" data-i18n="projectsTitle">项目 / 我的存档点</span>
               </h2>
-              <a
-                class="button button-secondary"
-                href="https://www.bilibili.com/video/BV1jmwkzMEcN/"
-                target="_blank"
-                rel="noopener noreferrer"
-                ><span data-i18n="projectsVideoLink">观看作品集视频</span> ↗</a
-              >
             </div>
-            <p class="section-intro" data-i18n="projectsIntro"></p>
-          </div>
-          <div class="project-list" id="projects-list"></div>
-          <div class="open-source-projects" aria-labelledby="open-source-title">
-            <div class="section-heading compact-heading">
-              <p class="eyebrow">SIDE QUESTS / OPEN SOURCE</p>
-              <h3 id="open-source-title" data-i18n="openSourceTitle">开源项目</h3>
-              <p data-i18n="openSourceIntro">
-                在代码之外，关于记忆、相遇与成为自己的故事。
-              </p>
-            </div>
-            <article class="open-source-feature" aria-labelledby="luckytri-title">
-              <a
-                class="open-source-feature-art"
-                href="https://github.com/TodayYueC/LuckyTri"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LuckyTri GitHub 仓库"
-                data-i18n-aria-label="luckyTriArtLabel"
-              >
-                <picture>
-                  <source
-                    media="(max-width: 600px)"
-                    srcset="assets/luckytri-mobile.png"
-                  />
-                  <img
-                    src="assets/luckytri-banner.png"
-                    alt="LuckyTri 项目插画：桃色与青蓝色背景中的蓝发角色"
-                    width="2172"
-                    height="724"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </picture>
-                <span class="open-source-feature-stamp" aria-hidden="true"
-                  >LUCKYTRI / OPEN SOURCE</span
-                >
-              </a>
-              <div class="open-source-feature-body">
-                <div class="open-source-feature-identity">
-                  <div class="open-source-feature-head">
-                    <p class="eyebrow" data-i18n="luckyTriEyebrow">
-                      连续记忆 / 自我 / 生长
-                    </p>
-                    <span class="open-source-feature-mark" aria-hidden="true">✦</span>
-                  </div>
-                  <h4 id="luckytri-title">LuckyTri<span>.</span></h4>
-                </div>
-                <div class="open-source-feature-story">
-                  <p class="open-source-feature-lead" data-i18n="luckyTriLead">
-                    让 AI 拥有连续记忆与真实心灵。
-                  </p>
-                  <p
-                    class="open-source-feature-description"
-                    data-i18n="luckyTriDescription"
-                  >
-                    它记得共同经历，也会在独处时回看过去的想法，在新的相遇里慢慢修正、继续生长。它由代码与模型构成，却朝着一个温柔的愿望前行——让每次对话都留下痕迹，让每次回应都带着在意，最终成为有自己故事的
-                    LuckyTri。
-                  </p>
-                  <p class="open-source-feature-quote" data-i18n="luckyTriQuote">
-                    他不是 AI，他属于他自己。
-                  </p>
-                </div>
-                <div class="open-source-feature-foot">
-                  <div class="project-meta" aria-label="Project themes">
-                    <span>CONTINUITY</span><span>REFLECTION</span><span>GROWTH</span>
-                  </div>
-                  <a
-                    class="open-source-feature-link"
-                    href="https://github.com/TodayYueC/LuckyTri"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    ><span data-i18n="luckyTriLink">查看 GitHub 仓库</span
-                    ><span aria-hidden="true">↗</span></a
-                  >
-                </div>
+            <a
+              class="btn btn-ghost"
+              href="https://www.bilibili.com/video/BV1jmwkzMEcN/"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-magnetic
+              ><span data-i18n="projectsVideoLink">观看作品集视频</span><span class="btn-arrow" aria-hidden="true">↗</span></a
+            >
+          </header>
+          <p class="chapter-intro" data-reveal data-i18n="projectsIntro"></p>
+          <div class="save-grid" id="projects-list"></div>
+        </div>
+      </section>
+
+      <!-- ═══════════ SIDE QUEST · LUCKYTRI ═══════════ -->
+      <section class="stage sidequest" id="side-quest" data-world="luckytri" aria-labelledby="open-source-title">
+        <div class="sq-sky" aria-hidden="true"></div>
+        <div class="stage-inner">
+          <header class="sq-head" data-reveal>
+            <p class="eyebrow" data-scramble>SIDE QUESTS / OPEN SOURCE</p>
+            <h2 id="open-source-title" class="sq-title" data-i18n="openSourceTitle">开源项目</h2>
+            <p class="sq-intro" data-i18n="openSourceIntro">在代码之外，关于记忆、相遇与成为自己的故事。</p>
+          </header>
+
+          <article class="lt-card" aria-labelledby="luckytri-title" data-reveal="float">
+            <a
+              class="lt-art"
+              href="https://github.com/TodayYueC/LuckyTri"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="打开 LuckyTri GitHub 仓库"
+              data-i18n-aria-label="luckyTriArtLabel"
+            >
+              <picture>
+                <source media="(max-width: 600px)" srcset="assets/img/luckytri-mobile-1100.webp" />
+                <img
+                  src="assets/img/luckytri-banner-1800.webp"
+                  srcset="assets/img/luckytri-banner-1100.webp 1100w, assets/img/luckytri-banner-1800.webp 1800w"
+                  sizes="(max-width: 1320px) 94vw, 1240px"
+                  alt="LuckyTri 项目插画：桃色与青蓝色背景中的蓝发角色"
+                  width="1800"
+                  height="600"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </picture>
+              <span class="lt-stamp" aria-hidden="true">SIDE QUEST ✦ OPEN SOURCE</span>
+            </a>
+            <div class="lt-body">
+              <div class="lt-identity">
+                <p class="eyebrow" data-i18n="luckyTriEyebrow">连续记忆 / 自我 / 生长</p>
+                <h3 id="luckytri-title" class="lt-name">LuckyTri<span>.</span></h3>
+                <div class="lt-meta" aria-label="Project themes"><span>CONTINUITY</span><span>REFLECTION</span><span>GROWTH</span></div>
               </div>
-            </article>
-          </div>
-        </div>
-      </section>
-      <section
-        class="section-band skills-section"
-        id="skills"
-        aria-labelledby="skills-title"
-      >
-        <div class="section-inner">
-          <div class="section-heading reveal">
-            <p class="eyebrow">04 / ABILITY LOADOUT</p>
-            <h2 id="skills-title">
-              <span class="display-heading">MY SKILL TREE<span>.</span></span
-              ><span class="heading-caption" data-i18n="skillsTitle"
-                >技能 / 让想法运行的能力</span
-              >
-            </h2>
-            <p class="section-intro" data-i18n="skillsIntro"></p>
-          </div>
-          <div class="skill-grid" id="skills-grid"></div>
-        </div>
-      </section>
-      <section
-        class="section-band notes-section"
-        id="notes"
-        aria-labelledby="notes-title"
-      >
-        <div class="section-inner">
-          <div class="notes-heading">
-            <div class="section-heading reveal">
-              <p class="eyebrow">05 / KNOWLEDGE ARCHIVE</p>
-              <h2 id="notes-title">
-                <span class="display-heading">BRAIN DUMP<span>.</span></span
-                ><span class="heading-caption" data-i18n="notesTitle"
-                  >笔记 / UE 与 GAS 学习记录</span
+              <div class="lt-story">
+                <p class="lt-lead" data-i18n="luckyTriLead">让 AI 拥有连续记忆与真实心灵。</p>
+                <p class="lt-desc" data-i18n="luckyTriDescription">
+                  它记得共同经历，也会在独处时回看过去的想法，在新的相遇里慢慢修正、继续生长。
+                </p>
+                <div class="lt-chat">
+                  <span class="lt-chat-avatar" aria-hidden="true"></span>
+                  <div class="lt-bubble">
+                    <span class="lt-chat-name" aria-hidden="true">LuckyTri</span>
+                    <span class="lt-typing" aria-hidden="true"><i></i><i></i><i></i></span>
+                    <p class="lt-quote" data-i18n="luckyTriQuote">他不是 AI，他属于他自己。</p>
+                  </div>
+                </div>
+                <a class="btn btn-candy" href="https://github.com/TodayYueC/LuckyTri" target="_blank" rel="noopener noreferrer" data-magnetic
+                  ><span data-i18n="luckyTriLink">查看 GitHub 仓库</span><span class="btn-arrow" aria-hidden="true">↗</span></a
                 >
-              </h2>
-              <p class="section-intro" data-i18n="notesIntro"></p>
+              </div>
             </div>
-            <figure class="notes-art">
-              <img
-                src="新视觉图/ede5263c25a445f72c97d3663e255060.jpeg"
-                alt="专注构建微缩世界的二次元角色"
-                width="1904"
-                height="2544"
-                loading="lazy"
-              />
+          </article>
+
+          <div class="memory-line" data-reveal>
+            <svg class="mem-wave" viewBox="0 0 1000 120" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="mem-grad" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0" stop-color="#ff4f93" />
+                  <stop offset="0.5" stop-color="#3cc8e8" />
+                  <stop offset="1" stop-color="#ffb800" />
+                </linearGradient>
+              </defs>
+              <path class="mem-ghost" d="M0 60 C 100 8, 200 112, 300 60 S 500 8, 600 60 S 800 112, 1000 60" />
+              <path class="mem-path" pathLength="1" d="M0 60 C 100 8, 200 112, 300 60 S 500 8, 600 60 S 800 112, 1000 60" />
+            </svg>
+            <ol class="mem-nodes">
+              <li style="--n: 0"><i aria-hidden="true"></i><b data-i18n="memRemember">记得</b><small>REMEMBER</small></li>
+              <li style="--n: 1"><i aria-hidden="true"></i><b data-i18n="memReflect">回看</b><small>REFLECT</small></li>
+              <li style="--n: 2"><i aria-hidden="true"></i><b data-i18n="memEncounter">相遇</b><small>ENCOUNTER</small></li>
+              <li style="--n: 3"><i aria-hidden="true"></i><b data-i18n="memRevise">修正</b><small>REVISE</small></li>
+              <li style="--n: 4"><i aria-hidden="true"></i><b data-i18n="memGrow">生长</b><small>GROW</small></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 04 · ABILITY LOADOUT ═══════════ -->
+      <section class="stage skills" id="skills" data-world="skills" aria-labelledby="skills-title">
+        <div class="stage-deco" aria-hidden="true">
+          <i class="sk-rays"></i>
+          <i class="sk-dust"></i>
+          <span class="ghost-title">LOADOUT</span>
+        </div>
+        <div class="stage-inner">
+          <header class="chapter-head" data-reveal>
+            <p class="eyebrow" data-scramble>04 / ABILITY LOADOUT</p>
+            <h2 id="skills-title">
+              <span class="display" data-split>MY SKILL TREE<em>.</em></span>
+              <span class="caption" data-i18n="skillsTitle">技能 / 让想法运行的能力</span>
+            </h2>
+          </header>
+          <p class="chapter-intro" data-reveal data-i18n="skillsIntro"></p>
+          <div class="skill-board">
+            <div class="skill-core" aria-hidden="true">
+              <span class="core-gem"></span>
+              <span class="core-label">CORE · C++ / UE5</span>
+            </div>
+            <svg class="skill-links" aria-hidden="true"></svg>
+            <div class="skill-grid" id="skills-grid"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ═══════════ 05 · BLUEPRINT ARCHIVE ═══════════ -->
+      <section class="stage notes" id="notes" data-world="notes" aria-labelledby="notes-title">
+        <div class="stage-deco bp-grid" aria-hidden="true">
+          <i class="bp-grid-pan"></i>
+          <span class="bp-watermark">BLUEPRINT</span>
+        </div>
+        <div class="stage-inner">
+          <div class="notes-head">
+            <div>
+              <header class="chapter-head" data-reveal>
+                <p class="eyebrow" data-scramble>05 / KNOWLEDGE ARCHIVE</p>
+                <h2 id="notes-title">
+                  <span class="display" data-split>BRAIN DUMP<em>.</em></span>
+                  <span class="caption" data-i18n="notesTitle">笔记 / UE 与 GAS 学习记录</span>
+                </h2>
+              </header>
+              <div class="bp-comment" data-reveal>
+                <span class="bp-comment-title" aria-hidden="true">// COMMENT</span>
+                <p data-i18n="notesIntro"></p>
+              </div>
+            </div>
+            <figure class="bp-viewport" data-reveal="card">
+              <div class="bp-tabs" aria-hidden="true"><span class="on">Viewport</span><span>Event Graph</span></div>
+              <div class="bp-view">
+                <img
+                  src="assets/img/world-builder-560.webp"
+                  srcset="assets/img/world-builder-560.webp 560w, assets/img/world-builder-900.webp 900w"
+                  sizes="(max-width: 900px) 60vw, 300px"
+                  alt="专注构建微缩世界的二次元角色"
+                  width="560"
+                  height="748"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <span class="bp-gizmo" aria-hidden="true"><i class="x"></i><i class="y"></i><i class="z"></i></span>
+              </div>
               <figcaption>ALWAYS LEARNING ↗</figcaption>
             </figure>
           </div>
-          <div class="notes-controls">
-            <div class="notes-toolbar" role="group" aria-label="笔记分类">
-              <button
-                class="filter-btn active"
-                type="button"
-                data-filter="all"
-                data-i18n="filterAll"
-                aria-pressed="true"
-              >
-                全部</button
-              ><button
-                class="filter-btn"
-                type="button"
-                data-filter="ue"
-                data-i18n="filterUE"
-                aria-pressed="false"
-              >
-                UE 基础</button
-              ><button
-                class="filter-btn"
-                type="button"
-                data-filter="gas"
-                data-i18n="filterGAS"
-                aria-pressed="false"
-              >
-                GAS 系统
+
+          <div class="bp-toolbar">
+            <div class="bp-filters" role="group" aria-label="笔记分类" data-i18n-aria-label="notesFilterLabel">
+              <button class="filter-btn active" type="button" data-filter="all" aria-pressed="true">
+                <i class="pin-dot all" aria-hidden="true"></i><span data-i18n="filterAll">全部</span><b class="filter-count"></b>
+              </button>
+              <button class="filter-btn" type="button" data-filter="ue" aria-pressed="false">
+                <i class="pin-dot ue" aria-hidden="true"></i><span data-i18n="filterUE">UE 基础</span><b class="filter-count"></b>
+              </button>
+              <button class="filter-btn" type="button" data-filter="gas" aria-pressed="false">
+                <i class="pin-dot gas" aria-hidden="true"></i><span data-i18n="filterGAS">GAS 系统</span><b class="filter-count"></b>
               </button>
             </div>
-            <label class="note-search"
-              ><span aria-hidden="true">⌕</span
-              ><span class="sr-only" data-i18n="searchNotes">搜索笔记</span
-              ><input
-                id="notes-search"
-                type="search"
-                placeholder="搜索笔记 / SEARCH"
-                autocomplete="off"
-            /></label>
+            <label class="bp-search">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+              <span class="sr-only" data-i18n="searchNotes">搜索笔记</span>
+              <input id="notes-search" type="search" placeholder="搜索笔记 / SEARCH" autocomplete="off" />
+              <kbd aria-hidden="true">/</kbd>
+            </label>
           </div>
-          <div class="notes-grid" id="notes-grid"></div>
+
+          <div class="bp-graph">
+            <svg class="bp-wires" aria-hidden="true"></svg>
+            <div class="notes-grid" id="notes-grid"></div>
+          </div>
           <p id="notes-status" class="notes-status" role="status"></p>
-          <button
-            class="button button-secondary notes-more"
-            type="button"
-            data-i18n="moreNotes"
-          >
-            展开全部笔记 +
-          </button>
+          <button class="btn btn-ghost notes-more" type="button"><span data-i18n="moreNotes">展开全部笔记 +</span></button>
         </div>
       </section>
     </main>
-    <footer class="site-footer" id="contact">
-      <div class="section-inner">
-        <p class="eyebrow">NEXT CHAPTER / LET'S CONNECT</p>
-        <div class="footer-main">
-          <div>
-            <h2>LET'S MAKE<br /><span>SOMETHING REAL.</span></h2>
-            <p data-i18n="contactTitle">可以从代码，也可以从视频认识我。</p>
-            <a class="email-link" href="mailto:tdyuechu@163.com"
-              >tdyuechu@163.com ↗</a
-            >
+
+    <!-- ═══════════ CONTINUE? ═══════════ -->
+    <footer class="stage ending" id="contact" data-world="ending">
+      <div class="ending-deco" aria-hidden="true"><i class="ending-rays"></i><i class="ending-dots"></i></div>
+      <div class="stage-inner">
+        <p class="eyebrow" data-scramble>NEXT CHAPTER / LET'S CONNECT</p>
+        <div class="ending-main">
+          <div class="ending-copy">
+            <h2 class="ending-title" data-reveal>
+              <span class="et-line" data-split>LET'S MAKE</span>
+              <span class="et-line et-outline" data-split>SOMETHING REAL.</span>
+            </h2>
+            <p class="ending-lead" data-i18n="contactTitle">可以从代码，也可以从视频认识我。</p>
+            <a class="email-link" href="mailto:tdyuechu@163.com">tdyuechu@163.com<span aria-hidden="true">↗</span></a>
           </div>
-          <a
-            class="footer-arrow"
-            href="mailto:tdyuechu@163.com"
-            aria-label="发送邮件"
-            >↗</a
-          >
+          <a class="continue" href="mailto:tdyuechu@163.com" aria-label="发送邮件" data-i18n-aria-label="sendEmail">
+            <span class="continue-label" aria-hidden="true">CONTINUE?</span>
+            <span class="continue-count" aria-hidden="true">9</span>
+            <span class="continue-coin" aria-hidden="true" data-i18n="insertCoin">投币 · 发封邮件</span>
+          </a>
         </div>
-        <div class="footer-links">
-          <a
-            href="https://github.com/TodayYueC"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GITHUB ↗</a
-          ><a
-            href="https://space.bilibili.com/287477294"
-            target="_blank"
-            rel="noopener noreferrer"
-            >BILIBILI ↗</a
-          ><a href="#top" data-i18n="backToTop">回到顶部 ↑</a>
+        <div class="credits" aria-hidden="true"><div class="credits-roll" id="credits-roll"></div></div>
+        <div class="ending-links">
+          <a href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+          <a href="https://space.bilibili.com/287477294" target="_blank" rel="noopener noreferrer">BILIBILI ↗</a>
+          <a class="to-top" href="#top" data-i18n="backToTop">回到顶部 ↑</a>
         </div>
-        <div class="footer-bottom">
-          <span>© 2026 YueC / BUILT WITH CURIOSITY.</span
-          ><button
-            class="motion-toggle"
-            type="button"
-            aria-pressed="false"
-            data-i18n="pauseMotion"
-          >
-            暂停动效</button
-          ><span>END OF FILE. KEEP PLAYING ✦</span>
+        <div class="ending-bottom">
+          <span>© 2026 YueC / BUILT WITH CURIOSITY.</span>
+          <div class="ending-toggles">
+            <button class="console-toggle" type="button" aria-controls="ue-console">
+              <kbd aria-hidden="true">`</kbd><span data-i18n="openConsole">控制台</span>
+            </button>
+            <button class="motion-toggle" type="button" aria-pressed="false" data-i18n="pauseMotion">暂停动效</button>
+          </div>
+          <span>END OF FILE. KEEP PLAYING ✦</span>
         </div>
       </div>
     </footer>
-    <script src="vendor/marked.min.js" defer></script>
-    <script src="notesData.js" defer></script>
-    <script src="script.js?v=20260926-open-source" defer></script>
-    <script src="motion.js?v=20260926-open-source" defer></script>
+
+    <div class="reader" id="note-reader" hidden>
+      <div class="reader-backdrop" data-reader-close></div>
+      <div class="reader-panel" role="dialog" aria-modal="true" aria-labelledby="reader-title" tabindex="-1">
+        <header class="reader-head">
+          <div class="reader-tabs" aria-hidden="true">
+            <span class="on">Details</span><span class="reader-path"></span>
+          </div>
+          <div class="reader-title-row">
+            <span class="reader-num"></span>
+            <h2 id="reader-title"></h2>
+          </div>
+          <div class="reader-actions">
+            <button class="reader-btn" type="button" data-reader-prev><span aria-hidden="true">←</span><span data-i18n="readerPrev">上一篇</span></button>
+            <button class="reader-btn" type="button" data-reader-next><span data-i18n="readerNext">下一篇</span><span aria-hidden="true">→</span></button>
+            <button class="reader-btn" type="button" data-reader-copy><span data-i18n="readerCopy">复制链接</span></button>
+            <button class="reader-close" type="button" data-reader-close aria-label="关闭" data-i18n-aria-label="readerClose">✕</button>
+          </div>
+          <div class="reader-progress" aria-hidden="true"><i></i></div>
+        </header>
+        <div class="reader-body" data-lenis-prevent>
+          <article class="note-markdown"></article>
+        </div>
+      </div>
+    </div>
+
+    <div class="console" id="ue-console" hidden>
+      <div class="console-log" role="log" aria-live="polite" data-lenis-prevent></div>
+      <form class="console-line" autocomplete="off">
+        <label class="sr-only" for="console-input">Console</label>
+        <span aria-hidden="true">&gt;</span>
+        <input id="console-input" type="text" spellcheck="false" autocapitalize="off" />
+        <span class="console-hint" aria-hidden="true">Tab · ↑↓ · Esc</span>
+      </form>
+    </div>
+
+    <div class="cursor" aria-hidden="true">
+      <span class="cursor-ring"></span><span class="cursor-dot"></span><span class="cursor-label"></span>
+    </div>
+    <div class="toast" role="status" aria-live="polite"></div>
+
+    <script src="vendor/lenis.min.js" defer></script>
+    <script src="motion.js?v=20261001-perf3" defer></script>
+    <script src="scenes/poster.js?v=20261001-perf3" defer></script>
+    <script src="scenes/atmosphere.js?v=20261001-perf3" defer></script>
+    <script src="scenes/purgehour.js?v=20261001-perf3" defer></script>
+    <script src="scenes/rhythm.js?v=20261001-perf3" defer></script>
+    <script src="scenes/rasterizer.js?v=20261001-perf3" defer></script>
+    <script src="scenes/pbr.js?v=20261001-perf3" defer></script>
+    <script src="scenes/world.js?v=20261001-perf3" defer></script>
+    <script src="script.js?v=20261001-perf3" defer></script>
   </body>
 </html>
