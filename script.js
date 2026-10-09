@@ -166,7 +166,6 @@ Object.assign(i18n.zh, {
   exploreProjects: "探索我的项目",
   aboutEyebrow: "关于我 / 代码背后",
   experienceHeading: "实习经历 / 从想法到上线",
-  experienceDate: "实习时间待补充",
   experienceCompany: "萨罗斯 · 腾讯光子工作室群",
   experienceRole: "客户端研发工程师 / 命运扳机项目组",
   experienceIntro:
@@ -213,7 +212,6 @@ Object.assign(i18n.en, {
   exploreProjects: "Explore my work",
   aboutEyebrow: "About / Behind the code",
   experienceHeading: "Experience / Ideas in production",
-  experienceDate: "Internship dates to be added",
   experienceCompany: "Saros · Tencent LIGHTSPEED Studios",
   experienceRole: "Client Development Engineer / Fate Trigger Team",
   experienceIntro:
