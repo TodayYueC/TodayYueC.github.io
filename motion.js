@@ -960,7 +960,7 @@
       }, 700);
     }],
     about: ["关于我 / whoami", () => say("YueC · UE5 Gameplay Engineer · C++ / Rendering · 想用双手创造一个世界。")],
-    contact: ["联系方式", () => say('Mail: <a href="mailto:tdyuechu@163.com">tdyuechu@163.com</a> · GitHub: TodayYueC', "c-ok")],
+    contact: ["联系方式", () => say('GitHub: <a href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer">TodayYueC</a>', "c-ok")],
     echo: ["echo <text>", (arg) => say(esc(arg || ""))],
     clear: ["清屏", () => consoleLog && (consoleLog.textContent = "")],
     quit: ["退出游戏？", () => say("QUIT GAME? — 这个世界还在加载，先别走嘛。", "c-warn")],

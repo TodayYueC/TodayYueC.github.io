@@ -26,9 +26,9 @@ const state = {
 
 const i18n = {
   zh: {
-    documentTitle: "YueC | UE5 玩法工程师 / C++ 渲染",
+    documentTitle: "YueC | UE5 客户端开发",
     metaDescription:
-      "YueC 的 UE5 玩法工程与 C++ 渲染作品集，包含实习经历、LuckyTri 开源项目与学习记录。",
+      "YueC 的 UE5 客户端开发作品集，记录玩法系统、插件开发与项目实践。",
     navAbout: "关于",
     navSkills: "技能",
     navProjects: "项目",
@@ -47,11 +47,11 @@ const i18n = {
     factEngine: "近期项目引擎版本",
     factCpp: "主要开发语言",
     factRepos: "非 fork 公开仓库",
-    factGameDev: "玩法系统与渲染管线",
+    factGameDev: "玩法系统与工具开发",
     aboutEyebrow: "个人方向",
     aboutTitle: "我的终极目标，是创造一个能把内心想法全盘托出的世界。",
     aboutBody:
-      "目前主要围绕 UE5 玩法工程和 C++ 渲染基础积累：角色控制、Enhanced Input、GAS、动画蒙太奇、行为树、UMG、DataAsset 配置，以及从软光栅到 OpenGL 的渲染管线拆解。我的项目不追求一次性把内容堆满，而是先把输入、状态、数值、表现之间的关系梳理干净。",
+      "我主要做 UE5 客户端开发，喜欢研究玩法系统和工具的实现。从 GAS 技能、敌人行为到消息通信插件，我会先梳理清楚各部分的职责，再一点点把功能做出来。",
     aboutBody2:
       "这里尽量只放我愿意被继续追问实现细节的内容：项目怎么拆、问题怎么修、下一步还可以怎么扩展。",
     skillsEyebrow: "技术栈",
@@ -60,7 +60,7 @@ const i18n = {
     projectsEyebrow: "项目",
     projectsTitle: "主要项目",
     projectsIntro:
-      "主要项目现在分成两条线：UE5 玩法工程和 C++ 渲染基础。PurgeHour 与 Cyber2026 记录战斗、GAS、节奏判定和事件分发；SoftRenderer 记录软光栅管线；PBRDeferredRenderer 作为 OpenGL PBR 延迟渲染器正在开发中。",
+      "这里记录了我做过的插件、玩法原型和一些技术练习：从 YueSignal 的本地通信，到 PurgeHour 的战斗系统，再到软光栅管线。",
     projectsVideoLink: "先看作品集视频",
     openSourceTitle: "开源项目",
     openSourceIntro: "在代码之外，关于记忆、相遇与成为自己的故事。",
@@ -84,13 +84,13 @@ const i18n = {
     contactEyebrow: "联系",
     contactTitle: "可以从代码，也可以从视频认识我。",
     contactBody:
-      "我现在最在意的事很简单：把脑内那些热血又麻烦的玩法，拆到 UE5 里还能继续生长；也把渲染管线拆到自己能解释、能实现的程度。PurgeHour、Cyber2026 和 SoftRenderer 都是这条路上的存档点。",
-    footerNote: "UE5 玩法工程与 C++ 渲染作品集",
+      "欢迎从项目代码和视频了解我的工作。如果你也对玩法系统或 UE 工具开发感兴趣，可以在 GitHub 找到我。",
+    footerNote: "UE5 客户端开发作品集",
   },
   en: {
-    documentTitle: "YueC | UE5 Gameplay & C++ Rendering",
+    documentTitle: "YueC | UE5 Client Development",
     metaDescription:
-      "YueC's UE5 gameplay and C++ rendering portfolio, featuring an internship, the LuckyTri open-source project, and development notes.",
+      "YueC's UE5 client development portfolio, featuring gameplay systems, plugins, and project notes.",
     navAbout: "About",
     navSkills: "Skills",
     navProjects: "Projects",
@@ -110,12 +110,12 @@ const i18n = {
     factEngine: "Recent engine version",
     factCpp: "Main language",
     factRepos: "Non-fork public repos",
-    factGameDev: "Gameplay and rendering",
+    factGameDev: "Gameplay systems and tools",
     aboutEyebrow: "Direction",
     aboutTitle:
       "My end goal is to create a world where I can pour out everything I have been carrying inside.",
     aboutBody:
-      "My current work centers on UE5 gameplay engineering and C++ rendering fundamentals: character control, Enhanced Input, GAS, animation montages, behavior trees, UMG, DataAsset configuration, and rendering-pipeline study from software rasterization to OpenGL. The goal is not to pack in one-off features, but to clarify how input, state, numbers, and presentation talk to each other.",
+      "I focus on UE5 client development and enjoy building gameplay systems and tools. From GAS abilities and enemy behavior to a messaging plugin, I start by defining each part's responsibilities and build from there.",
     aboutBody2:
       "I try to keep the site focused on work I am willing to be asked about in detail: how it was split, what broke, and where it can go next.",
     skillsEyebrow: "Stack",
@@ -125,7 +125,7 @@ const i18n = {
     projectsEyebrow: "Projects",
     projectsTitle: "Main projects",
     projectsIntro:
-      "The main projects now split across two tracks: UE5 gameplay engineering and C++ rendering fundamentals. PurgeHour and Cyber2026 cover combat, GAS, rhythm judgment, and event dispatching; SoftRenderer records the software rasterization pipeline; PBRDeferredRenderer is an in-development OpenGL PBR deferred renderer.",
+      "A collection of plugins, gameplay prototypes, and technical exercises: from local communication in YueSignal to combat in PurgeHour and a software rasterization pipeline.",
     projectsVideoLink: "Watch portfolio video",
     openSourceTitle: "Open-source projects",
     openSourceIntro: "Beyond the code: a story of memory, encounters, and becoming oneself.",
@@ -149,8 +149,8 @@ const i18n = {
     contactEyebrow: "Contact",
     contactTitle: "Start with the code, or with the video.",
     contactBody:
-      "What I care about right now is simple: taking the loud, troublesome gameplay ideas in my head and breaking them into UE5 systems that can keep growing, while also understanding rendering pipelines deeply enough to explain and implement them. PurgeHour, Cyber2026, and SoftRenderer are save points on that road.",
-    footerNote: "UE5 gameplay and C++ rendering portfolio",
+      "Explore my work through the code and videos. If you're interested in gameplay systems or UE tools too, you can find me on GitHub.",
+    footerNote: "UE5 client development portfolio",
   },
 };
 
@@ -162,7 +162,7 @@ Object.assign(i18n.zh, {
   navExperience: "实习经历",
   navContact: "联系我",
   heroTitle: "把想象，写成可玩的世界。",
-  heroDescription: "UE5 玩法工程 / C++ 渲染 / 一个想创造世界的二次元玩家。",
+  heroDescription: "UE5 客户端开发 / 玩法系统 / C++ 插件开发。",
   exploreProjects: "探索我的项目",
   aboutEyebrow: "关于我 / 代码背后",
   experienceHeading: "实习经历 / 从想法到上线",
@@ -182,10 +182,12 @@ Object.assign(i18n.zh, {
   memoryAgentBody:
     "围绕 utrace、DumpObj、MemReport 自动化分析关键场景内存变化，识别异常增长。",
   crashAgentBody:
-    "结合数据对 Crash 分类归因，识别 OOM、PageFault 等高置信度问题，并自动解决 Bug。",
+    "结合数据对 Crash 分类归因，辅助定位 OOM、PageFault 等问题。",
   projectsTitle: "项目 / 我的存档点",
   projectsIntro:
-    "从 UE5 玩法系统到 C++ 渲染管线。每个项目，都是把一个想法变成现实的存档点。",
+    "从通信插件到战斗原型，这些项目记录了我把想法落到代码里的过程。",
+  visitGithub: "访问 GitHub",
+  visitGithubCoin: "投币 · 查看 GitHub",
   projectsVideoLink: "观看作品集视频",
   skillsTitle: "技能 / 让想法运行的能力",
   notesTitle: "笔记 / UE 与 GAS 学习记录",
@@ -208,7 +210,7 @@ Object.assign(i18n.en, {
   navExperience: "Experience",
   heroTitle: "Turning imagination into playable worlds.",
   heroDescription:
-    "UE5 gameplay / C++ rendering / An anime fan building worlds through code.",
+    "UE5 client development / gameplay systems / C++ plugins.",
   exploreProjects: "Explore my work",
   aboutEyebrow: "About / Behind the code",
   experienceHeading: "Experience / Ideas in production",
@@ -228,10 +230,12 @@ Object.assign(i18n.en, {
   memoryAgentBody:
     "Automated analysis of memory changes in key scenarios using utrace, DumpObj and MemReport to identify abnormal growth.",
   crashAgentBody:
-    "Used data to classify crashes and identify high-confidence causes such as OOM and PageFault, with automated bug resolution.",
+    "Used data to classify crashes and help identify causes such as OOM and PageFault.",
   projectsTitle: "Projects / My save points",
   projectsIntro:
-    "From UE5 gameplay systems to C++ rendering pipelines. Each project is a save point on the way from imagination to implementation.",
+    "From a messaging plugin to a combat prototype, these projects trace how I turn ideas into code.",
+  visitGithub: "Visit GitHub",
+  visitGithubCoin: "INSERT COIN · VIEW GITHUB",
   skillsTitle: "Skills / Making ideas run",
   notesTitle: "Notes / UE & GAS learning archive",
   notesIntro:
@@ -275,9 +279,9 @@ const skillItems = {
       tags: ["DataAsset", "Blueprint", "TSubclassOf"],
     },
     {
-      title: "工程与渲染基础",
-      body: "C++、对象生命周期、内存、网络和渲染管线基础。写玩法或渲染代码时都会同时考虑调试和维护成本。",
-      tags: ["C++", "Rendering", "Debugging"],
+      title: "插件与工程实践",
+      body: "使用 C++ 和蓝图开发 UE 插件，关注类型安全、对象生命周期、调试和维护。",
+      tags: ["C++", "Blueprint", "Debugging"],
     },
   ],
   en: [
@@ -307,15 +311,30 @@ const skillItems = {
       tags: ["DataAsset", "Blueprint", "TSubclassOf"],
     },
     {
-      title: "Engineering and rendering fundamentals",
-      body: "C++, object lifecycle, memory, networking, and rendering-pipeline basics with debugging and maintenance in mind.",
-      tags: ["C++", "Rendering", "Debugging"],
+      title: "Plugins and engineering",
+      body: "Building UE plugins with C++ and Blueprint, with attention to type safety, object lifetime, debugging, and maintenance.",
+      tags: ["C++", "Blueprint", "Debugging"],
     },
   ],
 };
 
 const projectItems = {
   zh: [
+    {
+      title: "YueSignal",
+      subtitle: "UE5 强类型本地通信插件",
+      status: "仓库暂未公开",
+      body: "YueSignal 是一个面向 Unreal Engine 5 的本地通信插件，帮助不同系统通过清晰的消息约定协作。它区分广播和请求，为 C++ 与蓝图提供统一的使用方式，也为排查消息流向留出了工具。",
+      placeholder: "YueSignal",
+      meta: ["C++", "Unreal Engine 5", "Blueprint", "Gameplay Tags"],
+      points: [
+        "以 Gameplay Tag 和结构体类型定义通道，分别支持 Signal、Domain Event、Command 和 Query 四种通信语义。",
+        "提供即时、队列和下一帧调度，处理请求的取消、超时与延迟回复。",
+        "通过连接和所有者作用域管理订阅生命周期，并在对象或 World 结束时清理。",
+        "提供类型化蓝图节点和编辑器 Debugger，便于使用及追踪消息。",
+      ],
+      links: [],
+    },
     {
       title: "PurgeHour_UE5.7",
       subtitle: "第三人称混合战斗框架",
@@ -338,14 +357,14 @@ const projectItems = {
     {
       title: "Cyber2026_UE5.7",
       subtitle: "节奏射击与 ARPG 融合",
-      body: "Cyber2026 是 Global Game Jam 里的合作项目，核心是把第三人称射击和节奏判定绑在一起：玩家需要跟着节拍开火，并在不同面具/状态之间切换节奏。活动结束后，我又和 Claude 重新整理过代码框架，把 Jam 期间堆在一起的逻辑拆回角色、节奏判定、战斗、事件和 UI 几层。",
+      body: "Cyber2026 是 Global Game Jam 的合作项目，将第三人称射击和节奏判定结合：玩家跟着节拍开火，并在不同面具和状态之间切换。活动结束后，我重新整理了角色、节奏判定、战斗、事件和 UI 的代码结构。",
       placeholder: "Cyber2026",
       meta: ["C++", "Unreal Engine 5.7", "Game Jam", "Event Bus"],
       points: [
         "节奏系统区分 Early Hit、Late Hit 和 Miss，避免所有输入都被粗暴地塞进一个命中窗口。",
         "面具切换和射击反馈通过事件分发给 UI，减少 Widget 直接读取角色变量的情况。",
         "战斗和死亡连锁加了重复触发保护，避免 Jam 原型里常见的边界抖动。",
-        "活动结束后和 Claude 重新整理过目录与职责，让原型逻辑能继续维护，而不是只停留在 48 小时能跑的状态。",
+        "活动结束后整理目录和模块职责，让原型能继续迭代。",
       ],
       links: [
         {
@@ -373,28 +392,23 @@ const projectItems = {
         },
       ],
     },
-    {
-      title: "PBRDeferredRenderer",
-      subtitle: "OpenGL PBR 延迟渲染器",
-      status: "开发中",
-      body: "PBRDeferredRenderer 是正在推进的 OpenGL 渲染项目，当前仓库已经搭起 C++20、CMake、GLFW、GLAD 和 OpenGL 4.6 Debug Context 的基础窗口与渲染循环。它会作为下一阶段学习 PBR、G-buffer 和延迟光照管线的主线项目继续扩展。",
-      placeholder: "PBR Deferred",
-      meta: ["C++20", "OpenGL 4.6", "GLFW", "In Development"],
-      points: [
-        "当前代码已完成 GLFW 窗口、GLAD 初始化、OpenGL 4.6 Core Profile 上下文和 Debug Callback，方便后续定位图形 API 错误。",
-        "使用现代 OpenGL DSA 风格创建 VBO、EBO、VAO，并通过最小 Shader Program 绘制基础几何，先把渲染入口跑通。",
-        "CMake 中直接集成 third_party/glad 和 GLFW 源码，项目结构已经为后续渲染模块拆分预留入口。",
-        "后续重点会推进 PBR 材质、G-buffer、延迟光照、HDR / Tone Mapping 等渲染管线内容。",
-      ],
-      links: [
-        {
-          label: "打开仓库",
-          href: "https://github.com/TodayYueC/PBRDeferredRenderer",
-        },
-      ],
-    },
   ],
   en: [
+    {
+      title: "YueSignal",
+      subtitle: "Typed local messaging for UE5",
+      status: "Repository private",
+      body: "YueSignal is a local messaging plugin for Unreal Engine 5. It gives systems clear contracts for broadcasts and requests, with interfaces for both C++ and Blueprint and tools for following message flow.",
+      placeholder: "YueSignal",
+      meta: ["C++", "Unreal Engine 5", "Blueprint", "Gameplay Tags"],
+      points: [
+        "Defines channels with Gameplay Tags and struct types across four semantics: Signal, Domain Event, Command and Query.",
+        "Supports immediate, queued and next-tick dispatch, plus cancellation, deadlines and deferred replies for requests.",
+        "Manages subscription lifetimes with connections and owner scopes, cleaning up when an object or World closes.",
+        "Includes typed Blueprint nodes and an editor Debugger for inspection and tracing.",
+      ],
+      links: [],
+    },
     {
       title: "PurgeHour_UE5.7",
       subtitle: "Third-person hybrid combat framework",
@@ -417,14 +431,14 @@ const projectItems = {
     {
       title: "Cyber2026_UE5.7",
       subtitle: "Rhythm shooter with ARPG elements",
-      body: "Cyber2026 was a Global Game Jam collaboration built around third-person shooting and rhythm judgment: the player fires on beat and switches between masks or states. After the event, I reorganized the code framework with Claude, pulling jam-time logic back into character, rhythm judgment, combat, event, and UI layers.",
+      body: "Cyber2026 was a Global Game Jam collaboration combining third-person shooting with rhythm judgment: players fire on beat and switch between masks and states. After the event, I reorganized the character, rhythm, combat, event, and UI code.",
       placeholder: "Cyber2026",
       meta: ["C++", "Unreal Engine 5.7", "Game Jam", "Event Bus"],
       points: [
         "The rhythm system distinguishes Early Hit, Late Hit, and Miss instead of flattening all input into one timing window.",
         "Mask switching and shooting feedback are sent to UI through events, reducing direct reads from widgets into character state.",
         "Combat and chain-death logic include duplicate-trigger guards for the fragile edge cases common in jam prototypes.",
-        "After the event, Claude and I reorganized folders and responsibilities so the prototype was not stuck as a 48-hour tangle.",
+        "After the event, I reorganized folders and module responsibilities so the prototype could continue to evolve.",
       ],
       links: [
         {
@@ -449,26 +463,6 @@ const projectItems = {
         {
           label: "Open repository",
           href: "https://github.com/TodayYueC/SoftRenderer",
-        },
-      ],
-    },
-    {
-      title: "PBRDeferredRenderer",
-      subtitle: "OpenGL PBR deferred renderer",
-      status: "In development",
-      body: "PBRDeferredRenderer is the OpenGL rendering project I am currently building. The repository already has a C++20, CMake, GLFW, GLAD, and OpenGL 4.6 Debug Context foundation with a working window and render loop. It will become the main track for studying PBR, G-buffer layout, and deferred lighting.",
-      placeholder: "PBR Deferred",
-      meta: ["C++20", "OpenGL 4.6", "GLFW", "In Development"],
-      points: [
-        "The current code initializes a GLFW window, GLAD, an OpenGL 4.6 Core Profile context, and Debug Callback support for API diagnostics.",
-        "It uses modern OpenGL DSA-style VBO, EBO, and VAO setup with a minimal shader program to get the first geometry path running.",
-        "CMake integrates third_party/glad and GLFW from source, leaving room for future renderer module splits.",
-        "Next steps are PBR materials, G-buffer construction, deferred lighting, HDR, and tone mapping.",
-      ],
-      links: [
-        {
-          label: "Open repository",
-          href: "https://github.com/TodayYueC/PBRDeferredRenderer",
         },
       ],
     },
@@ -924,6 +918,17 @@ Object.assign(i18n.en, {
 /* Save slots: each project owns a live demo scene (see scenes/*.js). */
 const slotItems = [
   {
+    scene: "signal",
+    code: "UE5 / LOCAL MESSAGING",
+    color: "#a58bff",
+    color2: "#ddd3ff",
+    state: "ARCH",
+    label: "Signal · Event · Command · Query",
+    cursor: "INSPECT",
+    hint: { zh: "点击切换通信类型", en: "Click to explore message types" },
+    aria: { zh: "YueSignal 通信类型示意", en: "YueSignal message types diagram" },
+  },
+  {
     scene: "purgehour",
     code: "GAS / COMBAT SYSTEM",
     color: "#ff6f8f",
@@ -968,17 +973,6 @@ const slotItems = [
     info: true,
     hint: { zh: "点击切换渲染通道 · 拖动旋转", en: "Click to switch pass · Drag to rotate" },
     aria: { zh: "SoftRenderer 可交互演示：CPU 软光栅", en: "SoftRenderer interactive demo: CPU rasterizer" },
-  },
-  {
-    scene: "pbr",
-    code: "OPENGL / PBR",
-    color: "#a58bff",
-    color2: "#ddd3ff",
-    state: "WIP",
-    label: "OpenGL 4.6 → WebGL",
-    cursor: "SWITCH",
-    hint: { zh: "移动指针控制光源 · 点击切换 G-Buffer", en: "Move to steer the light · Click to cycle the G-buffer" },
-    aria: { zh: "PBRDeferredRenderer 可交互演示：G-Buffer 预览", en: "PBRDeferredRenderer interactive demo: G-buffer preview" },
   },
 ];
 
