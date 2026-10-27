@@ -186,8 +186,6 @@ Object.assign(i18n.zh, {
   projectsTitle: "项目 / 我的存档点",
   projectsIntro:
     "从通信插件到战斗原型，这些项目记录了我把想法落到代码里的过程。",
-  visitGithub: "访问 GitHub",
-  visitGithubCoin: "投币 · 查看 GitHub",
   projectsVideoLink: "观看作品集视频",
   skillsTitle: "技能 / 让想法运行的能力",
   notesTitle: "笔记 / UE 与 GAS 学习记录",
@@ -234,8 +232,6 @@ Object.assign(i18n.en, {
   projectsTitle: "Projects / My save points",
   projectsIntro:
     "From a messaging plugin to a combat prototype, these projects trace how I turn ideas into code.",
-  visitGithub: "Visit GitHub",
-  visitGithubCoin: "INSERT COIN · VIEW GITHUB",
   skillsTitle: "Skills / Making ideas run",
   notesTitle: "Notes / UE & GAS learning archive",
   notesIntro:
@@ -925,8 +921,8 @@ const slotItems = [
     state: "ARCH",
     label: "Signal · Event · Command · Query",
     cursor: "INSPECT",
-    hint: { zh: "点击切换通信类型", en: "Click to explore message types" },
-    aria: { zh: "YueSignal 通信类型示意", en: "YueSignal message types diagram" },
+    hint: { zh: "点击或按空格切换通信类型", en: "Click or press Space to switch message types" },
+    aria: { zh: "YueSignal 通信类型示意，点击或按回车、空格切换", en: "YueSignal message types. Click or press Enter or Space to switch." },
   },
   {
     scene: "purgehour",
@@ -1112,7 +1108,7 @@ function renderProjects() {
         <span class="slot-state"><i></i>${slot.state}</span>
       </div>
       <div class="slot-screen">
-        <canvas class="slot-canvas" data-scene="${slot.scene}" tabindex="0" role="img" data-cursor="${slot.cursor || "PLAY"}"></canvas>
+        <canvas class="slot-canvas" data-scene="${slot.scene}" tabindex="0" role="${slot.scene === "signal" ? "button" : "img"}" data-cursor="${slot.cursor || "PLAY"}"></canvas>
         <div class="slot-hud" aria-hidden="true"><span${slot.info ? " data-hud-info" : ""}>${escapeHtml(slot.label)}</span><b data-hud-mode></b></div>
         <span class="slot-hint" aria-hidden="true"></span>
       </div>
