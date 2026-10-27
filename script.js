@@ -49,11 +49,13 @@ const i18n = {
     factRepos: "非 fork 公开仓库",
     factGameDev: "玩法系统与工具开发",
     aboutEyebrow: "个人方向",
-    aboutTitle: "我的终极目标，是创造一个能把内心想法全盘托出的世界。",
+    aboutTitle: "我想让脑海中那些尚未存在的世界，有一天真的能够被人走进去。",
     aboutBody:
-      "我主要做 UE5 客户端开发，喜欢研究玩法系统和工具的实现。从 GAS 技能、敌人行为到消息通信插件，我会先梳理清楚各部分的职责，再一点点把功能做出来。",
+      "我是一名 UE5 客户端开发者，喜欢游戏，也喜欢研究游戏背后的技术。从玩法机制、角色行为到系统架构与开发工具，比起单纯实现一个功能，我更享受理解它、设计它，再亲手把它构建出来的过程。",
     aboutBody2:
-      "这里尽量只放我愿意被继续追问实现细节的内容：项目怎么拆、问题怎么修、下一步还可以怎么扩展。",
+      "当然，写代码并不是全部。我也想创造自己的游戏，讲述自己的故事，让那些原本只存在于想象中的人物、场景和情感，最终成为可以亲身体验的世界。",
+    aboutBody3: "这里记录我的作品、技术探索，以及一路上那些不太成熟但值得留下的想法。",
+    identitySlogan: "一个二次元死宅，正在尝试创造自己的世界。",
     skillsEyebrow: "技术栈",
     skillsTitle: "能直接落到项目里的能力",
     skillsIntro: "下面按“能解决什么问题”来组织，不按工具名堆列表。",
@@ -113,11 +115,13 @@ const i18n = {
     factGameDev: "Gameplay systems and tools",
     aboutEyebrow: "Direction",
     aboutTitle:
-      "My end goal is to create a world where I can pour out everything I have been carrying inside.",
+      "I want the worlds in my imagination to become places people can one day step into.",
     aboutBody:
-      "I focus on UE5 client development and enjoy building gameplay systems and tools. From GAS abilities and enemy behavior to a messaging plugin, I start by defining each part's responsibilities and build from there.",
+      "I'm a UE5 client developer who loves games and the technology behind them. From gameplay mechanics and character behavior to system architecture and development tools, I enjoy understanding and designing a system, then building it with my own hands.",
     aboutBody2:
-      "I try to keep the site focused on work I am willing to be asked about in detail: how it was split, what broke, and where it can go next.",
+      "Of course, code isn't everything. I also want to make my own games and tell my own stories, bringing imagined characters, places, and emotions into worlds people can experience for themselves.",
+    aboutBody3: "Here I share my projects, technical explorations, and the unfinished ideas worth keeping along the way.",
+    identitySlogan: "An anime-loving shut-in trying to create a world of my own.",
     skillsEyebrow: "Stack",
     skillsTitle: "Skills that map to real project problems",
     skillsIntro:
@@ -157,11 +161,11 @@ const i18n = {
 Object.assign(i18n.zh, {
   featuredExperience: "实习项目 / FEATURED EXPERIENCE",
   artCredit: "官方宣传图 ↗",
-  documentTitle: "YueC | 把想象写成可玩的世界",
+  documentTitle: "YueC | 我想创造的，不只是游戏，还有那些值得被记住的瞬间。",
   navAbout: "关于我",
   navExperience: "实习经历",
   navContact: "联系我",
-  heroTitle: "把想象，写成可玩的世界。",
+  heroTitle: "我想创造的，不只是游戏，还有那些值得被记住的瞬间。",
   heroDescription: "UE5 客户端开发 / 玩法系统 / C++ 插件开发。",
   exploreProjects: "探索我的项目",
   aboutEyebrow: "关于我 / 代码背后",
@@ -204,9 +208,9 @@ Object.assign(i18n.zh, {
 Object.assign(i18n.en, {
   featuredExperience: "FEATURED INTERNSHIP PROJECT",
   artCredit: "Official key art ↗",
-  documentTitle: "YueC | Imagine. Build. Play.",
+  documentTitle: "YueC | More than games, moments worth remembering",
   navExperience: "Experience",
-  heroTitle: "Turning imagination into playable worlds.",
+  heroTitle: "I want to create more than games—moments worth remembering.",
   heroDescription:
     "UE5 client development / gameplay systems / C++ plugins.",
   exploreProjects: "Explore my work",
