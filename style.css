@@ -671,8 +671,17 @@ a, button, input, summary { -webkit-tap-highlight-color: transparent; }
 .signal-lab-panel[hidden] { display: none; }
 .signal-lab-heading { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 18px; color: #b7a5f2; font: 700 10px/1.4 var(--mono); letter-spacing: 0.08em; }
 .signal-lab-heading span:last-child { color: #b8b2c6; text-align: right; letter-spacing: 0; }
-.signal-blueprints { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; align-items: start; }
-.signal-bp-node { overflow: hidden; border: 1px solid #666079; border-radius: 7px; background: #1c1b23; box-shadow: 0 7px 18px rgba(0,0,0,0.25); }
+.signal-blueprints { position: relative; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; align-items: start; }
+.signal-bp-node { overflow: hidden; border: 1px solid #666079; border-radius: 7px; background: #1c1b23; box-shadow: 0 7px 18px rgba(0,0,0,0.25); transition: border-color .25s, box-shadow .25s; }
+.signal-blueprints.is-highlighted .signal-bp-node { border-color: #9bc9ff; box-shadow: 0 0 20px rgba(127,231,255,.2); }
+.signal-blueprints.is-pulsing .signal-bp-node:first-child { animation: signal-node-pulse .8s ease both; }
+.signal-blueprints.is-pulsing .signal-bp-node:last-child { animation: signal-node-pulse .8s .35s ease both; }
+@keyframes signal-node-pulse { 0%, 100% { border-color: #666079; box-shadow: 0 7px 18px rgba(0,0,0,.25); } 45% { border-color: #7fe7ff; box-shadow: 0 0 24px rgba(127,231,255,.35); } }
+.signal-lab-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 14px; color: #b8b2c6; font: 500 10px/1.4 var(--mono); }
+.signal-action, .signal-code-steps button { border: 1px solid rgba(165,139,255,.38); border-radius: 5px; background: rgba(165,139,255,.09); color: #e3d9ff; cursor: pointer; font: 600 11px/1.4 var(--body); }
+.signal-action { padding: 8px 11px; }
+.signal-action:hover, .signal-code-steps button:hover { border-color: #bdaaff; background: rgba(165,139,255,.18); }
+.signal-action:focus-visible, .signal-code-steps button:focus-visible, .signal-trace button:focus-visible { outline: 2px solid #d4c4ff; outline-offset: 2px; }
 .signal-bp-title { padding: 10px 11px; min-height: 50px; background: linear-gradient(115deg,#334981,#503c80); color: #fff; font: 700 12px/1.3 var(--body); }
 .signal-bp-title small { display: block; margin-top: 4px; color: #d9d1ee; font: 500 10px/1.3 var(--mono); overflow-wrap: anywhere; }
 .signal-bp-body { display: grid; gap: 10px; padding: 12px 10px; }
@@ -686,15 +695,25 @@ a, button, input, summary { -webkit-tap-highlight-color: transparent; }
 .signal-bp-pin.out { justify-content: flex-end; text-align: right; }
 .signal-bp-pin.out i { border-color: #c9a5ff; }
 .signal-lab-caption { margin: 16px 0 0; color: #c2bccc; font-size: 12px; line-height: 1.6; }
+.signal-code-steps { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.signal-code-steps button { padding: 7px 10px; }
+.signal-code-steps button[aria-pressed="true"] { border-color: #bdaaff; background: rgba(165,139,255,.22); color: #fff; }
 .signal-code { overflow-x: auto; margin: 0; padding: 16px; border: 1px solid rgba(165,139,255,0.2); border-radius: 6px; background: #13111c; color: #e9e6f0; font: 500 12px/1.65 var(--mono); tab-size: 2; }
+.signal-code-block { color: #a8a1b5; transition: color .25s, background-color .25s; }
+.signal-code-block.is-active { color: #fff; background: rgba(165,139,255,.12); }
 .signal-code-key { color: #d9a8fa; }
 .signal-code-scroll-hint { display: none; margin-top: 8px; color: #c6bfd6; font: 500 11px/1.4 var(--body); }
 .signal-trace-prefix { margin: 0 0 13px; overflow-wrap: anywhere; color: #b8b2c6; font: 500 11px/1.5 var(--mono); }
 .signal-trace { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
-.signal-trace li { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; min-width: 0; margin-left: calc(var(--level) * 16px); padding: 9px 10px; border-left: 2px solid var(--trace); background: rgba(255,255,255,0.04); }
+.signal-trace li { min-width: 0; margin-left: calc(var(--level) * 16px); border-left: 2px solid var(--trace); background: rgba(255,255,255,0.04); }
+.signal-trace button { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; width: 100%; min-height: 40px; padding: 9px 10px; border: 0; background: transparent; text-align: left; cursor: pointer; transition: background .2s; }
+.signal-trace button:hover, .signal-trace button[aria-pressed="true"] { background: rgba(255,255,255,.09); }
+.signal-trace-arrow { margin-left: auto; color: var(--trace); opacity: .65; }
 .signal-trace-kind { color: var(--trace); font: 700 10px/1.4 var(--mono); }
 .signal-trace code { color: #f3f1f8; font: 600 12px/1.4 var(--mono); }
-.signal-trace small { margin-left: auto; color: #d3cebc; font: 500 10px/1.4 var(--mono); }
+.signal-trace small { color: #d3cebc; font: 500 10px/1.4 var(--mono); }
+.signal-trace-detail { min-height: 3em; margin: 13px 0 0; padding: 10px 12px; border: 1px solid rgba(165,139,255,.18); border-radius: 5px; color: #ded6ee; font-size: 12px; line-height: 1.5; }
+@media (prefers-reduced-motion: reduce) { .signal-bp-node, .signal-code-block, .signal-trace button { transition: none; } .signal-blueprints.is-pulsing .signal-bp-node { animation: none; } }
 .signal-feature-points { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: clamp(26px, 3vw, 42px); }
 .signal-feature-point { min-width: 0; padding: 17px 17px 19px; border: 1px solid rgba(165,139,255,0.16); border-top: 2px solid rgba(165,139,255,0.68); background: rgba(165,139,255,0.045); }
 .signal-feature-point-no { font: 700 10px/1 var(--mono); letter-spacing: 0.15em; color: #b8a2ff; }

@@ -193,6 +193,16 @@ Object.assign(i18n.zh, {
   signalTabTrace: "因果链",
   signalBlueprintNote: "指南节点示意",
   signalBlueprintCaption: "同一通道上的发布与监听节点，按指南简化展示。",
+  signalPulse: "演示消息广播",
+  signalPulseHint: "同一通道 · 示意动画",
+  signalCodeSections: "代码片段步骤",
+  signalStepRegister: "注册通道",
+  signalStepListen: "订阅消息",
+  signalStepPublish: "发布消息",
+  signalTraceAlarm: "警报 Signal 触发监听者，发起上锁请求。",
+  signalTraceLock: "监听者发出 Lock Command，由处理者执行。",
+  signalTraceLocked: "处理者提交 Locked Domain Event，通知监听者。",
+  signalTraceReport: "监听者发出 Report Query，示例中 5 秒后回复。",
   signalExecInput: "执行输入",
   signalExecOutput: "执行输出",
   signalAdvanced: "高级 · 默认折叠",
@@ -257,6 +267,16 @@ Object.assign(i18n.en, {
   signalTabTrace: "Causal tree",
   signalBlueprintNote: "Guide node illustration",
   signalBlueprintCaption: "A simplified view of the guide's publish and listen nodes on the same channel.",
+  signalPulse: "Play broadcast",
+  signalPulseHint: "Same channel · illustration",
+  signalCodeSections: "Code excerpt sections",
+  signalStepRegister: "Register",
+  signalStepListen: "Subscribe",
+  signalStepPublish: "Publish",
+  signalTraceAlarm: "The Alarm Signal reaches a listener, which sends a lock request.",
+  signalTraceLock: "The listener sends a Lock Command to its handler.",
+  signalTraceLocked: "The handler commits a Locked Domain Event for listeners.",
+  signalTraceReport: "A listener sends a Report Query, answered five seconds later in the guide.",
   signalExecInput: "Execution input",
   signalExecOutput: "Execution output",
   signalAdvanced: "Advanced · collapsed by default",
@@ -384,7 +404,7 @@ const projectItems = {
       placeholder: "PurgeHour",
       meta: ["C++", "Unreal Engine 5.7", "GAS", "TPS + ACT"],
       points: [
-        "PlayerState 作为 Owner，Character 作为 Avatar，重生后重新 InitAbilityActorInfo，不把冷却、Buff 和属性状态绑死在可销毁角色上。",
+        "PlayerState 持有 ASC 与属性集，Character 作为 Avatar；在 PossessedBy 与 OnRep_PlayerState 中绑定 Ability Actor Info。",
         "射击与近战都走 GAS 能力链路，GameplayTag 管输入、状态和互斥关系，降低蓝图里临时布尔值造成的状态残留。",
         "枪械、剑、动画和数值配置尽量外移到 DataAsset/蓝图资产，C++ 保留底层规则和扩展接口。",
         "敌人侧接入 AIController、Behavior Tree 与 GAS，能继续扩展巡逻、索敌、攻击任务和命中反馈。",
@@ -463,7 +483,7 @@ const projectItems = {
       placeholder: "PurgeHour",
       meta: ["C++", "Unreal Engine 5.7", "GAS", "TPS + ACT"],
       points: [
-        "PlayerState owns the ASC while Character works as Avatar, so respawn can re-run InitAbilityActorInfo without throwing away cooldowns, buffs, and attributes.",
+        "PlayerState owns the ASC and AttributeSet; Character is the Avatar. Ability Actor Info is initialized in PossessedBy and OnRep_PlayerState.",
         "Shooting and melee use GAS ability flows, with GameplayTags handling input, state, and mutual exclusion instead of scattered Blueprint booleans.",
         "Weapon, sword, animation, and numeric configuration live in DataAssets or Blueprint assets where possible; C++ keeps the rules and extension points.",
         "Enemy behavior connects AIController, Behavior Tree, and GAS, leaving space for patrol, targeting, attack tasks, and hit feedback.",
@@ -966,19 +986,19 @@ Object.assign(i18n.en, {
 const slotItems = [
   {
     scene: "purgehour",
-    code: "GAS / COMBAT SYSTEM",
+    code: "TPS / MELEE COMBAT",
     color: "#ff6f8f",
     color2: "#ffc7d3",
-    state: "ARCH",
-    label: "ASC · PlayerState",
-    cursor: "INSPECT",
+    state: "DEMO",
+    label: "TPS · MELEE / ILLUSTRATION",
+    cursor: "PLAY",
     hint: {
-      zh: "点标签切换架构视图 · 空格下一页",
-      en: "Click tabs to inspect architecture · Space for next",
+      zh: "点击或按空格切换",
+      en: "Click or press Space to switch",
     },
     aria: {
-      zh: "PurgeHour 架构剖视：Owner/Avatar、Ability Handle、属性广播与 DataAsset",
-      en: "PurgeHour architecture view: Owner/Avatar, ability handles, attribute broadcast and DataAssets",
+      zh: "PurgeHour 枪剑战斗玩法示意：点击 SHOOT 或 SLASH 触发动作，回车、空格或方向键切换",
+      en: "PurgeHour shooting and sword combat illustration: click SHOOT or SLASH, or use Enter, Space or arrow keys to switch.",
     },
   },
   {
@@ -1178,7 +1198,7 @@ function renderProjects() {
         <span class="slot-state"><i></i>${slot.state}</span>
       </div>
       <div class="slot-screen">
-        <canvas class="slot-canvas" data-scene="${slot.scene}" tabindex="0" role="${slot.scene === "signal" ? "button" : "img"}" data-cursor="${slot.cursor || "PLAY"}"></canvas>
+        <canvas class="slot-canvas" data-scene="${slot.scene}" tabindex="0" role="${slot.scene === "purgehour" ? "button" : "img"}" data-cursor="${slot.cursor || "PLAY"}"></canvas>
         <div class="slot-hud" aria-hidden="true"><span${slot.info ? " data-hud-info" : ""}>${escapeHtml(slot.label)}</span><b data-hud-mode></b></div>
         <span class="slot-hint" aria-hidden="true"></span>
       </div>
@@ -1510,6 +1530,34 @@ function setupSignalLab() {
       activate(tabs[next], true);
     });
   });
+  const diagram = lab.querySelector("[data-signal-diagram]");
+  lab.querySelector("[data-signal-pulse]")?.addEventListener("click", () => {
+    if (!diagram) return;
+    diagram.classList.remove("is-pulsing", "is-highlighted");
+    if (YC.motionOK?.()) {
+      void diagram.offsetWidth;
+      diagram.classList.add("is-pulsing");
+    } else {
+      diagram.classList.add("is-highlighted");
+    }
+  });
+  const codeSteps = [...lab.querySelectorAll("[data-code-step]")];
+  codeSteps.forEach((button) => button.addEventListener("click", () => {
+    codeSteps.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    lab.querySelectorAll("[data-code-block]").forEach((block) => {
+      block.classList.toggle("is-active", block.dataset.codeBlock === button.dataset.codeStep);
+    });
+  }));
+  const traceSteps = [...lab.querySelectorAll("[data-trace-step]")];
+  const traceDetail = lab.querySelector("[data-trace-detail]");
+  const traceKeys = { alarm: "signalTraceAlarm", lock: "signalTraceLock", locked: "signalTraceLocked", report: "signalTraceReport" };
+  traceSteps.forEach((button) => button.addEventListener("click", () => {
+    traceSteps.forEach((item) => item.setAttribute("aria-pressed", String(item === button)));
+    if (traceDetail) {
+      traceDetail.dataset.i18n = traceKeys[button.dataset.traceStep];
+      traceDetail.textContent = t(traceDetail.dataset.i18n);
+    }
+  }));
 }
 
 function setupEvents() {

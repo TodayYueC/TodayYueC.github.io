@@ -49,7 +49,7 @@
         }, 5000);
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20261028-lab" />
+    <link rel="stylesheet" href="style.css?v=20261028-play" />
     <link rel="stylesheet" href="motion.css?v=20261001-perf3" />
   </head>
   <body>
@@ -451,7 +451,7 @@
                 </div>
                 <div class="signal-lab-panel" role="tabpanel" id="signal-panel-blueprint" aria-labelledby="signal-tab-blueprint" tabindex="0">
                   <div class="signal-lab-heading"><span>BLUEPRINT / SIGNAL</span><span data-i18n="signalBlueprintNote">指南节点示意</span></div>
-                  <div class="signal-blueprints">
+                  <div class="signal-blueprints" data-signal-diagram>
                     <div class="signal-bp-node">
                       <div class="signal-bp-title">Publish Signal <small>Game.Chest.Opened</small></div>
                       <div class="signal-bp-body">
@@ -476,21 +476,25 @@
                       </div>
                     </div>
                   </div>
+                  <div class="signal-lab-controls"><button type="button" class="signal-action" data-signal-pulse data-i18n="signalPulse">演示消息广播</button><span data-i18n="signalPulseHint">同一通道 · 示意动画</span></div>
                   <p class="signal-lab-caption" data-i18n="signalBlueprintCaption">同一通道上的发布与监听节点，按指南简化展示。</p>
                 </div>
                 <div class="signal-lab-panel" role="tabpanel" id="signal-panel-cpp" aria-labelledby="signal-tab-cpp" tabindex="0" hidden>
                   <div class="signal-lab-heading"><span>C++ / SIGNAL</span><span data-i18n="signalCppNote">指南代码节选</span></div>
-                  <pre class="signal-code" tabindex="0"><code><span class="signal-code-key">auto</span> Opened = Bus-&gt;RegisterSignalChannel&lt;FChestOpened&gt;(
-    TAG_Chest_Opened).Value;
+                  <div class="signal-code-steps" role="group" aria-label="Code sections" data-i18n-aria-label="signalCodeSections">
+                    <button type="button" data-code-step="register" aria-pressed="true" data-i18n="signalStepRegister">注册通道</button><button type="button" data-code-step="listen" aria-pressed="false" data-i18n="signalStepListen">订阅消息</button><button type="button" data-code-step="publish" aria-pressed="false" data-i18n="signalStepPublish">发布消息</button>
+                  </div>
+                  <pre class="signal-code" tabindex="0"><code><span class="signal-code-block is-active" data-code-block="register"><span class="signal-code-key">auto</span> Opened = Bus-&gt;RegisterSignalChannel&lt;FChestOpened&gt;(
+    TAG_Chest_Opened).Value;</span>
 
-Bus-&gt;Subscribe(Opened, Scope.GetHandle(),
+<span class="signal-code-block" data-code-block="listen">Bus-&gt;Subscribe(Opened, Scope.GetHandle(),
     [](<span class="signal-code-key">const</span> FChestOpened&amp; E,
        <span class="signal-code-key">const</span> FYueSignalContext&amp;) {
       ShowToast(E.ChestId);
-    });
+    });</span>
 
-FYueSignalPublishResult R =
-    Bus-&gt;Publish(Opened, FChestOpened{ 7 });</code></pre>
+<span class="signal-code-block" data-code-block="publish">FYueSignalPublishResult R =
+    Bus-&gt;Publish(Opened, FChestOpened{ 7 });</span></code></pre>
                   <p class="signal-code-scroll-hint" data-i18n="signalCodeScrollHint">代码可左右滑动 ↔</p>
                   <p class="signal-lab-caption" data-i18n="signalCppCaption">摘自官方指南的教学片段，省略了类型和上下文定义。</p>
                 </div>
@@ -498,11 +502,12 @@ FYueSignalPublishResult R =
                   <div class="signal-lab-heading"><span>DEBUGGER / CAUSAL TREE</span><span data-i18n="signalTraceNote">指南场景示意</span></div>
                   <p class="signal-trace-prefix">YueSignal.Guide.Diagnostics.Chain</p>
                   <ol class="signal-trace" aria-label="从 Alarm 到 Report 的消息因果链" data-i18n-aria-label="signalTraceLabel">
-                    <li style="--level:0;--trace:#4fc3f7"><span class="signal-trace-kind">SIGNAL</span><code>.Alarm</code></li>
-                    <li style="--level:1;--trace:#ff7070"><span class="signal-trace-kind">COMMAND</span><code>.Lock</code></li>
-                    <li style="--level:2;--trace:#ffb74d"><span class="signal-trace-kind">DOMAIN EVENT</span><code>.Locked</code></li>
-                    <li style="--level:3;--trace:#81d48c"><span class="signal-trace-kind">QUERY</span><code>.Report</code><small data-i18n="signalTraceDelay">延迟回复 5 秒</small></li>
+                    <li style="--level:0;--trace:#4fc3f7"><button type="button" data-trace-step="alarm" aria-pressed="true"><span class="signal-trace-kind">SIGNAL</span><code>.Alarm</code><span class="signal-trace-arrow" aria-hidden="true">↗</span></button></li>
+                    <li style="--level:1;--trace:#ff7070"><button type="button" data-trace-step="lock" aria-pressed="false"><span class="signal-trace-kind">COMMAND</span><code>.Lock</code><span class="signal-trace-arrow" aria-hidden="true">↗</span></button></li>
+                    <li style="--level:2;--trace:#ffb74d"><button type="button" data-trace-step="locked" aria-pressed="false"><span class="signal-trace-kind">DOMAIN EVENT</span><code>.Locked</code><span class="signal-trace-arrow" aria-hidden="true">↗</span></button></li>
+                    <li style="--level:3;--trace:#81d48c"><button type="button" data-trace-step="report" aria-pressed="false"><span class="signal-trace-kind">QUERY</span><code>.Report</code><small data-i18n="signalTraceDelay">延迟回复 5 秒</small><span class="signal-trace-arrow" aria-hidden="true">↗</span></button></li>
                   </ol>
+                  <p class="signal-trace-detail" data-trace-detail data-i18n="signalTraceAlarm" aria-live="polite">警报 Signal 触发监听者，发起上锁请求。</p>
                   <p class="signal-lab-caption" data-i18n="signalTraceCaption">四条消息沿父子上下文串联；此处重绘指南场景，并非实时调试数据。</p>
                 </div>
               </div>
@@ -797,10 +802,10 @@ FYueSignalPublishResult R =
     <script src="motion.js?v=20261028-featureb" defer></script>
     <script src="scenes/poster.js?v=20261001-perf3" defer></script>
     <script src="scenes/atmosphere.js?v=20261001-perf3" defer></script>
-    <script src="scenes/purgehour.js?v=20261001-perf3" defer></script>
+    <script src="scenes/purgehour.js?v=20261028-play" defer></script>
     <script src="scenes/rhythm.js?v=20261001-perf3" defer></script>
     <script src="scenes/rasterizer.js?v=20261001-perf3" defer></script>
     <script src="scenes/world.js?v=20261001-perf3" defer></script>
-    <script src="script.js?v=20261028-lab" defer></script>
+    <script src="script.js?v=20261028-play" defer></script>
   </body>
 </html>
