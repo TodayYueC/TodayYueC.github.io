@@ -224,10 +224,11 @@
     hero: ["00", "TITLE SCREEN", null],
     about: ["01", "PLAYER PROFILE", "#about"],
     experience: ["02", "FIELD OPERATION", "#experience"],
-    projects: ["03", "SAVE POINTS", "#projects"],
-    "side-quest": ["03+", "SIDE QUEST", "#projects"],
-    skills: ["04", "ABILITY LOADOUT", "#skills"],
-    notes: ["05", "BLUEPRINT ARCHIVE", "#notes"],
+    yuesignal: ["03", "FEATURED PROJECT", "#yuesignal"],
+    projects: ["04", "SAVE POINTS", "#projects"],
+    "side-quest": ["04+", "SIDE QUEST", "#projects"],
+    skills: ["05", "ABILITY LOADOUT", "#skills"],
+    notes: ["06", "BLUEPRINT ARCHIVE", "#notes"],
     contact: ["∞", "CONTINUE?", null],
   };
   const navLinks = document.querySelector(".nav-links");
@@ -904,7 +905,7 @@
     consoleLog.scrollTop = consoleLog.scrollHeight;
   };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
-  const SECTIONS = { about: "#about", experience: "#experience", projects: "#projects", luckytri: "#side-quest", sidequest: "#side-quest", skills: "#skills", notes: "#notes", contact: "#contact", top: "#top" };
+  const SECTIONS = { about: "#about", experience: "#experience", yuesignal: "#yuesignal", projects: "#projects", luckytri: "#side-quest", sidequest: "#side-quest", skills: "#skills", notes: "#notes", contact: "#contact", top: "#top" };
   const COMMANDS = {
     help: ["列出所有命令 / list commands", () => {
       Object.entries(COMMANDS).forEach(([name, [desc]]) => say(`<span class="c-key">${name.padEnd(16, " ")}</span>${esc(desc)}`));
@@ -917,7 +918,7 @@
       YC.setTimeScale(n);
       say(`Time dilation set to ${YC.timeScale().toFixed(2)}×`, "c-ok");
     }],
-    open: ["open about|experience|projects|luckytri|skills|notes|contact", (arg) => {
+    open: ["open about|experience|yuesignal|projects|luckytri|skills|notes|contact", (arg) => {
       const hash = SECTIONS[(arg || "").toLowerCase()];
       if (!hash) return say(`Usage: open ${Object.keys(SECTIONS).join("|")}`, "c-warn");
       closeConsole();

@@ -187,9 +187,13 @@ Object.assign(i18n.zh, {
     "围绕 utrace、DumpObj、MemReport 自动化分析关键场景内存变化，识别异常增长。",
   crashAgentBody:
     "结合数据对 Crash 分类归因，辅助定位 OOM、PageFault 等问题。",
+  navYueSignal: "YueSignal",
+  signalFeatureHeading: "重点项目 / 本地通信",
+  signalFeatureInstruction: "交互示意 / 点击标签或按回车、空格切换，查看消息流向",
+  signalFeaturesLabel: "YueSignal 核心特点",
   projectsTitle: "项目 / 我的存档点",
   projectsIntro:
-    "从通信插件到战斗原型，这些项目记录了我把想法落到代码里的过程。",
+    "从战斗原型到渲染练习，这些项目记录了我把想法落到代码里的过程。",
   skillsTitle: "技能 / 让想法运行的能力",
   notesTitle: "笔记 / UE 与 GAS 学习记录",
   notesIntro:
@@ -232,9 +236,13 @@ Object.assign(i18n.en, {
     "Automated analysis of memory changes in key scenarios using utrace, DumpObj and MemReport to identify abnormal growth.",
   crashAgentBody:
     "Used data to classify crashes and help identify causes such as OOM and PageFault.",
+  navYueSignal: "YueSignal",
+  signalFeatureHeading: "Featured project / Local messaging",
+  signalFeatureInstruction: "Interactive illustration / Click a tab or press Enter or Space to explore message routes",
+  signalFeaturesLabel: "YueSignal highlights",
   projectsTitle: "Projects / My save points",
   projectsIntro:
-    "From a messaging plugin to a combat prototype, these projects trace how I turn ideas into code.",
+    "From a combat prototype to rendering exercises, these projects trace how I turn ideas into code.",
   skillsTitle: "Skills / Making ideas run",
   notesTitle: "Notes / UE & GAS learning archive",
   notesIntro:
@@ -323,7 +331,7 @@ const projectItems = {
       title: "YueSignal",
       subtitle: "UE5 强类型本地通信插件",
       status: "仓库暂未公开",
-      body: "YueSignal 是一个面向 Unreal Engine 5 的本地通信插件，帮助不同系统通过清晰的消息约定协作。它区分广播和请求，为 C++ 与蓝图提供统一的使用方式，也为排查消息流向留出了工具。",
+      body: "YueSignal 是我独立开发的 UE5 强类型本地通信插件。它用 Gameplay Tag、结构体类型和明确的通信语义约束消息，让广播与请求各有清晰的边界；从 C++、蓝图接入到消息追踪，尽量把日常使用和排查问题的流程串起来。",
       placeholder: "YueSignal",
       meta: ["C++", "Unreal Engine 5", "Blueprint", "Gameplay Tags"],
       points: [
@@ -402,7 +410,7 @@ const projectItems = {
       title: "YueSignal",
       subtitle: "Typed local messaging for UE5",
       status: "Repository private",
-      body: "YueSignal is a local messaging plugin for Unreal Engine 5. It gives systems clear contracts for broadcasts and requests, with interfaces for both C++ and Blueprint and tools for following message flow.",
+      body: "YueSignal is a typed local messaging plugin I built for UE5. Gameplay Tags, struct types and explicit communication semantics define clear contracts for broadcasts and requests, with C++ and Blueprint integration and tools for tracing message flow.",
       placeholder: "YueSignal",
       meta: ["C++", "Unreal Engine 5", "Blueprint", "Gameplay Tags"],
       points: [
@@ -1105,14 +1113,46 @@ function slotBody(project) {
       .join("")}</div>`;
 }
 
+const signalHighlights = {
+  zh: [
+    ["强类型通道", "以 Gameplay Tag 与结构体类型定义和校验通道。"],
+    ["四种通信语义", "Signal、Domain Event、Command、Query 各司其职。"],
+    ["调度与生命周期", "即时、队列与下一帧派发，支持超时取消和自动清理。"],
+    ["蓝图与调试", "类型化蓝图节点、因果树调试器与交互式指南，方便接入和追踪。"],
+  ],
+  en: [
+    ["Typed channels", "Channels are defined and checked with Gameplay Tags and struct types."],
+    ["Four semantics", "Signal, Domain Event, Command and Query each have a clear role."],
+    ["Dispatch & lifetime", "Immediate, queued and next-tick dispatch with timeouts, cancellation and cleanup."],
+    ["Blueprint & debugging", "Typed Blueprint nodes, a causal-tree debugger and an interactive guide support integration and tracing."],
+  ],
+};
+
+function renderSignalFeature() {
+  const feature = document.querySelector(".signal-feature-card");
+  if (!feature) return;
+  const project = projectItems[state.lang][0];
+  feature.querySelector(".signal-feature-copy").innerHTML = `
+    <p class="eyebrow">${escapeHtml(project.subtitle)}</p>
+    <div class="slot-title"><h3>${escapeHtml(project.title)}</h3><span class="status-pill">${escapeHtml(project.status)}</span></div>
+    <p class="slot-desc">${escapeHtml(project.body)}</p>
+    <div class="slot-meta">${project.meta.map((tag) => `<span>${escapeHtml(tag)}</span>`).join("")}</div>
+    <div class="project-links">${project.links.map((link) => `<a class="text-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}<span aria-hidden="true">↗</span></a>`).join("")}</div>`;
+  feature.querySelector(".signal-feature-points").innerHTML = signalHighlights[state.lang].map(([title, body], i) => `
+    <section class="signal-feature-point"><span class="signal-feature-point-no">0${i + 1}</span><h4>${escapeHtml(title)}</h4><p>${escapeHtml(body)}</p></section>`).join("");
+  feature.querySelector(".slot-hint").textContent = slotItems[0].hint[state.lang];
+  feature.querySelector(".slot-canvas").setAttribute("aria-label", slotItems[0].aria[state.lang]);
+}
+
 function renderProjects() {
   const list = document.querySelector("#projects-list");
   if (!list) return;
-  const projects = projectItems[state.lang];
+  const projects = projectItems[state.lang].slice(1);
+  const slots = slotItems.slice(1);
   if (!list.childElementCount) {
     list.innerHTML = projects
       .map((project, index) => {
-        const slot = slotItems[index];
+        const slot = slots[index];
         return `
     <article class="slot" style="--slot:${slot.color};--slot-2:${slot.color2}">
       <div class="slot-bar" aria-hidden="true">
@@ -1131,7 +1171,7 @@ function renderProjects() {
       .join("");
   }
   list.querySelectorAll(".slot").forEach((el, index) => {
-    const slot = slotItems[index];
+    const slot = slots[index];
     const body = el.querySelector(".slot-body");
     const open = body.querySelector(".project-details")?.open;
     body.innerHTML = slotBody(projects[index]);
@@ -1399,6 +1439,7 @@ YC.updateMotionButton = updateMotionButton;
 
 function renderPage() {
   updateStaticText();
+  renderSignalFeature();
   renderProjects();
   renderSkills();
   renderNotes({ keep: true });

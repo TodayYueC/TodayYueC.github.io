@@ -49,7 +49,7 @@
         }, 5000);
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20261028a" />
+    <link rel="stylesheet" href="style.css?v=20261028-feature2" />
     <link rel="stylesheet" href="motion.css?v=20261001-perf3" />
   </head>
   <body>
@@ -92,9 +92,10 @@
             <span class="nav-pill" aria-hidden="true"></span>
             <a class="nav-link" href="#about"><small>01</small><span data-i18n="navAbout">关于我</span></a>
             <a class="nav-link" href="#experience"><small>02</small><span data-i18n="navExperience">实习经历</span></a>
-            <a class="nav-link" href="#projects"><small>03</small><span data-i18n="navProjects">项目</span></a>
-            <a class="nav-link" href="#skills"><small>04</small><span data-i18n="navSkills">技能</span></a>
-            <a class="nav-link" href="#notes"><small>05</small><span data-i18n="navNotes">笔记</span></a>
+            <a class="nav-link" href="#yuesignal"><small>03</small><span data-i18n="navYueSignal">YueSignal</span></a>
+            <a class="nav-link" href="#projects"><small>04</small><span data-i18n="navProjects">项目</span></a>
+            <a class="nav-link" href="#skills"><small>05</small><span data-i18n="navSkills">技能</span></a>
+            <a class="nav-link" href="#notes"><small>06</small><span data-i18n="navNotes">笔记</span></a>
           </div>
           <a class="nav-contact" href="#contact"><span data-i18n="navContact">联系我</span><span aria-hidden="true">↗</span></a>
           <a class="nav-contact" href="https://luckytri.cn/" target="_blank" rel="noopener noreferrer"><span data-i18n="navMainSite">前往主站</span><span aria-hidden="true">↗</span></a>
@@ -145,7 +146,7 @@
             UE5 客户端开发 / 玩法系统 / C++ 插件开发。
           </p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#projects" data-magnetic
+            <a class="btn btn-primary" href="#yuesignal" data-magnetic
               ><span data-i18n="exploreProjects">探索我的项目</span><span class="btn-arrow" aria-hidden="true">↗</span></a
             >
             <a class="hero-social" href="https://github.com/TodayYueC" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
@@ -421,7 +422,34 @@
         </div>
       </section>
 
-      <!-- ═══════════ 03 · SAVE SLOTS ═══════════ -->
+      <!-- ═══════════ 03 · FEATURED SYSTEM ═══════════ -->
+      <section class="stage signal-feature" id="yuesignal" data-world="yuesignal" aria-labelledby="signal-feature-title">
+        <div class="stage-deco" aria-hidden="true"><i class="signal-feature-glow"></i><span class="ghost-title">SYSTEM ONLINE</span></div>
+        <div class="stage-inner">
+          <header class="chapter-head" data-reveal>
+            <p class="eyebrow" data-scramble>03 / FEATURED PROJECT</p>
+            <h2 id="signal-feature-title">
+              <span class="display" data-split>FEATURED SYSTEM<em>.</em></span>
+              <span class="caption" data-i18n="signalFeatureHeading">重点项目 / 本地通信</span>
+            </h2>
+          </header>
+          <article class="slot signal-feature-card" style="--slot:#a58bff;--slot-2:#ddd3ff" data-reveal="panel">
+            <div class="signal-feature-copy slot-body"></div>
+            <div class="signal-feature-visual">
+              <div class="signal-feature-bar" aria-hidden="true"><span>YUESIGNAL / LOCAL MESSAGING</span><b><i></i> SYSTEM ONLINE</b></div>
+              <div class="slot-screen">
+                <canvas class="slot-canvas" data-scene="signal" tabindex="0" role="button" data-cursor="INSPECT"></canvas>
+                <div class="slot-hud" aria-hidden="true"><span>LOCAL / MESSAGING</span><b data-hud-mode></b></div>
+                <span class="slot-hint" aria-hidden="true"></span>
+              </div>
+              <p class="signal-feature-instruction" data-i18n="signalFeatureInstruction">交互示意 / 点击标签或按回车、空格切换，查看消息流向</p>
+            </div>
+            <div class="signal-feature-points" aria-label="YueSignal 核心特点" data-i18n-aria-label="signalFeaturesLabel"></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ═══════════ 04 · SAVE SLOTS ═══════════ -->
       <section class="stage projects" id="projects" data-world="projects" aria-labelledby="projects-title">
         <div class="stage-deco" aria-hidden="true">
           <i class="slot-glow"></i>
@@ -430,7 +458,7 @@
         <div class="stage-inner">
           <header class="chapter-head chapter-head-row" data-reveal>
             <div>
-              <p class="eyebrow" data-scramble>03 / SELECTED WORKS</p>
+              <p class="eyebrow" data-scramble>04 / SELECTED WORKS</p>
               <h2 id="projects-title">
                 <span class="display" data-split>SAVE POINTS<em>.</em></span>
                 <span class="caption" data-i18n="projectsTitle">项目 / 我的存档点</span>
@@ -534,7 +562,7 @@
         </div>
         <div class="stage-inner">
           <header class="chapter-head" data-reveal>
-            <p class="eyebrow" data-scramble>04 / ABILITY LOADOUT</p>
+            <p class="eyebrow" data-scramble>05 / ABILITY LOADOUT</p>
             <h2 id="skills-title">
               <span class="display" data-split>MY SKILL TREE<em>.</em></span>
               <span class="caption" data-i18n="skillsTitle">技能 / 让想法运行的能力</span>
@@ -562,7 +590,7 @@
           <div class="notes-head">
             <div>
               <header class="chapter-head" data-reveal>
-                <p class="eyebrow" data-scramble>05 / KNOWLEDGE ARCHIVE</p>
+                <p class="eyebrow" data-scramble>06 / KNOWLEDGE ARCHIVE</p>
                 <h2 id="notes-title">
                   <span class="display" data-split>BRAIN DUMP<em>.</em></span>
                   <span class="caption" data-i18n="notesTitle">笔记 / UE 与 GAS 学习记录</span>
@@ -702,7 +730,7 @@
     <div class="toast" role="status" aria-live="polite"></div>
 
     <script src="vendor/lenis.min.js" defer></script>
-    <script src="motion.js?v=20261027b" defer></script>
+    <script src="motion.js?v=20261028-featureb" defer></script>
     <script src="scenes/poster.js?v=20261001-perf3" defer></script>
     <script src="scenes/atmosphere.js?v=20261001-perf3" defer></script>
     <script src="scenes/signal.js?v=20261027b" defer></script>
@@ -710,6 +738,6 @@
     <script src="scenes/rhythm.js?v=20261001-perf3" defer></script>
     <script src="scenes/rasterizer.js?v=20261001-perf3" defer></script>
     <script src="scenes/world.js?v=20261001-perf3" defer></script>
-    <script src="script.js?v=20261028a" defer></script>
+    <script src="script.js?v=20261028-feature2" defer></script>
   </body>
 </html>
