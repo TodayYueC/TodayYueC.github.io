@@ -188,8 +188,23 @@ Object.assign(i18n.zh, {
   crashAgentBody:
     "结合数据对 Crash 分类归因，辅助定位 OOM、PageFault 等问题。",
   navYueSignal: "YueSignal",
+  signalLabLabel: "YueSignal 交互视图",
+  signalTabBlueprint: "蓝图节点",
+  signalTabTrace: "因果链",
+  signalBlueprintNote: "指南节点示意",
+  signalBlueprintCaption: "同一通道上的发布与监听节点，按指南简化展示。",
+  signalExecInput: "执行输入",
+  signalExecOutput: "执行输出",
+  signalAdvanced: "高级 · 默认折叠",
+  signalCodeScrollHint: "代码可左右滑动 ↔",
+  signalCppNote: "指南代码节选",
+  signalCppCaption: "摘自官方指南的教学片段，省略了类型和上下文定义。",
+  signalTraceNote: "指南场景示意",
+  signalTraceDelay: "延迟回复 5 秒",
+  signalTraceCaption: "四条消息沿父子上下文串联；此处重绘指南场景，并非实时调试数据。",
+  signalTraceLabel: "从 Alarm 到 Report 的消息因果链",
+  signalLabInstruction: "切换视图，查看节点、代码与调试场景",
   signalFeatureHeading: "重点项目 / 本地通信",
-  signalFeatureInstruction: "交互示意 / 点击标签或按回车、空格切换，查看消息流向",
   signalFeaturesLabel: "YueSignal 核心特点",
   projectsTitle: "项目 / 我的存档点",
   projectsIntro:
@@ -237,8 +252,23 @@ Object.assign(i18n.en, {
   crashAgentBody:
     "Used data to classify crashes and help identify causes such as OOM and PageFault.",
   navYueSignal: "YueSignal",
+  signalLabLabel: "YueSignal interactive views",
+  signalTabBlueprint: "Blueprint",
+  signalTabTrace: "Causal tree",
+  signalBlueprintNote: "Guide node illustration",
+  signalBlueprintCaption: "A simplified view of the guide's publish and listen nodes on the same channel.",
+  signalExecInput: "Execution input",
+  signalExecOutput: "Execution output",
+  signalAdvanced: "Advanced · collapsed by default",
+  signalCodeScrollHint: "Swipe to scroll code ↔",
+  signalCppNote: "Guide code excerpt",
+  signalCppCaption: "A teaching excerpt from the guide; type and context definitions are omitted.",
+  signalTraceNote: "Guide scenario illustration",
+  signalTraceDelay: "5 second deferred reply",
+  signalTraceCaption: "Four messages linked by parent context. This recreates a guide scenario, not live debug data.",
+  signalTraceLabel: "Causal chain of messages from Alarm to Report",
+  signalLabInstruction: "Switch views to explore nodes, code, and a debug scenario",
   signalFeatureHeading: "Featured project / Local messaging",
-  signalFeatureInstruction: "Interactive illustration / Click a tab or press Enter or Space to explore message routes",
   signalFeaturesLabel: "YueSignal highlights",
   projectsTitle: "Projects / My save points",
   projectsIntro:
@@ -935,17 +965,6 @@ Object.assign(i18n.en, {
 /* Save slots: each project owns a live demo scene (see scenes/*.js). */
 const slotItems = [
   {
-    scene: "signal",
-    code: "UE5 / LOCAL MESSAGING",
-    color: "#a58bff",
-    color2: "#ddd3ff",
-    state: "ARCH",
-    label: "Signal · Event · Command · Query",
-    cursor: "INSPECT",
-    hint: { zh: "点击或按空格切换通信类型", en: "Click or press Space to switch message types" },
-    aria: { zh: "YueSignal 通信类型示意，点击或按回车、空格切换", en: "YueSignal message types. Click or press Enter or Space to switch." },
-  },
-  {
     scene: "purgehour",
     code: "GAS / COMBAT SYSTEM",
     color: "#ff6f8f",
@@ -1140,15 +1159,13 @@ function renderSignalFeature() {
     <div class="project-links">${project.links.map((link) => `<a class="text-link" href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer">${escapeHtml(link.label)}<span aria-hidden="true">↗</span></a>`).join("")}</div>`;
   feature.querySelector(".signal-feature-points").innerHTML = signalHighlights[state.lang].map(([title, body], i) => `
     <section class="signal-feature-point"><span class="signal-feature-point-no">0${i + 1}</span><h4>${escapeHtml(title)}</h4><p>${escapeHtml(body)}</p></section>`).join("");
-  feature.querySelector(".slot-hint").textContent = slotItems[0].hint[state.lang];
-  feature.querySelector(".slot-canvas").setAttribute("aria-label", slotItems[0].aria[state.lang]);
 }
 
 function renderProjects() {
   const list = document.querySelector("#projects-list");
   if (!list) return;
   const projects = projectItems[state.lang].slice(1);
-  const slots = slotItems.slice(1);
+  const slots = slotItems;
   if (!list.childElementCount) {
     list.innerHTML = projects
       .map((project, index) => {
@@ -1467,7 +1484,36 @@ function setFilter(filter) {
   renderNotes();
 }
 
+function setupSignalLab() {
+  const lab = document.querySelector("[data-signal-lab]");
+  if (!lab) return;
+  const tabs = [...lab.querySelectorAll('[role="tab"]')];
+  function activate(tab, moveFocus = false) {
+    tabs.forEach((item) => {
+      const selected = item === tab;
+      item.setAttribute("aria-selected", String(selected));
+      item.tabIndex = selected ? 0 : -1;
+      document.getElementById(item.getAttribute("aria-controls")).hidden = !selected;
+    });
+    if (moveFocus) tab.focus();
+  }
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => activate(tab));
+    tab.addEventListener("keydown", (event) => {
+      let next = index;
+      if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") next = (index + tabs.length - 1) % tabs.length;
+      else if (event.key === "Home") next = 0;
+      else if (event.key === "End") next = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      activate(tabs[next], true);
+    });
+  });
+}
+
 function setupEvents() {
+  setupSignalLab();
   document.querySelector(".lang-toggle")?.addEventListener("click", () => setLang(state.lang === "zh" ? "en" : "zh"));
   document.querySelectorAll(".filter-btn").forEach((button) => {
     button.addEventListener("click", () => setFilter(button.dataset.filter));

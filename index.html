@@ -49,7 +49,7 @@
         }, 5000);
       })();
     </script>
-    <link rel="stylesheet" href="style.css?v=20261028-feature2" />
+    <link rel="stylesheet" href="style.css?v=20261028-lab" />
     <link rel="stylesheet" href="motion.css?v=20261001-perf3" />
   </head>
   <body>
@@ -437,12 +437,76 @@
             <div class="signal-feature-copy slot-body"></div>
             <div class="signal-feature-visual">
               <div class="signal-feature-bar" aria-hidden="true"><span>YUESIGNAL / LOCAL MESSAGING</span><b><i></i> SYSTEM ONLINE</b></div>
-              <div class="slot-screen">
-                <canvas class="slot-canvas" data-scene="signal" tabindex="0" role="button" data-cursor="INSPECT"></canvas>
-                <div class="slot-hud" aria-hidden="true"><span>LOCAL / MESSAGING</span><b data-hud-mode></b></div>
-                <span class="slot-hint" aria-hidden="true"></span>
+              <!-- Source: Source/YueSignalGuide/Private/Chapters/YueGuideSignal.cpp:41-60;
+                   Source/YueSignalNodes/Private/K2Node_YueSignalSync.cpp:94-112;
+                   Source/YueSignalNodes/Private/K2Node_YueSignalAsync.cpp:29-48,143-158;
+                   Source/YueSignal/Public/YueSignalBlueprintAsync.h:41-55;
+                   Source/YueSignalGuide/Private/Chapters/YueGuideAdvanced.cpp:688-691,718-719,828-881;
+                   Source/YueSignalEditor/Private/SYueSignalDebugger.cpp:294-327. -->
+              <div class="signal-lab" data-signal-lab>
+                <div class="signal-lab-tabs" role="tablist" aria-label="YueSignal views" data-i18n-aria-label="signalLabLabel">
+                  <button type="button" role="tab" id="signal-tab-blueprint" aria-controls="signal-panel-blueprint" aria-selected="true" tabindex="0" data-signal-tab="blueprint" data-i18n="signalTabBlueprint">蓝图节点</button>
+                  <button type="button" role="tab" id="signal-tab-cpp" aria-controls="signal-panel-cpp" aria-selected="false" tabindex="-1" data-signal-tab="cpp">C++</button>
+                  <button type="button" role="tab" id="signal-tab-trace" aria-controls="signal-panel-trace" aria-selected="false" tabindex="-1" data-signal-tab="trace" data-i18n="signalTabTrace">因果链</button>
+                </div>
+                <div class="signal-lab-panel" role="tabpanel" id="signal-panel-blueprint" aria-labelledby="signal-tab-blueprint" tabindex="0">
+                  <div class="signal-lab-heading"><span>BLUEPRINT / SIGNAL</span><span data-i18n="signalBlueprintNote">指南节点示意</span></div>
+                  <div class="signal-blueprints">
+                    <div class="signal-bp-node">
+                      <div class="signal-bp-title">Publish Signal <small>Game.Chest.Opened</small></div>
+                      <div class="signal-bp-body">
+                        <div class="signal-bp-exec-pair"><i class="signal-bp-exec" aria-label="执行输入" data-i18n-aria-label="signalExecInput"></i><i class="signal-bp-exec" aria-label="执行输出" data-i18n-aria-label="signalExecOutput"></i></div>
+                        <div class="signal-bp-pin"><i></i><b>Channel</b><span>YSC_ChestOpened</span></div>
+                        <div class="signal-bp-pin"><i></i><b>Payload</b><span>ChestId = 7</span></div>
+                        <div class="signal-bp-advanced"><span aria-hidden="true">▸</span> Options <small data-i18n="signalAdvanced">高级 · 默认折叠</small></div>
+                        <div class="signal-bp-pin out"><b>Result</b><i></i></div>
+                      </div>
+                    </div>
+                    <div class="signal-bp-node">
+                      <div class="signal-bp-title">Listen Signal <small>Game.Chest.Opened</small></div>
+                      <div class="signal-bp-body">
+                        <div class="signal-bp-pin"><i></i><b>Channel</b><span>YSC_ChestOpened</span></div>
+                        <div class="signal-bp-pin"><i></i><b>Owner</b></div>
+                        <div class="signal-bp-pin"><i></i><b>Options</b></div>
+                        <div class="signal-bp-pin out"><b>On Message</b><i class="signal-bp-exec"></i></div>
+                        <div class="signal-bp-pin out"><b>On Failed</b><i class="signal-bp-exec"></i></div>
+                        <div class="signal-bp-pin out"><b>Payload</b><span>FChestOpened</span><i></i></div>
+                        <div class="signal-bp-pin out"><b>Context</b><i></i></div>
+                        <div class="signal-bp-pin out"><b>Status</b><i></i></div>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="signal-lab-caption" data-i18n="signalBlueprintCaption">同一通道上的发布与监听节点，按指南简化展示。</p>
+                </div>
+                <div class="signal-lab-panel" role="tabpanel" id="signal-panel-cpp" aria-labelledby="signal-tab-cpp" tabindex="0" hidden>
+                  <div class="signal-lab-heading"><span>C++ / SIGNAL</span><span data-i18n="signalCppNote">指南代码节选</span></div>
+                  <pre class="signal-code" tabindex="0"><code><span class="signal-code-key">auto</span> Opened = Bus-&gt;RegisterSignalChannel&lt;FChestOpened&gt;(
+    TAG_Chest_Opened).Value;
+
+Bus-&gt;Subscribe(Opened, Scope.GetHandle(),
+    [](<span class="signal-code-key">const</span> FChestOpened&amp; E,
+       <span class="signal-code-key">const</span> FYueSignalContext&amp;) {
+      ShowToast(E.ChestId);
+    });
+
+FYueSignalPublishResult R =
+    Bus-&gt;Publish(Opened, FChestOpened{ 7 });</code></pre>
+                  <p class="signal-code-scroll-hint" data-i18n="signalCodeScrollHint">代码可左右滑动 ↔</p>
+                  <p class="signal-lab-caption" data-i18n="signalCppCaption">摘自官方指南的教学片段，省略了类型和上下文定义。</p>
+                </div>
+                <div class="signal-lab-panel" role="tabpanel" id="signal-panel-trace" aria-labelledby="signal-tab-trace" tabindex="0" hidden>
+                  <div class="signal-lab-heading"><span>DEBUGGER / CAUSAL TREE</span><span data-i18n="signalTraceNote">指南场景示意</span></div>
+                  <p class="signal-trace-prefix">YueSignal.Guide.Diagnostics.Chain</p>
+                  <ol class="signal-trace" aria-label="从 Alarm 到 Report 的消息因果链" data-i18n-aria-label="signalTraceLabel">
+                    <li style="--level:0;--trace:#4fc3f7"><span class="signal-trace-kind">SIGNAL</span><code>.Alarm</code></li>
+                    <li style="--level:1;--trace:#ff7070"><span class="signal-trace-kind">COMMAND</span><code>.Lock</code></li>
+                    <li style="--level:2;--trace:#ffb74d"><span class="signal-trace-kind">DOMAIN EVENT</span><code>.Locked</code></li>
+                    <li style="--level:3;--trace:#81d48c"><span class="signal-trace-kind">QUERY</span><code>.Report</code><small data-i18n="signalTraceDelay">延迟回复 5 秒</small></li>
+                  </ol>
+                  <p class="signal-lab-caption" data-i18n="signalTraceCaption">四条消息沿父子上下文串联；此处重绘指南场景，并非实时调试数据。</p>
+                </div>
               </div>
-              <p class="signal-feature-instruction" data-i18n="signalFeatureInstruction">交互示意 / 点击标签或按回车、空格切换，查看消息流向</p>
+              <p class="signal-feature-instruction" data-i18n="signalLabInstruction">切换视图，查看节点、代码与调试场景</p>
             </div>
             <div class="signal-feature-points" aria-label="YueSignal 核心特点" data-i18n-aria-label="signalFeaturesLabel"></div>
           </article>
@@ -733,11 +797,10 @@
     <script src="motion.js?v=20261028-featureb" defer></script>
     <script src="scenes/poster.js?v=20261001-perf3" defer></script>
     <script src="scenes/atmosphere.js?v=20261001-perf3" defer></script>
-    <script src="scenes/signal.js?v=20261027b" defer></script>
     <script src="scenes/purgehour.js?v=20261001-perf3" defer></script>
     <script src="scenes/rhythm.js?v=20261001-perf3" defer></script>
     <script src="scenes/rasterizer.js?v=20261001-perf3" defer></script>
     <script src="scenes/world.js?v=20261001-perf3" defer></script>
-    <script src="script.js?v=20261028-feature2" defer></script>
+    <script src="script.js?v=20261028-lab" defer></script>
   </body>
 </html>
