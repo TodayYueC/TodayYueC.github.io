@@ -1178,6 +1178,7 @@ html.r-wireframe * { outline: 1px solid rgba(98, 230, 240, 0.45) !important; out
   .nav-link small { display: inline; font-size: 12px; margin-right: 10px; }
   .nav-link.active, .nav-link.active small { color: var(--accent); }
   .nav-contact { justify-content: center; margin: 18px 0 0; padding: 16px; font-size: 16px; }
+  .nav-contact + .nav-contact { margin-top: 0; }
   .lang-toggle { margin: 0; border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 9px; min-height: 48px; }
   .menu-resume { display: block; margin-top: 18px; font: 800 18px/1 var(--display); letter-spacing: 0.2em; color: var(--accent); text-align: left; }
   .hero { grid-template-columns: minmax(0, 1fr); align-content: start; padding-top: calc(var(--nav-h) + 56px); padding-bottom: 150px; }

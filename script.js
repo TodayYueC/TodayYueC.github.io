@@ -34,6 +34,7 @@ const i18n = {
     navProjects: "项目",
     navNotes: "笔记",
     navContact: "联系",
+    navMainSite: "前往主站",
     langButton: "EN",
     brandSlogan: "二次元死宅，也想用双手创造一点“世界”",
     heroEyebrow: "UE5 玩法工程师 / C++ / Rendering",
@@ -63,7 +64,6 @@ const i18n = {
     projectsTitle: "主要项目",
     projectsIntro:
       "这里记录了我做过的插件、玩法原型和一些技术练习：从 YueSignal 的本地通信，到 PurgeHour 的战斗系统，再到软光栅管线。",
-    projectsVideoLink: "先看作品集视频",
     openSourceTitle: "开源项目",
     openSourceIntro: "在代码之外，关于记忆、相遇与成为自己的故事。",
     luckyTriEyebrow: "连续记忆 / 自我 / 生长",
@@ -98,6 +98,7 @@ const i18n = {
     navProjects: "Projects",
     navNotes: "Notes",
     navContact: "Contact",
+    navMainSite: "Main site",
     langButton: "中",
     brandSlogan: "An anime shut-in trying to build small worlds by hand.",
     heroEyebrow: "UE5 Gameplay Engineer / C++ / Rendering",
@@ -130,7 +131,6 @@ const i18n = {
     projectsTitle: "Main projects",
     projectsIntro:
       "A collection of plugins, gameplay prototypes, and technical exercises: from local communication in YueSignal to combat in PurgeHour and a software rasterization pipeline.",
-    projectsVideoLink: "Watch portfolio video",
     openSourceTitle: "Open-source projects",
     openSourceIntro: "Beyond the code: a story of memory, encounters, and becoming oneself.",
     luckyTriEyebrow: "CONTINUITY / SELF / GROWTH",
@@ -190,7 +190,6 @@ Object.assign(i18n.zh, {
   projectsTitle: "项目 / 我的存档点",
   projectsIntro:
     "从通信插件到战斗原型，这些项目记录了我把想法落到代码里的过程。",
-  projectsVideoLink: "观看作品集视频",
   skillsTitle: "技能 / 让想法运行的能力",
   notesTitle: "笔记 / UE 与 GAS 学习记录",
   notesIntro:
@@ -333,7 +332,12 @@ const projectItems = {
         "通过连接和所有者作用域管理订阅生命周期，并在对象或 World 结束时清理。",
         "提供类型化蓝图节点和编辑器 Debugger，便于使用及追踪消息。",
       ],
-      links: [],
+      links: [
+        {
+          label: "查看文档",
+          href: "https://yuesignal.luckytri.cn/zh/",
+        },
+      ],
     },
     {
       title: "PurgeHour_UE5.7",
@@ -407,7 +411,12 @@ const projectItems = {
         "Manages subscription lifetimes with connections and owner scopes, cleaning up when an object or World closes.",
         "Includes typed Blueprint nodes and an editor Debugger for inspection and tracing.",
       ],
-      links: [],
+      links: [
+        {
+          label: "Read the docs",
+          href: "https://yuesignal.luckytri.cn/en/",
+        },
+      ],
     },
     {
       title: "PurgeHour_UE5.7",
